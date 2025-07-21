@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fitur Warna</title>
+
+  <!-- Tailwind CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+  <style>
+    @keyframes fadeSlideIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes blinkWind {
+      0% { transform: translateX(0) skewX(0deg); opacity: 1; }
+      30% { transform: translateX(6px) skewX(-5deg); opacity: 0.6; }
+      50% { transform: translateX(-6px) skewX(5deg); opacity: 0.6; }
+      100% { transform: translateX(0) skewX(0deg); opacity: 1; }
+    }
+    .animate-fadeSlideIn { animation: fadeSlideIn 0.8s ease-out; }
+    .blink-wind { animation: blinkWind 1.5s infinite ease-in-out; }
+  </style>
+</head>
+<body class="relative overflow-x-hidden font-sans">
+
+  <!-- Background luar angkasa -->
+  <iframe 
+    src="https://space-background-phi.vercel.app/" 
+    style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; border: none;" 
+    allowfullscreen
+  ></iframe>
+
+  <!-- Konten utama -->
+  <div class="pt-20 px-4 overflow-x-auto">
+    <div class="bg-white bg-opacity-10 backdrop-blur-xl rounded-3xl shadow-2xl border border-white border-opacity-20 transition-all duration-700 p-6 animate-fadeSlideIn max-w-6xl mx-auto">
+<div class="flex justify-center items-center mb-6 relative">
+  <h1 class="text-2xl font-bold text-gray-400">COLOR NAMES</h1>
+  <a href="../index.html" class="absolute right-0 flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:text-blue-200 transition-all duration-300 shadow-md">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+    </svg>
+    <span class="font-medium">Back</span>
+  </a>
+</div>
+      <!-- Header Label -->
+      <div class="grid grid-cols-8 gap-4 font-semibold text-white text-sm border-b border-white border-opacity-30 pb-2 mb-2">
+        <div>No</div>
+        <div>Color Code</div>
+        <div>Color Name</div>
+        <div>Red</div>
+        <div>Green</div>
+        <div>Blue</div>
+        <div>Hex</div>
+        <div>Preview</div>
+      </div>
+
+      <!-- Konten Warna -->
+      <div id="colorList"></div>
+
+    </div>
+  </div>
+
+  <script>
+    fetch('colors.json')
+      .then(response => response.json())
+      .then(data => {
+        const container = document.getElementById('colorList');
+        data.forEach((color, index) => {
+          const delay = (index * 0.2).toFixed(1);
+          const row = document.createElement('div');
+          row.className = "grid grid-cols-8 gap-4 text-white text-sm items-center py-2 hover:bg-white/5 rounded transition-all duration-300";
+          row.innerHTML = `
+            <div>${index + 1}</div>
+            <div>${color.color_no || '-'}</div>
+            <div>${color.color_name || 'Tanpa Nama'}</div>
+            <div>${color.red}</div>
+            <div>${color.green}</div>
+            <div>${color.blue}</div>
+            <div>${color.hex}</div>
+            <div>
+              <div class="w-20 h-6 rounded blink-wind" style="background-color: ${color.hex}; animation-delay: ${delay}s;"></div>
+            </div>
+          `;
+          container.appendChild(row);
+        });
+      })
+      .catch(error => console.error('Gagal memuat data warna:', error));
+  </script>
+
+</body>
+</html>

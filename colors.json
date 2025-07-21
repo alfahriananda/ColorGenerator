@@ -1,0 +1,3951 @@
+
+[
+  {
+    "color_name": "Mulberry Silk",
+    "red": 148,
+    "green": 118,
+    "blue": 108,
+    "hex": "#94766C"
+  },
+  {
+    "color_name": "Chelsea Mauve",
+    "red": 190,
+    "green": 172,
+    "blue": 159,
+    "hex": "#BEAC9F"
+  },
+  {
+    "color_name": "Cabbage Rose",
+    "red": 197,
+    "green": 159,
+    "blue": 145,
+    "hex": "#C59F91"
+  },
+  {
+    "color_name": "Rose Brocade",
+    "red": 153,
+    "green": 108,
+    "blue": 110,
+    "hex": "#996C6E"
+  },
+  {
+    "color_name": "Deepest Mauve",
+    "red": 109,
+    "green": 89,
+    "blue": 90,
+    "hex": "#6D595A"
+  },
+  {
+    "color_name": "Toile Red",
+    "red": 139,
+    "green": 83,
+    "blue": 78,
+    "hex": "#8B534E"
+  },
+  {
+    "color_name": "Decorous Amber",
+    "red": 172,
+    "green": 117,
+    "blue": 89,
+    "hex": "#AC7559"
+  },
+  {
+    "color_name": "Cajun Red",
+    "red": 141,
+    "green": 66,
+    "blue": 47,
+    "hex": "#8D422F"
+  },
+  {
+    "color_name": "Eastlake Gold",
+    "red": 194,
+    "green": 142,
+    "blue": 97,
+    "hex": "#C28E61"
+  },
+  {
+    "color_name": "Wickerwork",
+    "red": 193,
+    "green": 158,
+    "blue": 128,
+    "hex": "#C19E80"
+  },
+  {
+    "color_name": "Crewel Tan",
+    "red": 203,
+    "green": 185,
+    "blue": 155,
+    "hex": "#CBB99B"
+  },
+  {
+    "color_name": "Empire Gold",
+    "red": 193,
+    "green": 159,
+    "blue": 110,
+    "hex": "#C19F6E"
+  },
+  {
+    "color_name": "Majolica Green",
+    "red": 174,
+    "green": 176,
+    "blue": 143,
+    "hex": "#AEB08F"
+  },
+  {
+    "color_name": "Sheraton Sage",
+    "red": 143,
+    "green": 134,
+    "blue": 102,
+    "hex": "#8F8666"
+  },
+  {
+    "color_name": "Gallery Green",
+    "red": 112,
+    "green": 134,
+    "blue": 114,
+    "hex": "#708672"
+  },
+  {
+    "color_name": "Billiard Green",
+    "red": 69,
+    "green": 88,
+    "blue": 77,
+    "hex": "#45584D"
+  },
+  {
+    "color_name": "Calico",
+    "red": 140,
+    "green": 164,
+    "blue": 156,
+    "hex": "#8CA49C"
+  },
+  {
+    "color_name": "Teal Stencil",
+    "red": 98,
+    "green": 127,
+    "blue": 123,
+    "hex": "#627F7B"
+  },
+  {
+    "color_name": "Festoon Aqua",
+    "red": 160,
+    "green": 187,
+    "blue": 184,
+    "hex": "#A0BBBB"
+  },
+  {
+    "color_name": "Peacock Plume",
+    "red": 115,
+    "green": 150,
+    "blue": 148,
+    "hex": "#739694"
+  },
+  {
+    "color_name": "Queen Anne Lilac",
+    "red": 192,
+    "green": 182,
+    "blue": 180,
+    "hex": "#C0B6B4"
+  },
+  {
+    "color_name": "Patchwork Plum",
+    "red": 126,
+    "green": 105,
+    "blue": 106,
+    "hex": "#7E696A"
+  },
+  {
+    "color_name": "Pewter Tankard",
+    "red": 163,
+    "green": 155,
+    "blue": 144,
+    "hex": "#A39B90"
+  },
+  {
+    "color_name": "Curio Gray",
+    "red": 152,
+    "green": 137,
+    "blue": 119,
+    "hex": "#988977"
+  },
+  {
+    "color_name": "Rosedust",
+    "red": 204,
+    "green": 141,
+    "blue": 132,
+    "hex": "#CC8D84"
+  },
+  {
+    "color_name": "Rachel Pink",
+    "red": 232,
+    "green": 185,
+    "blue": 174,
+    "hex": "#E8B9AE"
+  },
+  {
+    "color_name": "Aristocrat Peach",
+    "red": 236,
+    "green": 206,
+    "blue": 185,
+    "hex": "#ECCEB9"
+  },
+  {
+    "color_name": "Caen Stone",
+    "red": 236,
+    "green": 208,
+    "blue": 177,
+    "hex": "#ECD0B1"
+  },
+  {
+    "color_name": "Acanthus",
+    "red": 205,
+    "green": 205,
+    "blue": 180,
+    "hex": "#CDCDB4"
+  },
+  {
+    "color_name": "Colonial Yellow",
+    "red": 239,
+    "green": 196,
+    "blue": 136,
+    "hex": "#EFC488"
+  },
+  {
+    "color_name": "Dutch Tile Blue",
+    "red": 154,
+    "green": 171,
+    "blue": 171,
+    "hex": "#9AABAB"
+  },
+  {
+    "color_name": "Needlepoint Navy",
+    "red": 84,
+    "green": 102,
+    "blue": 112,
+    "hex": "#546670"
+  },
+  {
+    "color_name": "Rembrandt Ruby",
+    "red": 151,
+    "green": 79,
+    "blue": 73,
+    "hex": "#974F49"
+  },
+  {
+    "color_name": "Roycroft Rose",
+    "red": 192,
+    "green": 143,
+    "blue": 128,
+    "hex": "#C08F80"
+  },
+  {
+    "color_name": "Warm Beige",
+    "red": 238,
+    "green": 218,
+    "blue": 195,
+    "hex": "#EEDAC3"
+  },
+  {
+    "color_name": "Buckram Binding",
+    "red": 217,
+    "green": 195,
+    "blue": 166,
+    "hex": "#D9C3A6"
+  },
+  {
+    "color_name": "Morris Room Grey",
+    "red": 173,
+    "green": 161,
+    "blue": 147,
+    "hex": "#ADA193"
+  },
+  {
+    "color_name": "Library Pewter",
+    "red": 127,
+    "green": 114,
+    "blue": 99,
+    "hex": "#7F7263"
+  },
+  {
+    "color_name": "Mellow Mauve",
+    "red": 196,
+    "green": 149,
+    "blue": 122,
+    "hex": "#C4957A"
+  },
+  {
+    "color_name": "Roycroft Adobe",
+    "red": 167,
+    "green": 98,
+    "blue": 81,
+    "hex": "#A76251"
+  },
+  {
+    "color_name": "Dard Hunter Green",
+    "red": 58,
+    "green": 74,
+    "blue": 63,
+    "hex": "#3A4A3F"
+  },
+  {
+    "color_name": "Ruskin Room Green",
+    "red": 172,
+    "green": 161,
+    "blue": 125,
+    "hex": "#ACA17D"
+  },
+  {
+    "color_name": "Peristyle Brass",
+    "red": 174,
+    "green": 144,
+    "blue": 94,
+    "hex": "#AE905E"
+  },
+  {
+    "color_name": "Hubbard Squash",
+    "red": 233,
+    "green": 191,
+    "blue": 140,
+    "hex": "#E9BF8C"
+  },
+  {
+    "color_name": "Antiquarian Brown",
+    "red": 148,
+    "green": 102,
+    "blue": 68,
+    "hex": "#946644"
+  },
+  {
+    "color_name": "White Hyacinth",
+    "red": 243,
+    "green": 229,
+    "blue": 209,
+    "hex": "#F3E5D1"
+  },
+  {
+    "color_name": "Studio Blue Green",
+    "red": 109,
+    "green": 129,
+    "blue": 123,
+    "hex": "#6D817B"
+  },
+  {
+    "color_name": "Bunglehouse Blue",
+    "red": 71,
+    "green": 98,
+    "blue": 111,
+    "hex": "#47626F"
+  },
+  {
+    "color_name": "Silver Gray",
+    "red": 184,
+    "green": 178,
+    "blue": 162,
+    "hex": "#B8B2A2"
+  },
+  {
+    "color_name": "Classic Light Buff",
+    "red": 240,
+    "green": 234,
+    "blue": 220,
+    "hex": "#F0EADC"
+  },
+  {
+    "color_name": "Classic Ivory",
+    "red": 242,
+    "green": 224,
+    "blue": 195,
+    "hex": "#F2E0C3"
+  },
+  {
+    "color_name": "Pearl Gray",
+    "red": 203,
+    "green": 206,
+    "blue": 197,
+    "hex": "#CBCEC5"
+  },
+  {
+    "color_name": "Porcelain",
+    "red": 233,
+    "green": 224,
+    "blue": 213,
+    "hex": "#E9E0D5"
+  },
+  {
+    "color_name": "Twilight Gray",
+    "red": 200,
+    "green": 191,
+    "blue": 181,
+    "hex": "#C8BFB5"
+  },
+  {
+    "color_name": "Light French Gray",
+    "red": 194,
+    "green": 192,
+    "blue": 187,
+    "hex": "#C2C0BB"
+  },
+  {
+    "color_name": "Classic Sand",
+    "red": 214,
+    "green": 188,
+    "blue": 170,
+    "hex": "#D6BCAA"
+  },
+  {
+    "color_name": "Chinese Red",
+    "red": 158,
+    "green": 62,
+    "blue": 51,
+    "hex": "#9E3E33"
+  },
+  {
+    "color_name": "Jazz Age Coral",
+    "red": 241,
+    "green": 191,
+    "blue": 177,
+    "hex": "#F1BFB1"
+  },
+  {
+    "color_name": "Frostwork",
+    "red": 203,
+    "green": 208,
+    "blue": 194,
+    "hex": "#CBD0C2"
+  },
+  {
+    "color_name": "Alexandrite",
+    "red": 89,
+    "green": 140,
+    "blue": 116,
+    "hex": "#598C74"
+  },
+  {
+    "color_name": "Salon Rose",
+    "red": 171,
+    "green": 120,
+    "blue": 120,
+    "hex": "#AB7878"
+  },
+  {
+    "color_name": "Studio Mauve",
+    "red": 198,
+    "green": 185,
+    "blue": 184,
+    "hex": "#C6B9B8"
+  },
+  {
+    "color_name": "Blue Sky",
+    "red": 171,
+    "green": 209,
+    "blue": 201,
+    "hex": "#ABD1C9"
+  },
+  {
+    "color_name": "Blue Peacock",
+    "red": 1,
+    "green": 78,
+    "blue": 76,
+    "hex": "#014E4C"
+  },
+  {
+    "color_name": "Vogue Green",
+    "red": 75,
+    "green": 86,
+    "blue": 69,
+    "hex": "#4B5645"
+  },
+  {
+    "color_name": "Cascade Green",
+    "red": 172,
+    "green": 177,
+    "blue": 159,
+    "hex": "#ACB19F"
+  },
+  {
+    "color_name": "Belvedere Cream",
+    "red": 240,
+    "green": 205,
+    "blue": 160,
+    "hex": "#F0CDA0"
+  },
+  {
+    "color_name": "Copen Blue",
+    "red": 194,
+    "green": 204,
+    "blue": 196,
+    "hex": "#C2CCC4"
+  },
+  {
+    "color_name": "Rose Tan",
+    "red": 205,
+    "green": 156,
+    "blue": 133,
+    "hex": "#CD9C85"
+  },
+  {
+    "color_name": "Pink Shadow",
+    "red": 222,
+    "green": 195,
+    "blue": 185,
+    "hex": "#DEC3B9"
+  },
+  {
+    "color_name": "Orchid",
+    "red": 188,
+    "green": 156,
+    "blue": 158,
+    "hex": "#BC9C9E"
+  },
+  {
+    "color_name": "Deep Maroon",
+    "red": 98,
+    "green": 63,
+    "blue": 69,
+    "hex": "#623F45"
+  },
+  {
+    "color_name": "Chartreuse",
+    "red": 225,
+    "green": 210,
+    "blue": 134,
+    "hex": "#E1D286"
+  },
+  {
+    "color_name": "Radiant Lilac",
+    "red": 164,
+    "green": 137,
+    "blue": 160,
+    "hex": "#A489A0"
+  },
+  {
+    "color_name": "Holiday Turquoise",
+    "red": 138,
+    "green": 198,
+    "blue": 189,
+    "hex": "#8AC6BD"
+  },
+  {
+    "color_name": "Appleblossom",
+    "red": 218,
+    "green": 181,
+    "blue": 180,
+    "hex": "#DAB5B4"
+  },
+  {
+    "color_name": "Classic French Gray",
+    "red": 136,
+    "green": 135,
+    "blue": 130,
+    "hex": "#888782"
+  },
+  {
+    "color_name": "Sunbeam Yellow",
+    "red": 240,
+    "green": 211,
+    "blue": 157,
+    "hex": "#F0D39D"
+  },
+  {
+    "color_name": "Pinky Beige",
+    "red": 201,
+    "green": 170,
+    "blue": 152,
+    "hex": "#C9AA98"
+  },
+  {
+    "color_name": "Pink Flamingo",
+    "red": 205,
+    "green": 113,
+    "blue": 123,
+    "hex": "#CD717B"
+  },
+  {
+    "color_name": "Skyline Steel",
+    "red": 198,
+    "green": 191,
+    "blue": 179,
+    "hex": "#C6BFB3"
+  },
+  {
+    "color_name": "Venetian Yellow",
+    "red": 246,
+    "green": 227,
+    "blue": 161,
+    "hex": "#F6E3A1"
+  },
+  {
+    "color_name": "Icy Lemonade",
+    "red": 244,
+    "green": 232,
+    "blue": 178,
+    "hex": "#F4E8B2"
+  },
+  {
+    "color_name": "Pineapple Cream",
+    "red": 242,
+    "green": 234,
+    "blue": 195,
+    "hex": "#F2EAC3"
+  },
+  {
+    "color_name": "Merlot",
+    "red": 81,
+    "green": 50,
+    "blue": 59,
+    "hex": "#51323B"
+  },
+  {
+    "color_name": "Rockweed",
+    "red": 68,
+    "green": 55,
+    "blue": 53,
+    "hex": "#443735"
+  },
+  {
+    "color_name": "Charcoal Blue",
+    "red": 61,
+    "green": 68,
+    "blue": 80,
+    "hex": "#3D4450"
+  },
+  {
+    "color_name": "Mineral Gray",
+    "red": 81,
+    "green": 87,
+    "blue": 99,
+    "hex": "#515763"
+  },
+  {
+    "color_name": "Rookwood Dark Red",
+    "red": 75,
+    "green": 41,
+    "blue": 41,
+    "hex": "#4B2929"
+  },
+  {
+    "color_name": "Rookwood Red",
+    "red": 98,
+    "green": 47,
+    "blue": 45,
+    "hex": "#622F2D"
+  },
+  {
+    "color_name": "Rookwood Terra Cotta",
+    "red": 151,
+    "green": 88,
+    "blue": 64,
+    "hex": "#975840"
+  },
+  {
+    "color_name": "Renwick Rose Beige",
+    "red": 175,
+    "green": 136,
+    "blue": 113,
+    "hex": "#AF8871"
+  },
+  {
+    "color_name": "Renwick Beige",
+    "red": 195,
+    "green": 176,
+    "blue": 157,
+    "hex": "#C3B09D"
+  },
+  {
+    "color_name": "Rookwood Brown",
+    "red": 127,
+    "green": 97,
+    "blue": 74,
+    "hex": "#7F614A"
+  },
+  {
+    "color_name": "Rockwood Medium Brown",
+    "red": 110,
+    "green": 82,
+    "blue": 65,
+    "hex": "#6E5241"
+  },
+  {
+    "color_name": "Rockwood Dark Brown",
+    "red": 95,
+    "green": 77,
+    "blue": 67,
+    "hex": "#5F4D43"
+  },
+  {
+    "color_name": "Rockwood Shutter Green",
+    "red": 48,
+    "green": 59,
+    "blue": 57,
+    "hex": "#303B39"
+  },
+  {
+    "color_name": "Rockwood Sash Green",
+    "red": 80,
+    "green": 106,
+    "blue": 103,
+    "hex": "#506A67"
+  },
+  {
+    "color_name": "Rockwood Blue Green",
+    "red": 115,
+    "green": 132,
+    "blue": 120,
+    "hex": "#738478"
+  },
+  {
+    "color_name": "Rockwood Jade",
+    "red": 151,
+    "green": 159,
+    "blue": 127,
+    "hex": "#979F7F"
+  },
+  {
+    "color_name": "Downing Straw",
+    "red": 202,
+    "green": 171,
+    "blue": 125,
+    "hex": "#CAB77D"
+  },
+  {
+    "color_name": "Rockwood Antique Gold",
+    "red": 165,
+    "green": 130,
+    "blue": 88,
+    "hex": "#A58258"
+  },
+  {
+    "color_name": "Renwick Olive",
+    "red": 151,
+    "green": 137,
+    "blue": 106,
+    "hex": "#97896A"
+  },
+  {
+    "color_name": "Rockwood Dark Green",
+    "red": 86,
+    "green": 92,
+    "blue": 74,
+    "hex": "#565C4A"
+  },
+  {
+    "color_name": "Rockwood Amber",
+    "red": 192,
+    "green": 134,
+    "blue": 80,
+    "hex": "#C08650"
+  },
+  {
+    "color_name": "Renwick Heather",
+    "red": 139,
+    "green": 125,
+    "blue": 123,
+    "hex": "#8B7D7B"
+  },
+  {
+    "color_name": "Downing Slate",
+    "red": 119,
+    "green": 127,
+    "blue": 134,
+    "hex": "#777F86"
+  },
+  {
+    "color_name": "Downing Earth",
+    "red": 136,
+    "green": 123,
+    "blue": 103,
+    "hex": "#887B67"
+  },
+  {
+    "color_name": "Downing Stone",
+    "red": 166,
+    "green": 163,
+    "blue": 151,
+    "hex": "#A6A397"
+  },
+  {
+    "color_name": "Downing Sand",
+    "red": 203,
+    "green": 188,
+    "blue": 165,
+    "hex": "#CBBCA5"
+  },
+  {
+    "color_name": "Rockwood Clay",
+    "red": 154,
+    "green": 126,
+    "blue": 100,
+    "hex": "#9A7E64"
+  },
+  {
+    "color_name": "Renwick Golden Oak",
+    "red": 150,
+    "green": 114,
+    "blue": 76,
+    "hex": "#96724C"
+  },
+  {
+    "color_name": "Colonial Revival Green Stone",
+    "red": 163,
+    "green": 155,
+    "blue": 126,
+    "hex": "#A39B7E"
+  },
+  {
+    "color_name": "Colonial Revival Stone",
+    "red": 167,
+    "green": 148,
+    "blue": 124,
+    "hex": "#A7947C"
+  },
+  {
+    "color_name": "Colonial Revival Tan",
+    "red": 211,
+    "green": 182,
+    "blue": 153,
+    "hex": "#D3B699"
+  },
+  {
+    "color_name": "Classical White",
+    "red": 236,
+    "green": 225,
+    "blue": 203,
+    "hex": "#ECE1CB"
+  },
+  {
+    "color_name": "Classical Gold",
+    "red": 235,
+    "green": 184,
+    "blue": 117,
+    "hex": "#EBB875"
+  },
+  {
+    "color_name": "Colonial Revival Gray",
+    "red": 180,
+    "green": 185,
+    "blue": 185,
+    "hex": "#B4B9B9"
+  },
+  {
+    "color_name": "Roycroft Vellum",
+    "red": 232,
+    "green": 217,
+    "blue": 189,
+    "hex": "#E8D9BD"
+  },
+  {
+    "color_name": "Birdseye Maple",
+    "red": 228,
+    "green": 196,
+    "blue": 149,
+    "hex": "#E4C495"
+  },
+  {
+    "color_name": "Craftsman Brown",
+    "red": 174,
+    "green": 146,
+    "blue": 120,
+    "hex": "#AE9278"
+  },
+  {
+    "color_name": "Quartersawn Oak",
+    "red": 133,
+    "green": 105,
+    "blue": 91,
+    "hex": "#85695B"
+  },
+  {
+    "color_name": "Aurora Brown",
+    "red": 106,
+    "green": 66,
+    "blue": 56,
+    "hex": "#6A4238"
+  },
+  {
+    "color_name": "Polished Mahogany",
+    "red": 67,
+    "green": 39,
+    "blue": 34,
+    "hex": "#432722"
+  },
+  {
+    "color_name": "Roycroft Copper Red",
+    "red": 123,
+    "green": 55,
+    "blue": 40,
+    "hex": "#7B3728"
+  },
+  {
+    "color_name": "Hammered Silver",
+    "red": 151,
+    "green": 138,
+    "blue": 127,
+    "hex": "#978A7F"
+  },
+  {
+    "color_name": "Weathered Shingle",
+    "red": 147,
+    "green": 127,
+    "blue": 104,
+    "hex": "#937F68"
+  },
+  {
+    "color_name": "Roycroft Suede",
+    "red": 167,
+    "green": 148,
+    "blue": 115,
+    "hex": "#A79473"
+  },
+  {
+    "color_name": "Roycroft Brass",
+    "red": 122,
+    "green": 106,
+    "blue": 81,
+    "hex": "#7A6A51"
+  },
+  {
+    "color_name": "Roycroft Mist Gray",
+    "red": 194,
+    "green": 189,
+    "blue": 177,
+    "hex": "#C2BDB1"
+  },
+  {
+    "color_name": "Bunglehouse Gray",
+    "red": 152,
+    "green": 143,
+    "blue": 123,
+    "hex": "#988F7B"
+  },
+  {
+    "color_name": "Roycroft Bronze Green",
+    "red": 87,
+    "green": 84,
+    "blue": 73,
+    "hex": "#575449"
+  },
+  {
+    "color_name": "Roycroft Bottle Green",
+    "red": 50,
+    "green": 64,
+    "blue": 56,
+    "hex": "#324038"
+  },
+  {
+    "color_name": "Roycroft Pewter",
+    "red": 97,
+    "green": 101,
+    "blue": 100,
+    "hex": "#616564"
+  },
+  {
+    "color_name": "Westchester Gray",
+    "red": 121,
+    "green": 121,
+    "blue": 120,
+    "hex": "#797978"
+  },
+  {
+    "color_name": "Chelsea Gray",
+    "red": 182,
+    "green": 183,
+    "blue": 176,
+    "hex": "#B6B7B0"
+  },
+  {
+    "color_name": "Sage Green Light",
+    "red": 115,
+    "green": 112,
+    "blue": 94,
+    "hex": "#73705E"
+  },
+  {
+    "color_name": "New Colonial Yellow",
+    "red": 217,
+    "green": 173,
+    "blue": 127,
+    "hex": "#D9AD7F"
+  },
+  {
+    "color_name": "Caribbean Coral",
+    "red": 190,
+    "green": 121,
+    "blue": 94,
+    "hex": "#BE795E"
+  },
+  {
+    "color_name": "Sycamore Tan",
+    "red": 156,
+    "green": 138,
+    "blue": 121,
+    "hex": "#9C8A79"
+  },
+  {
+    "color_name": "Fairfax Brown",
+    "red": 97,
+    "green": 70,
+    "blue": 58,
+    "hex": "#61463A"
+  },
+  {
+    "color_name": "Peace Yellow",
+    "red": 238,
+    "green": 207,
+    "blue": 158,
+    "hex": "#EECF9E"
+  },
+  {
+    "color_name": "Harvest Gold",
+    "red": 217,
+    "green": 160,
+    "blue": 106,
+    "hex": "#D9A06A"
+  },
+  {
+    "color_name": "Beige",
+    "red": 223,
+    "green": 200,
+    "blue": 181,
+    "hex": "#DFC8B5"
+  },
+  {
+    "color_name": "Sage",
+    "red": 179,
+    "green": 174,
+    "blue": 149,
+    "hex": "#B3AE95"
+  },
+  {
+    "color_name": "Avocado",
+    "red": 133,
+    "green": 124,
+    "blue": 93,
+    "hex": "#857C5D"
+  },
+  {
+    "color_name": "Powder Blue",
+    "red": 137,
+    "green": 164,
+    "blue": 173,
+    "hex": "#89A4AD"
+  },
+  {
+    "color_name": "Classical Yellow",
+    "red": 248,
+    "green": 212,
+    "blue": 146,
+    "hex": "#F8D492"
+  },
+  {
+    "color_name": "Snowfall",
+    "red": 224,
+    "green": 222,
+    "blue": 218,
+    "hex": "#E0DEDA"
+  },
+  {
+    "color_name": "Grayish",
+    "red": 207,
+    "green": 202,
+    "blue": 199,
+    "hex": "#CFCAC7"
+  },
+  {
+    "color_name": "Essential Gray",
+    "red": 188,
+    "green": 184,
+    "blue": 182,
+    "hex": "#BCB8B6"
+  },
+  {
+    "color_name": "Proper Gray",
+    "red": 173,
+    "green": 168,
+    "blue": 165,
+    "hex": "#ADA8A5"
+  },
+  {
+    "color_name": "Mink",
+    "red": 132,
+    "green": 123,
+    "blue": 119,
+    "hex": "#847B77"
+  },
+  {
+    "color_name": "Folkstone",
+    "red": 109,
+    "green": 101,
+    "blue": 98,
+    "hex": "#6D6562"
+  },
+  {
+    "color_name": "Black Bean",
+    "red": 64,
+    "green": 51,
+    "blue": 48,
+    "hex": "#403330"
+  },
+  {
+    "color_name": "Smart White",
+    "red": 228,
+    "green": 219,
+    "blue": 216,
+    "hex": "#E4DBD8"
+  },
+  {
+    "color_name": "Individual White",
+    "red": 212,
+    "green": 205,
+    "blue": 202,
+    "hex": "#D4CDCA"
+  },
+  {
+    "color_name": "Imagine",
+    "red": 194,
+    "green": 182,
+    "blue": 182,
+    "hex": "#C2B6B6"
+  },
+  {
+    "color_name": "Flexible Gray",
+    "red": 177,
+    "green": 163,
+    "blue": 161,
+    "hex": "#B1A3A1"
+  },
+  {
+    "color_name": "Chinchilla",
+    "red": 134,
+    "green": 120,
+    "blue": 117,
+    "hex": "#867875"
+  },
+  {
+    "color_name": "Browse Brown",
+    "red": 110,
+    "green": 97,
+    "blue": 95,
+    "hex": "#6E615F"
+  },
+  {
+    "color_name": "Bitter Chocolate",
+    "red": 77,
+    "green": 60,
+    "blue": 60,
+    "hex": "#4D3C3C"
+  },
+  {
+    "color_name": "Vaguely Mauve",
+    "red": 209,
+    "green": 197,
+    "blue": 196,
+    "hex": "#D1C5C4"
+  },
+  {
+    "color_name": "Chaise Mauve",
+    "red": 193,
+    "green": 178,
+    "blue": 179,
+    "hex": "#C1B2B3"
+  },
+  {
+    "color_name": "Intuitive",
+    "red": 179,
+    "green": 163,
+    "blue": 165,
+    "hex": "#B3A3A5"
+  },
+  {
+    "color_name": "Enigma",
+    "red": 139,
+    "green": 124,
+    "blue": 126,
+    "hex": "#8B7C7E"
+  },
+  {
+    "color_name": "Poetry Plum",
+    "red": 111,
+    "green": 92,
+    "blue": 95,
+    "hex": "#6F5C5F"
+  },
+  {
+    "color_name": "Marooned",
+    "red": 78,
+    "green": 49,
+    "blue": 50,
+    "hex": "#4E3132"
+  },
+  {
+    "color_name": "Dreamy White",
+    "red": 227,
+    "green": 217,
+    "blue": 213,
+    "hex": "#E3D9D5"
+  },
+  {
+    "color_name": "Breathless",
+    "red": 214,
+    "green": 194,
+    "blue": 190,
+    "hex": "#D6C2BE"
+  },
+  {
+    "color_name": "Insightful Rose",
+    "red": 201,
+    "green": 176,
+    "blue": 171,
+    "hex": "#C9B0AB"
+  },
+  {
+    "color_name": "Dressy Rose",
+    "red": 184,
+    "green": 157,
+    "blue": 154,
+    "hex": "#B89D9A"
+  },
+  {
+    "color_name": "Socialite",
+    "red": 144,
+    "green": 118,
+    "blue": 118,
+    "hex": "#907676"
+  },
+  {
+    "color_name": "River Rouge",
+    "red": 118,
+    "green": 89,
+    "blue": 93,
+    "hex": "#76595D"
+  },
+  {
+    "color_name": "Cordovan",
+    "red": 95,
+    "green": 61,
+    "blue": 63,
+    "hex": "#5F3D3F"
+  },
+  {
+    "color_name": "Cultured Pearl",
+    "red": 229,
+    "green": 220,
+    "blue": 214,
+    "hex": "#E5DCD6"
+  },
+  {
+    "color_name": "White Truffle",
+    "red": 215,
+    "green": 200,
+    "blue": 194,
+    "hex": "#D7C8C2"
+  },
+  {
+    "color_name": "Artistic Taupe",
+    "red": 195,
+    "green": 177,
+    "blue": 172,
+    "hex": "#C3B1AC"
+  },
+  {
+    "color_name": "Glamour",
+    "red": 182,
+    "green": 160,
+    "blue": 154,
+    "hex": "#B6A09A"
+  },
+  {
+    "color_name": "Bateau Brown",
+    "red": 122,
+    "green": 95,
+    "blue": 90,
+    "hex": "#7A5F5A"
+  },
+  {
+    "color_name": "Dark Auburn",
+    "red": 90,
+    "green": 53,
+    "blue": 50,
+    "hex": "#5A3532"
+  },
+  {
+    "color_name": "Gauzy White",
+    "red": 227,
+    "green": 219,
+    "blue": 212,
+    "hex": "#E3DBD4"
+  },
+  {
+    "color_name": "Angora",
+    "red": 209,
+    "green": 197,
+    "blue": 190,
+    "hex": "#D1C5BE"
+  },
+  {
+    "color_name": "Temperate Taupe",
+    "red": 191,
+    "green": 177,
+    "blue": 170,
+    "hex": "#BFB1AA"
+  },
+  {
+    "color_name": "Truly Taupe",
+    "red": 172,
+    "green": 158,
+    "blue": 151,
+    "hex": "#AC9E97"
+  },
+  {
+    "color_name": "Poised Taupe",
+    "red": 140,
+    "green": 126,
+    "blue": 120,
+    "hex": "#8C7E78"
+  },
+  {
+    "color_name": "Nutshell",
+    "red": 117,
+    "green": 103,
+    "blue": 97,
+    "hex": "#756761"
+  },
+  {
+    "color_name": "Otter",
+    "red": 86,
+    "green": 67,
+    "blue": 59,
+    "hex": "#56433B"
+  },
+  {
+    "color_name": "Hush White",
+    "red": 229,
+    "green": 218,
+    "blue": 212,
+    "hex": "#E5DAD4"
+  },
+  {
+    "color_name": "Unfussy Beige",
+    "red": 214,
+    "green": 200,
+    "blue": 192,
+    "hex": "#D6C8C0"
+  },
+  {
+    "color_name": "Doeskin",
+    "red": 198,
+    "green": 179,
+    "blue": 169,
+    "hex": "#C6B3A9"
+  },
+  {
+    "color_name": "Emerging Taupe",
+    "red": 184,
+    "green": 161,
+    "blue": 150,
+    "hex": "#B8A196"
+  },
+  {
+    "color_name": "Swing Brown",
+    "red": 148,
+    "green": 117,
+    "blue": 105,
+    "hex": "#947569"
+  },
+  {
+    "color_name": "Hot Cocoa",
+    "red": 128,
+    "green": 98,
+    "blue": 87,
+    "hex": "#806257"
+  },
+  {
+    "color_name": "Terra Brun",
+    "red": 90,
+    "green": 56,
+    "blue": 45,
+    "hex": "#5A382D"
+  },
+  {
+    "color_name": "Gorgeous White",
+    "red": 231,
+    "green": 219,
+    "blue": 211,
+    "hex": "#E7DBD3"
+  },
+  {
+    "color_name": "Abalone Shell",
+    "red": 219,
+    "green": 199,
+    "blue": 189,
+    "hex": "#DBC7BD"
+  },
+  {
+    "color_name": "Sashay Sand",
+    "red": 207,
+    "green": 180,
+    "blue": 168,
+    "hex": "#CFB4A8"
+  },
+  {
+    "color_name": "Sandbank",
+    "red": 195,
+    "green": 164,
+    "blue": 151,
+    "hex": "#C3A497"
+  },
+  {
+    "color_name": "Reddened Earth",
+    "red": 156,
+    "green": 110,
+    "blue": 99,
+    "hex": "#9C6E63"
+  },
+  {
+    "color_name": "Canyon Clay",
+    "red": 133,
+    "green": 89,
+    "blue": 79,
+    "hex": "#85594F"
+  },
+  {
+    "color_name": "Fiery Brown",
+    "red": 93,
+    "green": 56,
+    "blue": 49,
+    "hex": "#5D3831"
+  },
+  {
+    "color_name": "Polite White",
+    "red": 233,
+    "green": 221,
+    "blue": 212,
+    "hex": "#E9DDD4"
+  },
+  {
+    "color_name": "Malted Milk",
+    "red": 222,
+    "green": 202,
+    "blue": 189,
+    "hex": "#DECABD"
+  },
+  {
+    "color_name": "Likeable Sand",
+    "red": 209,
+    "green": 183,
+    "blue": 168,
+    "hex": "#D1B7A8"
+  },
+  {
+    "color_name": "Interface Tan",
+    "red": 193,
+    "green": 163,
+    "blue": 146,
+    "hex": "#C1A392"
+  },
+  {
+    "color_name": "Moroccan Spice",
+    "red": 157,
+    "green": 120,
+    "blue": 104,
+    "hex": "#9D7868"
+  },
+  {
+    "color_name": "Tanbark",
+    "red": 137,
+    "green": 102,
+    "blue": 86,
+    "hex": "#896656"
+  },
+  {
+    "color_name": "Vintage Leather",
+    "red": 105,
+    "green": 67,
+    "blue": 54,
+    "hex": "#694336"
+  },
+  {
+    "color_name": "Nice White",
+    "red": 230,
+    "green": 221,
+    "blue": 213,
+    "hex": "#E6DDD5"
+  },
+  {
+    "color_name": "Reticence",
+    "red": 217,
+    "green": 205,
+    "blue": 195,
+    "hex": "#D9CDC3"
+  },
+  {
+    "color_name": "Bona Fide Beige",
+    "red": 203,
+    "green": 185,
+    "blue": 171,
+    "hex": "#CBB9AB"
+  },
+  {
+    "color_name": "Sand Trap",
+    "red": 187,
+    "green": 165,
+    "blue": 149,
+    "hex": "#BBA595"
+  },
+  {
+    "color_name": "Mocha",
+    "red": 150,
+    "green": 122,
+    "blue": 106,
+    "hex": "#967A6A"
+  },
+  {
+    "color_name": "Brewly Brown",
+    "red": 113,
+    "green": 82,
+    "blue": 67,
+    "hex": "#715243"
+  },
+  {
+    "color_name": "French Roast",
+    "red": 79,
+    "green": 52,
+    "blue": 38,
+    "hex": "#4F3426"
+  },
+  {
+    "color_name": "Heron Plume",
+    "red": 229,
+    "green": 225,
+    "blue": 216,
+    "hex": "#E5E1D8"
+  },
+  {
+    "color_name": "Popular Gray",
+    "red": 212,
+    "green": 204,
+    "blue": 195,
+    "hex": "#D4CCC3"
+  },
+  {
+    "color_name": "Versatile Gray",
+    "red": 193,
+    "green": 182,
+    "blue": 171,
+    "hex": "#C1B6AB"
+  },
+  {
+    "color_name": "Perfect Greige",
+    "red": 183,
+    "green": 171,
+    "blue": 159,
+    "hex": "#B7AB9F"
+  },
+  {
+    "color_name": "Spalding Gray",
+    "red": 141,
+    "green": 127,
+    "blue": 117,
+    "hex": "#8D7F75"
+  },
+  {
+    "color_name": "Garret Gray",
+    "red": 117,
+    "green": 104,
+    "blue": 97,
+    "hex": "#756861"
+  },
+  {
+    "color_name": "Turkish Coffee",
+    "red": 77,
+    "green": 57,
+    "blue": 48,
+    "hex": "#4D3930"
+  },
+  {
+    "color_name": "Everyday White",
+    "red": 228,
+    "green": 220,
+    "blue": 212,
+    "hex": "#E4DCD4"
+  },
+  {
+    "color_name": "Realist Beige",
+    "red": 211,
+    "green": 200,
+    "blue": 189,
+    "hex": "#D3C8BD"
+  },
+  {
+    "color_name": "Diverse Beige",
+    "red": 194,
+    "green": 180,
+    "blue": 167,
+    "hex": "#C2B4A7"
+  },
+  {
+    "color_name": "Utterly Beige",
+    "red": 181,
+    "green": 165,
+    "blue": 151,
+    "hex": "#B5A597"
+  },
+  {
+    "color_name": "Down Home",
+    "red": 144,
+    "green": 120,
+    "blue": 101,
+    "hex": "#907865"
+  },
+  {
+    "color_name": "Cobble Brown",
+    "red": 122,
+    "green": 100,
+    "blue": 85,
+    "hex": "#7A6455"
+  },
+  {
+    "color_name": "Sable",
+    "red": 95,
+    "green": 75,
+    "blue": 63,
+    "hex": "#5F4B3F"
+  },
+  {
+    "color_name": "Modest White",
+    "red": 230,
+    "green": 221,
+    "blue": 212,
+    "hex": "#E6DDD4"
+  },
+  {
+    "color_name": "Simplify Beige",
+    "red": 214,
+    "green": 199,
+    "blue": 185,
+    "hex": "#D6C7B9"
+  },
+  {
+    "color_name": "Sand Dune",
+    "red": 197,
+    "green": 177,
+    "blue": 162,
+    "hex": "#C5B1A2"
+  },
+  {
+    "color_name": "Trusty Tan",
+    "red": 181,
+    "green": 159,
+    "blue": 143,
+    "hex": "#B59F8F"
+  },
+  {
+    "color_name": "Nuthatch",
+    "red": 142,
+    "green": 114,
+    "blue": 95,
+    "hex": "#8E725F"
+  },
+  {
+    "color_name": "Grounded",
+    "red": 120,
+    "green": 91,
+    "blue": 71,
+    "hex": "#785847"
+  },
+  {
+    "color_name": "Java",
+    "red": 99,
+    "green": 69,
+    "blue": 51,
+    "hex": "#634533"
+  },
+  {
+    "color_name": "Reliable White",
+    "red": 232,
+    "green": 222,
+    "blue": 211,
+    "hex": "#E8DED3"
+  },
+  {
+    "color_name": "Lightweight Beige",
+    "red": 218,
+    "green": 200,
+    "blue": 184,
+    "hex": "#DAC8B8"
+  },
+  {
+    "color_name": "Familiar Beige",
+    "red": 202,
+    "green": 179,
+    "blue": 160,
+    "hex": "#CAB3A0"
+  },
+  {
+    "color_name": "Sensational Sand",
+    "red": 191,
+    "green": 163,
+    "blue": 141,
+    "hex": "#BFA38D"
+  },
+  {
+    "color_name": "Toasty",
+    "red": 149,
+    "green": 114,
+    "blue": 88,
+    "hex": "#957258"
+  },
+  {
+    "color_name": "Jute Brown",
+    "red": 129,
+    "green": 93,
+    "blue": 64,
+    "hex": "#815D40"
+  },
+  {
+    "color_name": "Sturdy Brown",
+    "red": 105,
+    "green": 72,
+    "blue": 44,
+    "hex": "#69482C"
+  },
+  {
+    "color_name": "Pacer White",
+    "red": 229,
+    "green": 221,
+    "blue": 208,
+    "hex": "#E5DDD0"
+  },
+  {
+    "color_name": "Sand Dollar",
+    "red": 215,
+    "green": 197,
+    "blue": 179,
+    "hex": "#D7C5B3"
+  },
+  {
+    "color_name": "Practical Beige",
+    "red": 201,
+    "green": 178,
+    "blue": 156,
+    "hex": "#C9B29C"
+  },
+  {
+    "color_name": "Sands of Time",
+    "red": 188,
+    "green": 163,
+    "blue": 139,
+    "hex": "#BCA38B"
+  },
+  {
+    "color_name": "Portabello",
+    "red": 148,
+    "green": 122,
+    "blue": 98,
+    "hex": "#947A62"
+  },
+  {
+    "color_name": "Tea Chest",
+    "red": 125,
+    "green": 100,
+    "blue": 77,
+    "hex": "#7D644D"
+  },
+  {
+    "color_name": "Kaffee",
+    "red": 101,
+    "green": 80,
+    "blue": 61,
+    "hex": "#65503D"
+  },
+  {
+    "color_name": "Divine White",
+    "red": 230,
+    "green": 220,
+    "blue": 205,
+    "hex": "#E6DCCD"
+  },
+  {
+    "color_name": "Kilim Beige",
+    "red": 215,
+    "green": 197,
+    "blue": 174,
+    "hex": "#D7C5AE"
+  },
+  {
+    "color_name": "Nomadic Desert",
+    "red": 199,
+    "green": 177,
+    "blue": 152,
+    "hex": "#C7B198"
+  },
+  {
+    "color_name": "Latte",
+    "red": 186,
+    "green": 161,
+    "blue": 133,
+    "hex": "#BAA185"
+  },
+  {
+    "color_name": "Hopsack",
+    "red": 158,
+    "green": 129,
+    "blue": 99,
+    "hex": "#9E8163"
+  },
+  {
+    "color_name": "Steady Brown",
+    "red": 138,
+    "green": 107,
+    "blue": 77,
+    "hex": "#8A6B4D"
+  },
+  {
+    "color_name": "Coconut Husk",
+    "red": 112,
+    "green": 87,
+    "blue": 63,
+    "hex": "#70573F"
+  },
+  {
+    "color_name": "Biscuit",
+    "red": 235,
+    "green": 221,
+    "blue": 203,
+    "hex": "#EBDDCB"
+  },
+  {
+    "color_name": "Interactive Cream",
+    "red": 228,
+    "green": 202,
+    "blue": 173,
+    "hex": "#E4CAAD"
+  },
+  {
+    "color_name": "Bagel",
+    "red": 215,
+    "green": 181,
+    "blue": 147,
+    "hex": "#D7B593"
+  },
+  {
+    "color_name": "Totally Tan",
+    "red": 204,
+    "green": 166,
+    "blue": 131,
+    "hex": "#CCA683"
+  },
+  {
+    "color_name": "Tatami Tan",
+    "red": 186,
+    "green": 140,
+    "blue": 100,
+    "hex": "#BA8C64"
+  },
+  {
+    "color_name": "Smokey Topaz",
+    "red": 165,
+    "green": 121,
+    "blue": 85,
+    "hex": "#A57955"
+  },
+  {
+    "color_name": "Leather Bound",
+    "red": 141,
+    "green": 98,
+    "blue": 61,
+    "hex": "#8D623D"
+  },
+  {
+    "color_name": "Antique White",
+    "red": 232,
+    "green": 220,
+    "blue": 198,
+    "hex": "#E8DCC6"
+  },
+  {
+    "color_name": "Believable Buff",
+    "red": 219,
+    "green": 199,
+    "blue": 168,
+    "hex": "#DBC7A8"
+  },
+  {
+    "color_name": "Whole Wheat",
+    "red": 205,
+    "green": 181,
+    "blue": 146,
+    "hex": "#CDB592"
+  },
+  {
+    "color_name": "Camelback",
+    "red": 197,
+    "green": 170,
+    "blue": 133,
+    "hex": "#C5AA85"
+  },
+  {
+    "color_name": "Baguette",
+    "red": 179,
+    "green": 145,
+    "blue": 103,
+    "hex": "#B39167"
+  },
+  {
+    "color_name": "Cardboard",
+    "red": 156,
+    "green": 122,
+    "blue": 86,
+    "hex": "#9C7A56"
+  },
+  {
+    "color_name": "Craft Paper",
+    "red": 138,
+    "green": 102,
+    "blue": 69,
+    "hex": "#8A6645"
+  },
+  {
+    "color_name": "Navajo White",
+    "red": 233,
+    "green": 220,
+    "blue": 198,
+    "hex": "#E9DCC6"
+  },
+  {
+    "color_name": "Ivoire",
+    "red": 228,
+    "green": 206,
+    "blue": 172,
+    "hex": "#E4CEAC"
+  },
+  {
+    "color_name": "Blonde",
+    "red": 220,
+    "green": 189,
+    "blue": 146,
+    "hex": "#DCBD92"
+  },
+  {
+    "color_name": "Restrained Gold",
+    "red": 210,
+    "green": 176,
+    "blue": 132,
+    "hex": "#D2B084"
+  },
+  {
+    "color_name": "Mannered Gold",
+    "red": 193,
+    "green": 151,
+    "blue": 99,
+    "hex": "#C19763"
+  },
+  {
+    "color_name": "Chamois",
+    "red": 173,
+    "green": 132,
+    "blue": 81,
+    "hex": "#AD8451"
+  },
+  {
+    "color_name": "Relic Bronze",
+    "red": 144,
+    "green": 106,
+    "blue": 58,
+    "hex": "#906A3A"
+  },
+  {
+    "color_name": "Muslin",
+    "red": 234,
+    "green": 223,
+    "blue": 201,
+    "hex": "#EADFC9"
+  },
+  {
+    "color_name": "Netsuke",
+    "red": 224,
+    "green": 207,
+    "blue": 176,
+    "hex": "#E0CFB0"
+  },
+  {
+    "color_name": "Ecru",
+    "red": 208,
+    "green": 186,
+    "blue": 148,
+    "hex": "#D0BA94"
+  },
+  {
+    "color_name": "Harmonic Tan",
+    "red": 198,
+    "green": 176,
+    "blue": 138,
+    "hex": "#C6B08A"
+  },
+  {
+    "color_name": "Burlap",
+    "red": 172,
+    "green": 149,
+    "blue": 113,
+    "hex": "#AC9571"
+  },
+  {
+    "color_name": "Artifact",
+    "red": 154,
+    "green": 129,
+    "blue": 94,
+    "hex": "#9A815E"
+  },
+  {
+    "color_name": "Mossy Gold",
+    "red": 127,
+    "green": 103,
+    "blue": 67,
+    "hex": "#7F6743"
+  },
+  {
+    "color_name": "Moderate White",
+    "red": 233,
+    "green": 222,
+    "blue": 207,
+    "hex": "#E9DECF"
+  },
+  {
+    "color_name": "Softer Tan",
+    "red": 218,
+    "green": 202,
+    "blue": 178,
+    "hex": "#DACAB2"
+  },
+  {
+    "color_name": "Macadamia",
+    "red": 204,
+    "green": 183,
+    "blue": 155,
+    "hex": "#CCB79B"
+  },
+  {
+    "color_name": "Basket Beige",
+    "red": 192,
+    "green": 169,
+    "blue": 139,
+    "hex": "#C0A98B"
+  },
+  {
+    "color_name": "Dapper Tan",
+    "red": 148,
+    "green": 127,
+    "blue": 101,
+    "hex": "#947F65"
+  },
+  {
+    "color_name": "Thatch Brown",
+    "red": 134,
+    "green": 112,
+    "blue": 87,
+    "hex": "#867057"
+  },
+  {
+    "color_name": "Umber",
+    "red": 110,
+    "green": 84,
+    "blue": 60,
+    "hex": "#6E543C"
+  },
+  {
+    "color_name": "Panda White",
+    "red": 234,
+    "green": 226,
+    "blue": 212,
+    "hex": "#EAE2D4"
+  },
+  {
+    "color_name": "Wool Skein",
+    "red": 217,
+    "green": 207,
+    "blue": 186,
+    "hex": "#D9CFBA"
+  },
+  {
+    "color_name": "Relaxed Khaki",
+    "red": 200,
+    "green": 187,
+    "blue": 163,
+    "hex": "#C8BBA3"
+  },
+  {
+    "color_name": "Universal Khaki",
+    "red": 184,
+    "green": 169,
+    "blue": 146,
+    "hex": "#B8A992"
+  },
+  {
+    "color_name": "Quiver Tan",
+    "red": 142,
+    "green": 127,
+    "blue": 106,
+    "hex": "#8E7F6A"
+  },
+  {
+    "color_name": "Superior Bronze",
+    "red": 120,
+    "green": 105,
+    "blue": 87,
+    "hex": "#786957"
+  },
+  {
+    "color_name": "Protégé Bronze",
+    "red": 102,
+    "green": 84,
+    "blue": 62,
+    "hex": "#66543E"
+  },
+  {
+    "color_name": "Nacre",
+    "red": 232,
+    "green": 226,
+    "blue": 212,
+    "hex": "#E8E2D4"
+  },
+  {
+    "color_name": "Rice Grain",
+    "red": 219,
+    "green": 208,
+    "blue": 185,
+    "hex": "#DBD0B9"
+  },
+  {
+    "color_name": "Ramie",
+    "red": 205,
+    "green": 189,
+    "blue": 162,
+    "hex": "#CDBDA2"
+  },
+  {
+    "color_name": "Favorite Tan",
+    "red": 193,
+    "green": 174,
+    "blue": 145,
+    "hex": "#C1AE91"
+  },
+  {
+    "color_name": "Sawdust",
+    "red": 153,
+    "green": 137,
+    "blue": 112,
+    "hex": "#998970"
+  },
+  {
+    "color_name": "High Tea",
+    "red": 126,
+    "green": 111,
+    "blue": 89,
+    "hex": "#7E6F59"
+  },
+  {
+    "color_name": "Best Bronze",
+    "red": 93,
+    "green": 81,
+    "blue": 62,
+    "hex": "#5D513E"
+  },
+  {
+    "color_name": "Nonchalant White",
+    "red": 222,
+    "green": 221,
+    "blue": 209,
+    "hex": "#DEDDD1"
+  },
+  {
+    "color_name": "Ancient Marble",
+    "red": 209,
+    "green": 204,
+    "blue": 185,
+    "hex": "#D1CCB9"
+  },
+  {
+    "color_name": "Grassland",
+    "red": 193,
+    "green": 188,
+    "blue": 167,
+    "hex": "#C1BCA7"
+  },
+  {
+    "color_name": "Svelte Sage",
+    "red": 178,
+    "green": 172,
+    "blue": 150,
+    "hex": "#B2AC96"
+  },
+  {
+    "color_name": "Connected Gray",
+    "red": 137,
+    "green": 132,
+    "blue": 115,
+    "hex": "#898473"
+  },
+  {
+    "color_name": "Eclipse",
+    "red": 107,
+    "green": 103,
+    "blue": 87,
+    "hex": "#6B6757"
+  },
+  {
+    "color_name": "Garden Gate",
+    "red": 94,
+    "green": 89,
+    "blue": 73,
+    "hex": "#5E5949"
+  },
+  {
+    "color_name": "Moderne White",
+    "red": 226,
+    "green": 224,
+    "blue": 215,
+    "hex": "#E2E0D7"
+  },
+  {
+    "color_name": "Sedate Gray",
+    "red": 209,
+    "green": 205,
+    "blue": 191,
+    "hex": "#D1CDBF"
+  },
+  {
+    "color_name": "Techno Gray",
+    "red": 191,
+    "green": 185,
+    "blue": 170,
+    "hex": "#BFB9AA"
+  },
+  {
+    "color_name": "Chatroom",
+    "red": 176,
+    "green": 171,
+    "blue": 156,
+    "hex": "#B0AB9C"
+  },
+  {
+    "color_name": "Hardware",
+    "red": 139,
+    "green": 131,
+    "blue": 114,
+    "hex": "#8B8372"
+  },
+  {
+    "color_name": "Cocoon",
+    "red": 114,
+    "green": 107,
+    "blue": 91,
+    "hex": "#726B5B"
+  },
+  {
+    "color_name": "Andiron",
+    "red": 66,
+    "green": 64,
+    "blue": 54,
+    "hex": "#424036"
+  },
+  {
+    "color_name": "Sagey",
+    "red": 226,
+    "green": 226,
+    "blue": 209,
+    "hex": "#E2E2D1"
+  },
+  {
+    "color_name": "Liveable Green",
+    "red": 206,
+    "green": 206,
+    "blue": 189,
+    "hex": "#CECEBD"
+  },
+  {
+    "color_name": "Softened Green",
+    "red": 187,
+    "green": 188,
+    "blue": 167,
+    "hex": "#BBBCA7"
+  },
+  {
+    "color_name": "Clary Sage",
+    "red": 172,
+    "green": 173,
+    "blue": 151,
+    "hex": "#ACAD97"
+  },
+  {
+    "color_name": "Artichoke",
+    "red": 127,
+    "green": 130,
+    "blue": 102,
+    "hex": "#7F8266"
+  },
+  {
+    "color_name": "Oakmoss",
+    "red": 101,
+    "green": 104,
+    "blue": 76,
+    "hex": "#65684C"
+  },
+  {
+    "color_name": "Secret Garden",
+    "red": 79,
+    "green": 82,
+    "blue": 58,
+    "hex": "#4F523A"
+  },
+  {
+    "color_name": "Ethereal White",
+    "red": 227,
+    "green": 226,
+    "blue": 217,
+    "hex": "#E3E2D9"
+  },
+  {
+    "color_name": "Conservative Gray",
+    "red": 209,
+    "green": 208,
+    "blue": 198,
+    "hex": "#D1D0C6"
+  },
+  {
+    "color_name": "Austere Gray",
+    "red": 190,
+    "green": 191,
+    "blue": 178,
+    "hex": "#BEBFB2"
+  },
+  {
+    "color_name": "Escape Gray",
+    "red": 171,
+    "green": 172,
+    "blue": 159,
+    "hex": "#ABAC9F"
+  },
+  {
+    "color_name": "Dried Thyme",
+    "red": 123,
+    "green": 128,
+    "blue": 112,
+    "hex": "#7B8070"
+  },
+  {
+    "color_name": "Rosemary",
+    "red": 100,
+    "green": 105,
+    "blue": 92,
+    "hex": "#64695C"
+  },
+  {
+    "color_name": "Shade-Grown",
+    "red": 78,
+    "green": 81,
+    "blue": 71,
+    "hex": "#4E5147"
+  },
+  {
+    "color_name": "Opaline",
+    "red": 220,
+    "green": 223,
+    "blue": 215,
+    "hex": "#DCDFD7"
+  },
+  {
+    "color_name": "Filmy Green",
+    "red": 209,
+    "green": 211,
+    "blue": 199,
+    "hex": "#D1D3C7"
+  },
+  {
+    "color_name": "Contented",
+    "red": 189,
+    "green": 192,
+    "blue": 179,
+    "hex": "#BDC0B3"
+  },
+  {
+    "color_name": "Coastal Plain",
+    "red": 159,
+    "green": 166,
+    "blue": 148,
+    "hex": "#9FA694"
+  },
+  {
+    "color_name": "Privilege Green",
+    "red": 122,
+    "green": 135,
+    "blue": 117,
+    "hex": "#7A8775"
+  },
+  {
+    "color_name": "Basil",
+    "red": 98,
+    "green": 110,
+    "blue": 96,
+    "hex": "#626E60"
+  },
+  {
+    "color_name": "Rock Garden",
+    "red": 70,
+    "green": 84,
+    "blue": 72,
+    "hex": "#465448"
+  },
+  {
+    "color_name": "Frosty White",
+    "red": 221,
+    "green": 221,
+    "blue": 214,
+    "hex": "#DDDDD6"
+  },
+  {
+    "color_name": "Abof Gray",
+    "red": 201,
+    "green": 201,
+    "blue": 192,
+    "hex": "#C9C9C0"
+  },
+  {
+    "color_name": "Sensible Hue",
+    "red": 182,
+    "green": 181,
+    "blue": 171,
+    "hex": "#B6B5AB"
+  },
+  {
+    "color_name": "Rare Gray",
+    "red": 166,
+    "green": 166,
+    "blue": 155,
+    "hex": "#A6A69B"
+  },
+  {
+    "color_name": "Link Gray",
+    "red": 127,
+    "green": 126,
+    "blue": 114,
+    "hex": "#7F7E72"
+  },
+  {
+    "color_name": "Thunderous",
+    "red": 109,
+    "green": 108,
+    "blue": 98,
+    "hex": "#6D6C62"
+  },
+  {
+    "color_name": "Cast Iron",
+    "red": 100,
+    "green": 100,
+    "blue": 90,
+    "hex": "#64645A"
+  },
+  {
+    "color_name": "Spare White",
+    "red": 228,
+    "green": 228,
+    "blue": 221,
+    "hex": "#E4E4DD"
+  },
+  {
+    "color_name": "Sea Salt",
+    "red": 205,
+    "green": 210,
+    "blue": 202,
+    "hex": "#CDD2CA"
+  },
+  {
+    "color_name": "Comfort Gray",
+    "red": 190,
+    "green": 195,
+    "blue": 187,
+    "hex": "#BEC3BB"
+  },
+  {
+    "color_name": "Oyster Bay",
+    "red": 174,
+    "green": 179,
+    "blue": 169,
+    "hex": "#AEB3A9"
+  },
+  {
+    "color_name": "Retreat",
+    "red": 122,
+    "green": 128,
+    "blue": 118,
+    "hex": "#7A8076"
+  },
+  {
+    "color_name": "Pewter Green",
+    "red": 94,
+    "green": 98,
+    "blue": 89,
+    "hex": "#5E6259"
+  },
+  {
+    "color_name": "Ripe Olive",
+    "red": 68,
+    "green": 72,
+    "blue": 61,
+    "hex": "#44483D"
+  },
+  {
+    "color_name": "Window Pane",
+    "red": 215,
+    "green": 223,
+    "blue": 216,
+    "hex": "#D7DFD8"
+  },
+  {
+    "color_name": "Rainwashed",
+    "red": 194,
+    "green": 205,
+    "blue": 197,
+    "hex": "#C2CDC5"
+  },
+  {
+    "color_name": "Quietude",
+    "red": 173,
+    "green": 187,
+    "blue": 178,
+    "hex": "#ADBBB2"
+  },
+  {
+    "color_name": "Halcyon Green",
+    "red": 155,
+    "green": 170,
+    "blue": 162,
+    "hex": "#9BAAA2"
+  },
+  {
+    "color_name": "Crewel Tan",
+    "red": 203,
+    "green": 185,
+    "blue": 155,
+    "hex": "#CBB99B"
+  },
+  {
+    "color_name": "Empire Gold",
+    "red": 193,
+    "green": 159,
+    "blue": 110,
+    "hex": "#C19F6E"
+  },
+  {
+    "color_name": "Majolica Green",
+    "red": 174,
+    "green": 176,
+    "blue": 143,
+    "hex": "#AEB08F"
+  },
+  {
+    "color_name": "Sheraton Sage",
+    "red": 143,
+    "green": 134,
+    "blue": 102,
+    "hex": "#8F8666"
+  },
+  {
+    "color_name": "Gallery Green",
+    "red": 112,
+    "green": 134,
+    "blue": 114,
+    "hex": "#708672"
+  },
+  {
+    "color_name": "Billiard Green",
+    "red": 69,
+    "green": 88,
+    "blue": 77,
+    "hex": "#45584D"
+  },
+  {
+    "color_name": "Calico",
+    "red": 140,
+    "green": 164,
+    "blue": 156,
+    "hex": "#8CA49C"
+  },
+  {
+    "color_name": "Teal Stencil",
+    "red": 98,
+    "green": 127,
+    "blue": 123,
+    "hex": "#627F7B"
+  },
+  {
+    "color_name": "Festoon Aqua",
+    "red": 160,
+    "green": 187,
+    "blue": 184,
+    "hex": "#A0BBBB"
+  },
+  {
+    "color_name": "Peacock Plume",
+    "red": 115,
+    "green": 150,
+    "blue": 148,
+    "hex": "#739694"
+  },
+  {
+    "color_name": "Queen Anne Lilac",
+    "red": 192,
+    "green": 182,
+    "blue": 180,
+    "hex": "#C0B6B4"
+  },
+  {
+    "color_name": "Patchwork Plum",
+    "red": 126,
+    "green": 105,
+    "blue": 106,
+    "hex": "#7E696A"
+  },
+  {
+    "color_name": "Pewter Tankard",
+    "red": 163,
+    "green": 155,
+    "blue": 144,
+    "hex": "#A39B90"
+  },
+  {
+    "color_name": "Curio Gray",
+    "red": 152,
+    "green": 137,
+    "blue": 119,
+    "hex": "#988977"
+  },
+  {
+    "color_name": "Rosedust",
+    "red": 204,
+    "green": 141,
+    "blue": 132,
+    "hex": "#CC8D84"
+  },
+  {
+    "color_name": "Rachel Pink",
+    "red": 232,
+    "green": 185,
+    "blue": 174,
+    "hex": "#E8B9AE"
+  },
+  {
+    "color_name": "Aristocrat Peach",
+    "red": 236,
+    "green": 206,
+    "blue": 185,
+    "hex": "#ECCEB9"
+  },
+  {
+    "color_name": "Caen Stone",
+    "red": 236,
+    "green": 208,
+    "blue": 177,
+    "hex": "#ECD0B1"
+  },
+  {
+    "color_name": "Acanthus",
+    "red": 205,
+    "green": 205,
+    "blue": 180,
+    "hex": "#CDCDB4"
+  },
+  {
+    "color_name": "Colonial Yellow",
+    "red": 239,
+    "green": 196,
+    "blue": 136,
+    "hex": "#EFC488"
+  },
+  {
+    "color_name": "Dutch Tile Blue",
+    "red": 154,
+    "green": 171,
+    "blue": 171,
+    "hex": "#9AABAB"
+  },
+  {
+    "color_name": "Needlepoint Navy",
+    "red": 84,
+    "green": 102,
+    "blue": 112,
+    "hex": "#546670"
+  },
+  {
+    "color_name": "Rembrandt Ruby",
+    "red": 151,
+    "green": 79,
+    "blue": 73,
+    "hex": "#974F49"
+  },
+  {
+    "color_name": "Roycroft Rose",
+    "red": 192,
+    "green": 143,
+    "blue": 128,
+    "hex": "#C08F80"
+  },
+  {
+    "color_name": "Warm Beige",
+    "red": 238,
+    "green": 218,
+    "blue": 195,
+    "hex": "#EEDAC3"
+  },
+  {
+    "color_name": "Buckram Binding",
+    "red": 217,
+    "green": 195,
+    "blue": 166,
+    "hex": "#D9C3A6"
+  },
+  {
+    "color_name": "Morris Room Grey",
+    "red": 173,
+    "green": 161,
+    "blue": 147,
+    "hex": "#ADA193"
+  },
+  {
+    "color_name": "Library Pewter",
+    "red": 127,
+    "green": 114,
+    "blue": 99,
+    "hex": "#7F7263"
+  },
+  {
+    "color_name": "Mellow Mauve",
+    "red": 196,
+    "green": 149,
+    "blue": 122,
+    "hex": "#C4957A"
+  },
+  {
+    "color_name": "Roycroft Adobe",
+    "red": 167,
+    "green": 98,
+    "blue": 81,
+    "hex": "#A76251"
+  },
+  {
+    "color_name": "Dard Hunter Green",
+    "red": 58,
+    "green": 74,
+    "blue": 63,
+    "hex": "#3A4A3F"
+  },
+  {
+    "color_name": "Ruskin Room Green",
+    "red": 172,
+    "green": 161,
+    "blue": 125,
+    "hex": "#ACA17D"
+  },
+  {
+    "color_name": "Peristyle Brass",
+    "red": 174,
+    "green": 144,
+    "blue": 94,
+    "hex": "#AE905E"
+  },
+  {
+    "color_name": "Hubbard Squash",
+    "red": 233,
+    "green": 191,
+    "blue": 140,
+    "hex": "#E9BF8C"
+  },
+  {
+    "color_name": "Antiquarian Brown",
+    "red": 148,
+    "green": 102,
+    "blue": 68,
+    "hex": "#946644"
+  },
+  {
+    "color_name": "White Hyacinth",
+    "red": 243,
+    "green": 229,
+    "blue": 209,
+    "hex": "#F3E5D1"
+  },
+  {
+    "color_name": "Studio Blue Green",
+    "red": 109,
+    "green": 129,
+    "blue": 123,
+    "hex": "#6D817B"
+  },
+  {
+    "color_name": "Bunglehouse Blue",
+    "red": 71,
+    "green": 98,
+    "blue": 111,
+    "hex": "#47626F"
+  },
+  {
+    "color_name": "Silver Gray",
+    "red": 184,
+    "green": 178,
+    "blue": 162,
+    "hex": "#B8B2A2"
+  },
+  {
+    "color_name": "Classic Light Buff",
+    "red": 240,
+    "green": 234,
+    "blue": 220,
+    "hex": "#F0EADC"
+  },
+  {
+    "color_name": "Classic Ivory",
+    "red": 242,
+    "green": 224,
+    "blue": 195,
+    "hex": "#F2E0C3"
+  },
+  {
+    "color_name": "Pearl Gray",
+    "red": 203,
+    "green": 206,
+    "blue": 197,
+    "hex": "#CBCEC5"
+  },
+  {
+    "color_name": "Porcelain",
+    "red": 233,
+    "green": 224,
+    "blue": 213,
+    "hex": "#E9E0D5"
+  },
+  {
+    "color_name": "Twilight Gray",
+    "red": 200,
+    "green": 191,
+    "blue": 181,
+    "hex": "#C8BFB5"
+  },
+  {
+    "color_name": "Light French Gray",
+    "red": 194,
+    "green": 192,
+    "blue": 187,
+    "hex": "#C2C0BB"
+  },
+  {
+    "color_name": "Classic Sand",
+    "red": 214,
+    "green": 188,
+    "blue": 170,
+    "hex": "#D6BCAA"
+  },
+  {
+    "color_name": "Chinese Red",
+    "red": 158,
+    "green": 62,
+    "blue": 51,
+    "hex": "#9E3E33"
+  },
+  {
+    "color_name": "Jazz Age Coral",
+    "red": 241,
+    "green": 191,
+    "blue": 177,
+    "hex": "#F1BFB1"
+  },
+  {
+    "color_name": "Frostwork",
+    "red": 203,
+    "green": 208,
+    "blue": 194,
+    "hex": "#CBD0C2"
+  },
+  {
+    "color_name": "Alexandrite",
+    "red": 89,
+    "green": 140,
+    "blue": 116,
+    "hex": "#598C74"
+  },
+  {
+    "color_name": "Salon Rose",
+    "red": 171,
+    "green": 120,
+    "blue": 120,
+    "hex": "#AB7878"
+  },
+  {
+    "color_name": "Studio Mauve",
+    "red": 198,
+    "green": 185,
+    "blue": 184,
+    "hex": "#C6B9B8"
+  },
+  {
+    "color_name": "Blue Sky",
+    "red": 171,
+    "green": 209,
+    "blue": 201,
+    "hex": "#ABD1C9"
+  },
+  {
+    "color_name": "Blue Peacock",
+    "red": 1,
+    "green": 78,
+    "blue": 76,
+    "hex": "#014E4C"
+  },
+  {
+    "color_name": "Vogue Green",
+    "red": 75,
+    "green": 86,
+    "blue": 69,
+    "hex": "#4B5645"
+  },
+  {
+    "color_name": "Cascade Green",
+    "red": 172,
+    "green": 177,
+    "blue": 159,
+    "hex": "#ACB19F"
+  },
+  {
+    "color_name": "Belvedere Cream",
+    "red": 240,
+    "green": 205,
+    "blue": 160,
+    "hex": "#F0CDA0"
+  },
+  {
+    "color_name": "Copen Blue",
+    "red": 194,
+    "green": 204,
+    "blue": 196,
+    "hex": "#C2CCC4"
+  },
+  {
+    "color_name": "Rose Tan",
+    "red": 205,
+    "green": 156,
+    "blue": 133,
+    "hex": "#CD9C85"
+  },
+  {
+    "color_name": "Pink Shadow",
+    "red": 222,
+    "green": 195,
+    "blue": 185,
+    "hex": "#DEC3B9"
+  },
+  {
+    "color_name": "Orchid",
+    "red": 188,
+    "green": 156,
+    "blue": 158,
+    "hex": "#BC9C9E"
+  },
+  {
+    "color_name": "Deep Maroon",
+    "red": 98,
+    "green": 63,
+    "blue": 69,
+    "hex": "#623F45"
+  },
+  {
+    "color_name": "Chartreuse",
+    "red": 225,
+    "green": 210,
+    "blue": 134,
+    "hex": "#E1D286"
+  },
+  {
+    "color_name": "Radiant Lilac",
+    "red": 164,
+    "green": 137,
+    "blue": 160,
+    "hex": "#A489A0"
+  },
+  {
+    "color_name": "Holiday Turquoise",
+    "red": 138,
+    "green": 198,
+    "blue": 189,
+    "hex": "#8AC6BD"
+  },
+  {
+    "color_name": "Appleblossom",
+    "red": 218,
+    "green": 181,
+    "blue": 180,
+    "hex": "#DAB5B4"
+  },
+  {
+    "color_name": "Classic French Gray",
+    "red": 136,
+    "green": 135,
+    "blue": 130,
+    "hex": "#888782"
+  },
+  {
+    "color_name": "Sunbeam Yellow",
+    "red": 240,
+    "green": 211,
+    "blue": 157,
+    "hex": "#F0D39D"
+  },
+  {
+    "color_name": "Pinky Beige",
+    "red": 201,
+    "green": 170,
+    "blue": 152,
+    "hex": "#C9AA98"
+  },
+  {
+    "color_name": "Pink Flamingo",
+    "red": 205,
+    "green": 113,
+    "blue": 123,
+    "hex": "#CD717B"
+  },
+  {
+    "color_name": "Skyline Steel",
+    "red": 198,
+    "green": 191,
+    "blue": 179,
+    "hex": "#C6BFB3"
+  },
+  {
+    "color_name": "Venetian Yellow",
+    "red": 246,
+    "green": 227,
+    "blue": 161,
+    "hex": "#F6E3A1"
+  },
+  {
+    "color_name": "Icy Lemonade",
+    "red": 244,
+    "green": 232,
+    "blue": 178,
+    "hex": "#F4E8B2"
+  },
+  {
+    "color_name": "Pineapple Cream",
+    "red": 242,
+    "green": 234,
+    "blue": 195,
+    "hex": "#F2EAC3"
+  },
+  {
+    "color_name": "Merlot",
+    "red": 81,
+    "green": 50,
+    "blue": 59,
+    "hex": "#51323B"
+  },
+  {
+    "color_name": "Rockweed",
+    "red": 68,
+    "green": 55,
+    "blue": 53,
+    "hex": "#443735"
+  },
+  {
+    "color_name": "Charcoal Blue",
+    "red": 61,
+    "green": 68,
+    "blue": 80,
+    "hex": "#3D4450"
+  },
+  {
+    "color_name": "Mineral Gray",
+    "red": 81,
+    "green": 87,
+    "blue": 99,
+    "hex": "#515763"
+  },
+  {
+    "color_name": "Rookwood Dark Red",
+    "red": 75,
+    "green": 41,
+    "blue": 41,
+    "hex": "#4B2929"
+  },
+  {
+    "color_name": "Rookwood Red",
+    "red": 98,
+    "green": 47,
+    "blue": 45,
+    "hex": "#622F2D"
+  },
+  {
+    "color_name": "Rookwood Terra Cotta",
+    "red": 151,
+    "green": 88,
+    "blue": 64,
+    "hex": "#975840"
+  },
+  {
+    "color_name": "Renwick Rose Beige",
+    "red": 175,
+    "green": 136,
+    "blue": 113,
+    "hex": "#AF8871"
+  },
+  {
+    "color_name": "Renwick Beige",
+    "red": 195,
+    "green": 176,
+    "blue": 157,
+    "hex": "#C3B09D"
+  },
+  {
+    "color_name": "Rookwood Brown",
+    "red": 127,
+    "green": 97,
+    "blue": 74,
+    "hex": "#7F614A"
+  },
+  {
+    "color_name": "Roycroft Vellum",
+    "red": 232,
+    "green": 217,
+    "blue": 189,
+    "hex": "#E8D9BD"
+  },
+  {
+    "color_name": "Birdseye Maple",
+    "red": 228,
+    "green": 196,
+    "blue": 149,
+    "hex": "#E4C495"
+  },
+  {
+    "color_name": "Craftsman Brown",
+    "red": 174,
+    "green": 146,
+    "blue": 120,
+    "hex": "#AE9278"
+  },
+  {
+    "color_name": "Quartersawn Oak",
+    "red": 133,
+    "green": 105,
+    "blue": 91,
+    "hex": "#85695B"
+  },
+  {
+    "color_name": "Aurora Brown",
+    "red": 106,
+    "green": 66,
+    "blue": 56,
+    "hex": "#6A4238"
+  },
+  {
+    "color_name": "Polished Mahogany",
+    "red": 67,
+    "green": 39,
+    "blue": 34,
+    "hex": "#432722"
+  },
+  {
+    "color_name": "Roycroft Copper Red",
+    "red": 123,
+    "green": 55,
+    "blue": 40,
+    "hex": "#7B3728"
+  },
+  {
+    "color_name": "Hammered Silver",
+    "red": 151,
+    "green": 138,
+    "blue": 127,
+    "hex": "#978A7F"
+  },
+  {
+    "color_name": "Weathered Shingle",
+    "red": 147,
+    "green": 127,
+    "blue": 104,
+    "hex": "#937F68"
+  },
+  {
+    "color_name": "Roycroft Suede",
+    "red": 167,
+    "green": 148,
+    "blue": 115,
+    "hex": "#A79473"
+  },
+  {
+    "color_name": "Roycroft Brass",
+    "red": 122,
+    "green": 106,
+    "blue": 81,
+    "hex": "#7A6A51"
+  },
+  {
+    "color_name": "Roycroft Mist Gray",
+    "red": 194,
+    "green": 189,
+    "blue": 177,
+    "hex": "#C2BDB1"
+  },
+  {
+    "color_name": "Bunglehouse Gray",
+    "red": 152,
+    "green": 143,
+    "blue": 123,
+    "hex": "#988F7B"
+  },
+  {
+    "color_name": "Roycroft Bronze Green",
+    "red": 87,
+    "green": 84,
+    "blue": 73,
+    "hex": "#575449"
+  },
+  {
+    "color_name": "Roycroft Bottle Green",
+    "red": 50,
+    "green": 64,
+    "blue": 56,
+    "hex": "#324038"
+  },
+  {
+    "color_name": "Roycroft Pewter",
+    "red": 97,
+    "green": 101,
+    "blue": 100,
+    "hex": "#616564"
+  },
+  {
+    "color_name": "Westchester Gray",
+    "red": 121,
+    "green": 121,
+    "blue": 120,
+    "hex": "#797978"
+  },
+  {
+    "color_name": "Chelsea Gray",
+    "red": 182,
+    "green": 183,
+    "blue": 176,
+    "hex": "#B6B7B0"
+  },
+  {
+    "color_name": "Sage Green Light",
+    "red": 115,
+    "green": 112,
+    "blue": 94,
+    "hex": "#73705E"
+  },
+  {
+    "color_name": "New Colonial Yellow",
+    "red": 217,
+    "green": 173,
+    "blue": 127,
+    "hex": "#D9AD7F"
+  },
+  {
+    "color_name": "Caribbean Coral",
+    "red": 190,
+    "green": 121,
+    "blue": 94,
+    "hex": "#BE795E"
+  },
+  {
+    "color_name": "Sycamore Tan",
+    "red": 156,
+    "green": 138,
+    "blue": 121,
+    "hex": "#9C8A79"
+  },
+  {
+    "color_name": "Fairfax Brown",
+    "red": 97,
+    "green": 70,
+    "blue": 58,
+    "hex": "#61463A"
+  },
+  {
+    "color_name": "Peace Yellow",
+    "red": 238,
+    "green": 207,
+    "blue": 158,
+    "hex": "#EECF9E"
+  },
+  {
+    "color_name": "Harvest Gold",
+    "red": 217,
+    "green": 160,
+    "blue": 106,
+    "hex": "#D9A06A"
+  },
+  {
+    "color_name": "Beige",
+    "red": 223,
+    "green": 200,
+    "blue": 181,
+    "hex": "#DFC8B5"
+  },
+  {
+    "color_name": "Sage",
+    "red": 179,
+    "green": 174,
+    "blue": 149,
+    "hex": "#B3AE95"
+  },
+  {
+    "color_name": "Avocado",
+    "red": 133,
+    "green": 124,
+    "blue": 93,
+    "hex": "#857C5D"
+  },
+  {
+    "color_name": "Powder Blue",
+    "red": 137,
+    "green": 164,
+    "blue": 173,
+    "hex": "#89A4AD"
+  },
+  {
+    "color_name": "Classical Yellow",
+    "red": 248,
+    "green": 212,
+    "blue": 146,
+    "hex": "#F8D492"
+  },
+  {
+    "color_name": "Snowfall",
+    "red": 224,
+    "green": 222,
+    "blue": 218,
+    "hex": "#E0DEDA"
+  },
+  {
+    "color_name": "Grayish",
+    "red": 207,
+    "green": 202,
+    "blue": 199,
+    "hex": "#CFCAC7"
+  },
+  {
+    "color_name": "Essential Gray",
+    "red": 188,
+    "green": 184,
+    "blue": 182,
+    "hex": "#BCB8B6"
+  },
+  {
+    "color_name": "Proper Gray",
+    "red": 173,
+    "green": 168,
+    "blue": 165,
+    "hex": "#ADA8A5"
+  },
+  {
+    "color_name": "Mink",
+    "red": 132,
+    "green": 123,
+    "blue": 119,
+    "hex": "#847B77"
+  },
+  {
+    "color_name": "Folkstone",
+    "red": 109,
+    "green": 101,
+    "blue": 98,
+    "hex": "#6D6562"
+  },
+  {
+    "color_name": "Black Bean",
+    "red": 64,
+    "green": 51,
+    "blue": 48,
+    "hex": "#403330"
+  },
+  {
+    "color_name": "Smart White",
+    "red": 228,
+    "green": 219,
+    "blue": 216,
+    "hex": "#E4DBD8"
+  },
+  {
+    "color_name": "Individual White",
+    "red": 212,
+    "green": 205,
+    "blue": 202,
+    "hex": "#D4CDCA"
+  },
+  {
+    "color_name": "Imagine",
+    "red": 194,
+    "green": 182,
+    "blue": 182,
+    "hex": "#C2B6B6"
+  },
+  {
+    "color_name": "Flexible Gray",
+    "red": 177,
+    "green": 163,
+    "blue": 161,
+    "hex": "#B1A3A1"
+  },
+  {
+    "color_name": "Chinchilla",
+    "red": 134,
+    "green": 120,
+    "blue": 117,
+    "hex": "#867875"
+  },
+  {
+    "color_name": "Browse Brown",
+    "red": 110,
+    "green": 97,
+    "blue": 95,
+    "hex": "#6E615F"
+  },
+  {
+    "color_name": "Bitter Chocolate",
+    "red": 77,
+    "green": 60,
+    "blue": 60,
+    "hex": "#4D3C3C"
+  },
+  {
+    "color_name": "Vaguely Mauve",
+    "red": 209,
+    "green": 197,
+    "blue": 196,
+    "hex": "#D1C5C4"
+  },
+  {
+    "color_name": "Chaise Mauve",
+    "red": 193,
+    "green": 178,
+    "blue": 179,
+    "hex": "#C1B2B3"
+  },
+  {
+    "color_name": "Intuitive",
+    "red": 179,
+    "green": 163,
+    "blue": 165,
+    "hex": "#B3A3A5"
+  },
+  {
+    "color_name": "Enigma",
+    "red": 139,
+    "green": 124,
+    "blue": 126,
+    "hex": "#8B7C7E"
+  },
+  {
+    "color_name": "Poetry Plum",
+    "red": 111,
+    "green": 92,
+    "blue": 95,
+    "hex": "#6F5C5F"
+  },
+  {
+    "color_name": "Marooned",
+    "red": 78,
+    "green": 49,
+    "blue": 50,
+    "hex": "#4E3132"
+  },
+  {
+    "color_name": "Dreamy White",
+    "red": 227,
+    "green": 217,
+    "blue": 213,
+    "hex": "#E3D9D5"
+  },
+  {
+    "color_name": "Breathless",
+    "red": 214,
+    "green": 194,
+    "blue": 190,
+    "hex": "#D6C2BE"
+  },
+  {
+    "color_name": "Insightful Rose",
+    "red": 201,
+    "green": 176,
+    "blue": 171,
+    "hex": "#C9B0AB"
+  },
+  {
+    "color_name": "Dressy Rose",
+    "red": 184,
+    "green": 157,
+    "blue": 154,
+    "hex": "#B89D9A"
+  },
+  {
+    "color_name": "Socialite",
+    "red": 144,
+    "green": 118,
+    "blue": 118,
+    "hex": "#907676"
+  },
+  {
+    "color_name": "River Rouge",
+    "red": 118,
+    "green": 89,
+    "blue": 93,
+    "hex": "#76595D"
+  },
+  {
+    "color_name": "Cordovan",
+    "red": 95,
+    "green": 61,
+    "blue": 63,
+    "hex": "#5F3D3F"
+  },
+  {
+    "color_name": "Cultured Pearl",
+    "red": 229,
+    "green": 220,
+    "blue": 214,
+    "hex": "#E5DCD6"
+  },
+  {
+    "color_name": "White Truffle",
+    "red": 215,
+    "green": 200,
+    "blue": 194,
+    "hex": "#D7C8C2"
+  },
+  {
+    "color_name": "Artistic Taupe",
+    "red": 195,
+    "green": 177,
+    "blue": 172,
+    "hex": "#C3B1AC"
+  },
+  {
+    "color_name": "Glamour",
+    "red": 182,
+    "green": 160,
+    "blue": 154,
+    "hex": "#B6A09A"
+  },
+  {
+    "color_name": "Dutch Cocoa",
+    "red": 140,
+    "green": 112,
+    "blue": 106,
+    "hex": "#8C706A"
+  },
+  {
+    "color_name": "Bateau Brown",
+    "red": 122,
+    "green": 95,
+    "blue": 90,
+    "hex": "#7A5F5A"
+  },
+  {
+    "color_name": "Dark Auburn",
+    "red": 90,
+    "green": 53,
+    "blue": 50,
+    "hex": "#5A3532"
+  },
+  {
+    "color_name": "Gauzy White",
+    "red": 227,
+    "green": 219,
+    "blue": 212,
+    "hex": "#E3DBD4"
+  },
+  {
+    "color_name": "Angora",
+    "red": 209,
+    "green": 197,
+    "blue": 190,
+    "hex": "#D1C5BE"
+  },
+  {
+    "color_name": "Temperate Taupe",
+    "red": 191,
+    "green": 177,
+    "blue": 170,
+    "hex": "#BFB1AA"
+  },
+  {
+    "color_name": "Truly Taupe",
+    "red": 172,
+    "green": 158,
+    "blue": 151,
+    "hex": "#AC9E97"
+  },
+  {
+    "color_name": "Poised Taupe",
+    "red": 140,
+    "green": 126,
+    "blue": 120,
+    "hex": "#8C7E78"
+  },
+  {
+    "color_name": "Nutshell",
+    "red": 117,
+    "green": 103,
+    "blue": 97,
+    "hex": "#756761"
+  },
+  {
+    "color_name": "Otter",
+    "red": 86,
+    "green": 67,
+    "blue": 59,
+    "hex": "#56433B"
+  },
+  {
+    "color_name": "Hush White",
+    "red": 229,
+    "green": 218,
+    "blue": 212,
+    "hex": "#E5DAD4"
+  },
+  {
+    "color_name": "Unfussy Beige",
+    "red": 214,
+    "green": 200,
+    "blue": 192,
+    "hex": "#D6C8C0"
+  },
+  {
+    "color_name": "Doeskin",
+    "red": 198,
+    "green": 179,
+    "blue": 169,
+    "hex": "#C6B3A9"
+  },
+  {
+    "color_name": "Emerging Taupe",
+    "red": 184,
+    "green": 161,
+    "blue": 150,
+    "hex": "#B8A196"
+  },
+  {
+    "color_name": "Swing Brown",
+    "red": 148,
+    "green": 117,
+    "blue": 105,
+    "hex": "#947569"
+  },
+  {
+    "color_name": "Hot Cocoa",
+    "red": 128,
+    "green": 98,
+    "blue": 87,
+    "hex": "#806257"
+  },
+  {
+    "color_name": "Terra Brun",
+    "red": 90,
+    "green": 56,
+    "blue": 45,
+    "hex": "#5A382D"
+  },
+  {
+    "color_name": "Gorgeous White",
+    "red": 231,
+    "green": 219,
+    "blue": 211,
+    "hex": "#E7DBD3"
+  },
+  {
+    "color_name": "Abalone Shell",
+    "red": 219,
+    "green": 199,
+    "blue": 189,
+    "hex": "#DBC7BD"
+  },
+  {
+    "color_name": "Sashay Sand",
+    "red": 207,
+    "green": 180,
+    "blue": 168,
+    "hex": "#CFB4A8"
+  },
+  {
+    "color_name": "Sandbank",
+    "red": 195,
+    "green": 164,
+    "blue": 151,
+    "hex": "#C3A497"
+  },
+  {
+    "color_name": "Reddened Earth",
+    "red": 156,
+    "green": 110,
+    "blue": 99,
+    "hex": "#9C6E63"
+  },
+  {
+    "color_name": "Canyon Clay",
+    "red": 133,
+    "green": 89,
+    "blue": 79,
+    "hex": "#85594F"
+  },
+  {
+    "color_name": "Fiery Brown",
+    "red": 93,
+    "green": 56,
+    "blue": 49,
+    "hex": "#5D3831"
+  },
+  {
+    "color_name": "Polite White",
+    "red": 233,
+    "green": 221,
+    "blue": 212,
+    "hex": "#E9DDD4"
+  },
+  {
+    "color_name": "Malted Milk",
+    "red": 222,
+    "green": 202,
+    "blue": 189,
+    "hex": "#DECABD"
+  },
+  {
+    "color_name": "Likeable Sand",
+    "red": 209,
+    "green": 183,
+    "blue": 168,
+    "hex": "#D1B7A8"
+  },
+  {
+    "color_name": "Interface Tan",
+    "red": 193,
+    "green": 163,
+    "blue": 146,
+    "hex": "#C1A392"
+  },
+  {
+    "color_name": "Moroccan Spice",
+    "red": 157,
+    "green": 120,
+    "blue": 104,
+    "hex": "#9D7868"
+  },
+  {
+    "color_name": "Tanbark",
+    "red": 137,
+    "green": 102,
+    "blue": 86,
+    "hex": "#896656"
+  },
+  {
+    "color_name": "Vintage Leather",
+    "red": 105,
+    "green": 67,
+    "blue": 54,
+    "hex": "#694336"
+  },
+  {
+    "color_name": "Nice White",
+    "red": 230,
+    "green": 221,
+    "blue": 213,
+    "hex": "#E6DDD5"
+  },
+  {
+    "color_name": "Reticence",
+    "red": 217,
+    "green": 205,
+    "blue": 195,
+    "hex": "#D9CDC3"
+  },
+  {
+    "color_name": "Bona Fide Beige",
+    "red": 203,
+    "green": 185,
+    "blue": 171,
+    "hex": "#CBB9AB"
+  },
+  {
+    "color_name": "Sand Trap",
+    "red": 187,
+    "green": 165,
+    "blue": 149,
+    "hex": "#BBA595"
+  },
+  {
+    "color_name": "Mocha",
+    "red": 150,
+    "green": 122,
+    "blue": 106,
+    "hex": "#967A6A"
+  },
+  {
+    "color_name": "Brewly Brown",
+    "red": 113,
+    "green": 82,
+    "blue": 67,
+    "hex": "#715243"
+  },
+  {
+    "color_name": "French Roast",
+    "red": 79,
+    "green": 52,
+    "blue": 38,
+    "hex": "#4F3426"
+  },
+  {
+    "color_name": "Heron Plume",
+    "red": 229,
+    "green": 225,
+    "blue": 216,
+    "hex": "#E5E1D8"
+  },
+  {
+    "color_name": "Popular Gray",
+    "red": 212,
+    "green": 204,
+    "blue": 195,
+    "hex": "#D4CCC3"
+  },
+  {
+    "color_name": "Versatile Gray",
+    "red": 193,
+    "green": 182,
+    "blue": 171,
+    "hex": "#C1B6AB"
+  },
+  {
+    "color_name": "Perfect Greige",
+    "red": 183,
+    "green": 171,
+    "blue": 159,
+    "hex": "#B7AB9F"
+  },
+  {
+    "color_name": "Spalding Gray",
+    "red": 141,
+    "green": 127,
+    "blue": 117,
+    "hex": "#8D7F75"
+  },
+  {
+    "color_name": "Garret Gray",
+    "red": 117,
+    "green": 104,
+    "blue": 97,
+    "hex": "#756861"
+  },
+  {
+    "color_name": "Turkish Coffee",
+    "red": 77,
+    "green": 57,
+    "blue": 48,
+    "hex": "#4D3930"
+  },
+  {
+    "color_name": "Everyday White",
+    "red": 228,
+    "green": 220,
+    "blue": 212,
+    "hex": "#E4DCD4"
+  },
+  {
+    "color_name": "Realist Beige",
+    "red": 211,
+    "green": 200,
+    "blue": 189,
+    "hex": "#D3C8BD"
+  },
+  {
+    "color_name": "Diverse Beige",
+    "red": 194,
+    "green": 180,
+    "blue": 167,
+    "hex": "#C2B4A7"
+  },
+  {
+    "color_name": "Utterly Beige",
+    "red": 181,
+    "green": 165,
+    "blue": 151,
+    "hex": "#B5A597"
+  },
+  {
+    "color_name": "Down Home",
+    "red": 144,
+    "green": 120,
+    "blue": 101,
+    "hex": "#907865"
+  },
+  {
+    "color_name": "Cobble Brown",
+    "red": 122,
+    "green": 100,
+    "blue": 85,
+    "hex": "#7A6455"
+  },
+  {
+    "color_name": "Sable",
+    "red": 95,
+    "green": 75,
+    "blue": 63,
+    "hex": "#5F4B3F"
+  },
+  {
+    "color_name": "Modest White",
+    "red": 230,
+    "green": 221,
+    "blue": 212,
+    "hex": "#E6DDD4"
+  },
+  {
+    "color_name": "Simplify Beige",
+    "red": 214,
+    "green": 199,
+    "blue": 185,
+    "hex": "#D6C7B9"
+  },
+  {
+    "color_name": "Sand Dune",
+    "red": 197,
+    "green": 177,
+    "blue": 162,
+    "hex": "#C5B1A2"
+  },
+  {
+    "color_name": "Trusty Tan",
+    "red": 181,
+    "green": 159,
+    "blue": 143,
+    "hex": "#B59F8F"
+  },
+  {
+    "color_name": "Nuthatch",
+    "red": 142,
+    "green": 114,
+    "blue": 95,
+    "hex": "#8E725F"
+  },
+  {
+    "color_name": "Grounded",
+    "red": 120,
+    "green": 91,
+    "blue": 71,
+    "hex": "#785847"
+  },
+  {
+    "color_name": "Java",
+    "red": 99,
+    "green": 69,
+    "blue": 51,
+    "hex": "#634533"
+  }
+]
