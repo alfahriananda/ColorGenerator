@@ -50,7 +50,9 @@
                                 <div>
                                     <label for="algorithmType" class="block text-sm font-medium text-gray-700 mb-1">Algorithm</label>
                                     <select id="algorithmType" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                                        <option value="kmeans">K-Means Clustering</option>
+                                        <option value="kmeans">K-Means Clustering (Fast)</option>
+                                        <option value="medianCut" selected>Median Cut (Balanced)</option>
+                                        <option value="vibrant">Vibrant Extraction (Artistic)</option>
                                     </select>
                                 </div>
                             </div>

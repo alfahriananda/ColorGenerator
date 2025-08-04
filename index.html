@@ -272,7 +272,7 @@ Here's the complete code with all modifications to include descriptive color nam
                 <button class="nav-btn px-3 py-2 text-sm font-medium" onclick="showPage('page3')">Generate Palette</button>
                 <button class="nav-btn px-3 py-2 text-sm font-medium" onclick="showPage('page4')">Color Codes</button>
                 <a href="fitur-warna.html">
-                    <button class="nav-btn px-3 py-2 text-sm font-medium">Colors Snap</button>
+                    <button class="nav-btn px-3 py-2 text-sm font-medium">colors snap</button>
                 </a>
             </div>
         </div>
@@ -414,6 +414,7 @@ Here's the complete code with all modifications to include descriptive color nam
                                         <option value="5">5</option>
                                         <option value="8" selected>8</option>
                                         <option value="12">12</option>
+                                        <option value="16">16</option>
                                         <option value="16">16 (Detailed)</option>
                                     </select>
                                 </div>
@@ -421,7 +422,9 @@ Here's the complete code with all modifications to include descriptive color nam
                                 <div>
                                     <label for="algorithmType" class="block text-sm font-medium text-gray-700 mb-1">Algorithm</label>
                                     <select id="algorithmType" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                                        <option value="kmeans">K-Means Clustering</option>
+                                        <option value="kmeans">K-Means Clustering (Fast)</option>
+                                        <option value="medianCut" selected>Median Cut (Balanced)</option>
+                                        <option value="vibrant">Vibrant Extraction (Artistic)</option>
                                     </select>
                                 </div>
                             </div>
@@ -481,6 +484,19 @@ Here's the complete code with all modifications to include descriptive color nam
                             <!-- Color codes will be generated here -->
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Page 5: All Palettes -->
+    <div id="page5" class="page pt-20">
+        <div class="container mx-auto px-4 py-10">
+            <h2 class="text-3xl font-bold text-center text-white mb-10">All Generated Palettes</h2>
+            
+            <div class="max-w-6xl mx-auto">
+                <div id="savedPalettesContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Saved palettes will be generated here -->
                 </div>
             </div>
         </div>
@@ -1069,204 +1085,55 @@ Here's the complete code with all modifications to include descriptive color nam
         const generatePaletteBtn = document.getElementById('generatePaletteBtn');
         generatePaletteBtn.addEventListener('click', generatePalette);
         
-        function generatePalette() {
-            const colorCount = parseInt(document.getElementById('colorCount').value);
-            const img = document.getElementById('generatedImage');
-            const palettePreview = document.getElementById('palettePreview');
-            const loadingIndicator = document.getElementById('loadingIndicator');
-            
-            // Show loading indicator
-            loadingIndicator.classList.remove('hidden');
-            generatePaletteBtn.disabled = true;
-            
-            // Hide previous results
-            palettePreview.classList.add('hidden');
-            
-            // Check if image is loaded
-            if (!img.complete || img.naturalWidth === 0) {
-                alert('Please wait for the image to load completely');
-                loadingIndicator.classList.add('hidden');
-                generatePaletteBtn.disabled = false;
-                return;
-            }
-            
-            // Use Color Thief to extract colors
-            const colorThief = new ColorThief();
-            
-            try {
-                // Get palette from image
-                let palette;
-                const algorithmType = document.getElementById('algorithmType').value;
-                
-                // Simulate different algorithms (in a real app, you'd implement these)
-                if (algorithmType === 'kmeans') {
-                    palette = colorThief.getPalette(img, colorCount);
-                    // For vibrant extraction, we'll get fewer colors then pad with similar colors
-                    const vibrantCount = Math.min(6, colorCount);
-                    palette = colorThief.getPalette(img, vibrantCount);
-                    
-                    // If we need more colors, generate variations
-                    if (colorCount > vibrantCount) {
-                        const additionalColors = generateColorVariations(palette, colorCount - vibrantCount);
-                        palette = palette.concat(additionalColors);
-                    }
-                }
-                
-                if (!palette || palette.length === 0) {
-                    throw new Error('Could not extract colors from this image');
-                }
-                
-                // Convert RGB arrays to HEX strings
-                currentPalette = palette.map(color => rgbToHex(color[0], color[1], color[2]));
-                
-                // Display the palette
-                displayPalettePreview(currentPalette);
-                generateColorBars(currentPalette);
-                generateColorCodes(currentPalette);
-                
+function generatePalette() {
+    const colorCount = parseInt(document.getElementById('colorCount').value);
+    const img = document.getElementById('generatedImage');
+    const palettePreview = document.getElementById('palettePreview');
+    const loadingIndicator = document.getElementById('loadingIndicator');
+    const algorithmType = document.getElementById('algorithmType').value;
 
-               function compressPalette(palette) {
-    return {
-        i: palette.id, // ID
-        c: palette.colors.map(c => c.replace('#', '')), // Warna tanpa #
-        m: palette.image.substring(0, 30), // Potong URL gambar
-        d: palette.date.substring(0, 10) // Hanya tanggal (YYYY-MM-DD)
-    };
-}
+    loadingIndicator.classList.remove('hidden');
+    generatePaletteBtn.disabled = true;
+    palettePreview.classList.add('hidden');
 
-function savePalette(colors, imageSrc) {
-    const compressed = compressPalette({
-        id: Date.now(),
-        colors: colors,
-        image: imageSrc,
-        date: new Date().toISOString()
-    });
-
-    savedPalettes.unshift(compressed);
+    if (!img.complete || img.naturalWidth === 0) {
+        alert('Please wait for the image to load completely');
+        loadingIndicator.classList.add('hidden');
+        generatePaletteBtn.disabled = false;
+        return;
+    }
 
     try {
-        localStorage.setItem('colorPalettes', JSON.stringify(savedPalettes));
-    } catch (e) {
-        console.error("Storage penuh, menghapus palette lama...");
-        savedPalettes.splice(-3); // Hapus 3 palette terlama
-        localStorage.setItem('colorPalettes', JSON.stringify(savedPalettes));
+        let palette;
+
+        if (algorithmType === 'kmeans') {
+            palette = extractColorsWithKMeans(img, colorCount);
+        } else {
+            // Gunakan kmeans untuk algoritma lain
+            const colorThief = new ColorThief();
+            palette = colorThief.getPalette(img, colorCount);
+            palette = palette.map(c => rgbToHex(c[0], c[1], c[2]));
+        }
+
+        if (!palette || palette.length === 0) {
+            throw new Error('Could not extract colors from this image');
+        }
+
+        currentPalette = palette;
+
+        displayPalettePreview(currentPalette);
+        generateColorBars(currentPalette);
+        generateColorCodes(currentPalette);
+
+        palettePreview.classList.remove('hidden');
+    } catch (error) {
+        console.error('Error extracting colors:', error);
+        alert('Error: ' + error.message);
+    } finally {
+        loadingIndicator.classList.add('hidden');
+        generatePaletteBtn.disabled = false;
     }
 }
-                
-                // Show results
-                palettePreview.classList.remove('hidden');
-                loadingIndicator.classList.add('hidden');
-                generatePaletteBtn.disabled = false;
-                
-            } catch (error) {
-                console.error('Error extracting colors:', error);
-                alert('Error: ' + error.message);
-                loadingIndicator.classList.add('hidden');
-                generatePaletteBtn.disabled = false;
-            }
-        }
-        
-        // Helper function to generate color variations
-        function generateColorVariations(baseColors, count) {
-            const variations = [];
-            for (let i = 0; i < count; i++) {
-                const baseColor = baseColors[i % baseColors.length];
-                const variation = [
-                    Math.min(255, Math.max(0, baseColor[0] + Math.floor(Math.random() * 40 - 20))),
-                    Math.min(255, Math.max(0, baseColor[1] + Math.floor(Math.random() * 40 - 20))),
-                    Math.min(255, Math.max(0, baseColor[2] + Math.floor(Math.random() * 40 - 20)))
-                ];
-                variations.push(variation);
-            }
-            return variations;
-        }
-        
-        // Helper function: RGB array to HEX string
-        function rgbToHex(r, g, b) {
-            return '#' + [r, g, b].map(x => {
-                const hex = x.toString(16);
-                return hex.length === 1 ? '0' + hex : hex;
-            }).join('');
-        }
-        
-        // Display palette preview
-        function displayPalettePreview(colors) {
-            const container = document.getElementById('paletteColorsContainer');
-            container.innerHTML = '';
-            
-            colors.forEach(color => {
-                const colorBox = document.createElement('div');
-                colorBox.className = 'w-10 h-10 rounded-full shadow-md cursor-pointer';
-                colorBox.style.backgroundColor = color;
-                colorBox.title = color;
-                colorBox.onclick = () => copyToClipboard(color);
-                container.appendChild(colorBox);
-            });
-        }
-        
-        // Generate color bars for page 4
-        function generateColorBars(colors) {
-            const container = document.getElementById('colorBarsContainer');
-            container.innerHTML = '';
-            
-            colors.forEach(color => {
-                const colorName = getClosestColorName(color);
-                
-                const barContainer = document.createElement('div');
-                barContainer.className = 'flex items-center mb-4 p-3 bg-gray-50 rounded-lg';
-                
-                // Color info container (name and hex)
-                const colorInfoContainer = document.createElement('div');
-                colorInfoContainer.className = 'w-32 mr-4';
-                
-                // Color name
-                const nameElement = document.createElement('div');
-                nameElement.className = 'text-sm font-semibold text-gray-800';
-                nameElement.textContent = colorName;
-                
-                // Hex code
-                const hexElement = document.createElement('div');
-                hexElement.className = 'text-xs text-gray-500 mb-1';
-                hexElement.textContent = color;
-                
-                // Copy button
-                const copyButton = document.createElement('button');
-                copyButton.className = 'text-xs text-indigo-600 hover:text-indigo-800';
-                copyButton.textContent = 'Copy';
-                copyButton.onclick = () => {
-                    copyToClipboard(color);
-                    showCopyNotification();
-                };
-                
-                // Assemble color info
-                colorInfoContainer.appendChild(nameElement);
-                colorInfoContainer.appendChild(hexElement);
-                colorInfoContainer.appendChild(copyButton);
-                
-                // Color bar
-                const colorBar = document.createElement('div');
-                colorBar.className = 'flex-1 h-10 rounded-lg shadow-inner relative overflow-hidden';
-                
-                // Main color
-                const mainColor = document.createElement('div');
-                mainColor.className = 'absolute inset-0';
-                mainColor.style.backgroundColor = color;
-                
-                // Hover effect
-                const hoverEffect = document.createElement('div');
-                hoverEffect.className = 'absolute inset-0 bg-black opacity-0 hover:opacity-10 transition-opacity duration-200';
-                // Assemble color bar
-                colorBar.appendChild(mainColor);
-                colorBar.appendChild(hoverEffect);
-                
-                // Combine all elements
-                barContainer.appendChild(colorInfoContainer);
-                barContainer.appendChild(colorBar);
-                
-                // Add to container
-                container.appendChild(barContainer);
-            });
-        }
 
         // Generate color codes for page 4
         function generateColorCodes(colors) {
@@ -1323,6 +1190,134 @@ function savePalette(colors, imageSrc) {
                 container.appendChild(colorBox);
             });
         }
+
+// === FUNGSI HELPER ===
+function rgbToHex(r, g, b) {
+    return "#" + [r, g, b]
+        .map(x => {
+            const hex = x.toString(16);
+            return hex.length === 1 ? "0" + hex : hex;
+        })
+        .join("");
+}
+
+function displayPalettePreview(colors) {
+    const container = document.getElementById('paletteColorsContainer');
+    if (!container) return;
+
+    container.innerHTML = '';
+
+    colors.forEach(color => {
+        const colorBox = document.createElement('div');
+        colorBox.className = 'w-10 h-10 rounded-full shadow-md cursor-pointer';
+        colorBox.style.backgroundColor = color;
+        colorBox.title = color;
+        colorBox.onclick = () => copyToClipboard(color);
+        container.appendChild(colorBox);
+    });
+}
+
+// === FUNGSI K-MEANS CLUSTERING ===
+function extractColorsWithKMeans(img, k) {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = img.naturalWidth;
+    canvas.height = img.naturalHeight;
+    ctx.drawImage(img, 0, 0);
+
+    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    const data = imageData.data;
+
+    const pixels = [];
+    for (let i = 0; i < data.length; i += 4) {
+        pixels.push([data[i], data[i + 1], data[i + 2]]);
+    }
+
+    const centroids = Array.from({ length: k }, () => pixels[Math.floor(Math.random() * pixels.length)]);
+
+    for (let iter = 0; iter < 10; iter++) {
+        const clusters = Array.from({ length: k }, () => []);
+
+        for (const pixel of pixels) {
+            let minDist = Infinity;
+            let closest = 0;
+            for (let i = 0; i < centroids.length; i++) {
+                const dist = Math.hypot(
+                    pixel[0] - centroids[i][0],
+                    pixel[1] - centroids[i][1],
+                    pixel[2] - centroids[i][2]
+                );
+                if (dist < minDist) {
+                    minDist = dist;
+                    closest = i;
+                }
+            }
+            clusters[closest].push(pixel);
+        }
+
+        for (let i = 0; i < k; i++) {
+            if (clusters[i].length === 0) continue;
+            const sum = [0, 0, 0];
+            for (const [r, g, b] of clusters[i]) {
+                sum[0] += r;
+                sum[1] += g;
+                sum[2] += b;
+            }
+            centroids[i] = sum.map(v => Math.round(v / clusters[i].length));
+        }
+    }
+
+    return centroids.map(([r, g, b]) => rgbToHex(r, g, b));
+}
+
+// === FUNGSI GENERATE PALETTE (MODIFIED) ===
+function generatePalette() {
+    const colorCount = parseInt(document.getElementById('colorCount').value);
+    const img = document.getElementById('generatedImage');
+    const palettePreview = document.getElementById('palettePreview');
+    const loadingIndicator = document.getElementById('loadingIndicator');
+    const algorithmType = document.getElementById('algorithmType').value;
+
+    loadingIndicator.classList.remove('hidden');
+    generatePaletteBtn.disabled = true;
+    palettePreview.classList.add('hidden');
+
+    if (!img.complete || img.naturalWidth === 0) {
+        alert('Please wait for the image to load completely');
+        loadingIndicator.classList.add('hidden');
+        generatePaletteBtn.disabled = false;
+        return;
+    }
+
+    try {
+        let palette;
+
+        if (algorithmType === 'kmeans') {
+            palette = extractColorsWithKMeans(img, colorCount);
+        } else {
+            const colorThief = new ColorThief();
+            const rawPalette = colorThief.getPalette(img, colorCount);
+            palette = rawPalette.map(c => rgbToHex(c[0], c[1], c[2]));
+        }
+
+        if (!palette || palette.length === 0) {
+            throw new Error('Could not extract colors from this image');
+        }
+
+        currentPalette = palette;
+        displayPalettePreview(currentPalette);
+        generateColorBars(currentPalette);
+        generateColorCodes(currentPalette);
+        palettePreview.classList.remove('hidden');
+    } catch (error) {
+        console.error('Error extracting colors:', error);
+        alert('Error: ' + error.message);
+    } finally {
+        loadingIndicator.classList.add('hidden');
+        generatePaletteBtn.disabled = false;
+    }
+}
 
         // Helper function to create color detail row
         function createColorDetail(label, value, copyValue) {
@@ -1435,82 +1430,53 @@ function savePalette(colors, imageSrc) {
             // Store in localStorage
             localStorage.setItem('colorPalettes', JSON.stringify(savedPalettes));
         }
+                
+function generateColorBars(colors) {
+    const container = document.getElementById('colorBarsContainer');
+    if (!container) return;
 
-        // Update saved palettes display
-        function updateSavedPalettesDisplay() {
-            const container = document.getElementById('savedPalettesContainer');
-            container.innerHTML = '';
-            
-            if (savedPalettes.length === 0) {
-                container.innerHTML = '<p class="text-center text-gray-500 col-span-3">No palettes saved yet</p>';
-                return;
-            }
-            
-            savedPalettes.forEach(palette => {
-                const paletteCard = document.createElement('div');
-                paletteCard.className = 'bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow';
-                
-                // Image container
-                const imageContainer = document.createElement('div');
-                imageContainer.className = 'h-48 relative';
-                
-                const img = document.createElement('img');
-                img.src = palette.image;
-                img.alt = palette.name;
-                img.className = 'w-full h-full object-cover';
-                
-                // Color bar
-                const colorBar = document.createElement('div');
-                colorBar.className = 'absolute bottom-0 left-0 right-0 h-8 flex';
-                
-                // Display up to 5 colors
-                palette.colors.slice(0, 5).forEach(color => {
-                    const colorDiv = document.createElement('div');
-                    colorDiv.className = 'flex-1';
-                    colorDiv.style.backgroundColor = color;
-                    colorBar.appendChild(colorDiv);
-                });
-                
-                imageContainer.appendChild(img);
-                imageContainer.appendChild(colorBar);
-                
-                // Card body
-                const cardBody = document.createElement('div');
-                cardBody.className = 'p-4';
-                
-                const title = document.createElement('h3');
-                title.className = 'text-lg font-medium text-gray-800 mb-2 truncate';
-                title.textContent = palette.name;
-                
-                const dateInfo = document.createElement('p');
-                dateInfo.className = 'text-xs text-gray-500 mb-2';
-                dateInfo.textContent = palette.date;
-                
-                const footer = document.createElement('div');
-                footer.className = 'flex justify-between items-center';
-                
-                const colorCount = document.createElement('span');
-                colorCount.className = 'text-gray-500 text-sm';
-                colorCount.textContent = `${palette.colors.length} colors`;
-                
-                const viewBtn = document.createElement('button');
-                viewBtn.className = 'text-indigo-600 text-sm font-medium hover:text-indigo-800';
-                viewBtn.textContent = 'View Details';
-                viewBtn.onclick = () => viewSavedPalette(palette.id);
-                
-                footer.appendChild(colorCount);
-                footer.appendChild(viewBtn);
-                
-                cardBody.appendChild(title);
-                cardBody.appendChild(dateInfo);
-                cardBody.appendChild(footer);
-                
-                paletteCard.appendChild(imageContainer);
-                paletteCard.appendChild(cardBody);
-                
-                container.appendChild(paletteCard);
-            });
-        }
+    container.innerHTML = '';
+
+    colors.forEach(color => {
+        const colorName = getClosestColorName(color);
+
+        const barContainer = document.createElement('div');
+        barContainer.className = 'flex items-center mb-4 p-3 bg-gray-50 rounded-lg';
+
+        // Info warna (nama & kode)
+        const info = document.createElement('div');
+        info.className = 'w-32 mr-4';
+
+        const name = document.createElement('div');
+        name.className = 'text-sm font-semibold text-gray-800';
+        name.textContent = colorName;
+
+        const hex = document.createElement('div');
+        hex.className = 'text-xs text-gray-500 mb-1';
+        hex.textContent = color;
+
+        const copyBtn = document.createElement('button');
+        copyBtn.className = 'text-xs text-indigo-600 hover:text-indigo-800';
+        copyBtn.textContent = 'Copy';
+        copyBtn.onclick = () => {
+            copyToClipboard(color);
+            showCopyNotification();
+        };
+
+        info.appendChild(name);
+        info.appendChild(hex);
+        info.appendChild(copyBtn);
+
+        // Bar warna
+        const bar = document.createElement('div');
+        bar.className = 'flex-1 h-10 rounded-lg shadow-inner relative overflow-hidden';
+        bar.style.backgroundColor = color;
+
+        barContainer.appendChild(info);
+        barContainer.appendChild(bar);
+        container.appendChild(barContainer);
+    });
+}
 
         // View saved palette details
         function viewSavedPalette(paletteId) {

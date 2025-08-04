@@ -21,6 +21,8 @@
     }
     .animate-fadeSlideIn { animation: fadeSlideIn 0.8s ease-out; }
     .blink-wind { animation: blinkWind 1.5s infinite ease-in-out; }
+    .color-slide { display: none; }
+    .color-slide.active { display: block; }
   </style>
 </head>
 <body class="relative overflow-x-hidden font-sans">
@@ -35,43 +37,104 @@
   <!-- Konten utama -->
   <div class="pt-20 px-4 overflow-x-auto">
     <div class="bg-white bg-opacity-10 backdrop-blur-xl rounded-3xl shadow-2xl border border-white border-opacity-20 transition-all duration-700 p-6 animate-fadeSlideIn max-w-6xl mx-auto">
-<div class="flex justify-center items-center mb-6 relative">
-  <h1 class="text-2xl font-bold text-gray-400">COLOR NAMES</h1>
-  <a href="index.html" class="absolute right-0 flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:text-blue-200 transition-all duration-300 shadow-md">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-    </svg>
-    <span class="font-medium">Back</span>
-  </a>
-</div>
+      <div class="flex justify-between items-center mb-6">
+        <h1 class="text-2xl font-bold text-gray-100">COLOR NAMES</h1>
+        <div class="flex items-center gap-4">
+          <div id="slideInfo" class="text-white font-medium">Slide 1 of 1</div>
+          <div class="flex gap-2">
+            <button id="prevSlide" class="px-3 py-1 rounded bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 transition-all duration-300 shadow-md disabled:opacity-50" disabled>
+              Prev
+            </button>
+            <button id="nextSlide" class="px-3 py-1 rounded bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 transition-all duration-300 shadow-md">
+              Next
+            </button>
+          </div>
+          <a href="index.html" class="flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:text-blue-200 transition-all duration-300 shadow-md">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+            <span class="font-medium">Back</span>
+          </a>
+        </div>
+      </div>
+
       <!-- Header Label -->
-<div class="grid grid-cols-7 gap-4 font-semibold text-white text-sm border-b border-white border-opacity-30 pb-2 mb-2">
-  <div>No</div>
-  <div>Color Name</div>
-  <div>Red</div>
-  <div>Green</div>
-  <div>Blue</div>
-  <div>Hex</div>
-  <div>Preview</div>
-</div>
+      <div class="grid grid-cols-7 gap-4 font-semibold text-white text-sm border-b border-white border-opacity-30 pb-2 mb-2">
+        <div>No</div>
+        <div>Color Name</div>
+        <div>Red</div>
+        <div>Green</div>
+        <div>Blue</div>
+        <div>Hex</div>
+        <div>Preview</div>
+      </div>
 
-      <!-- Konten Warna -->
-      <div id="colorList"></div>
+      <!-- Kontainer untuk slide warna -->
+      <div id="slidesContainer"></div>
 
+      <!-- Navigasi bawah -->
+      <div class="flex justify-center mt-6 gap-2">
+        <div id="slideDots" class="flex gap-2"></div>
+      </div>
     </div>
   </div>
 
   <script>
-    fetch('colors.json')
-      .then(response => response.json())
-      .then(data => {
-        const container = document.getElementById('colorList');
-        data.forEach((color, index) => {
-          const delay = (index * 0.2).toFixed(1);
+    let currentSlide = 0;
+    let totalSlides = 0;
+    let colorsPerSlide = 50;
+    let colorData = [];
+
+    // Fungsi untuk menampilkan slide tertentu
+    function showSlide(index) {
+      const slides = document.querySelectorAll('.color-slide');
+      const dots = document.querySelectorAll('.slide-dot');
+      
+      // Sembunyikan semua slide
+      slides.forEach(slide => slide.classList.remove('active'));
+      dots.forEach(dot => dot.classList.remove('active'));
+      
+      // Tampilkan slide yang dipilih
+      slides[index].classList.add('active');
+      dots[index].classList.add('active');
+      
+      // Update tombol navigasi
+      document.getElementById('prevSlide').disabled = index === 0;
+      document.getElementById('nextSlide').disabled = index === totalSlides - 1;
+      
+      // Update info slide
+      document.getElementById('slideInfo').textContent = `Slide ${index + 1} of ${totalSlides}`;
+      currentSlide = index;
+    }
+
+    // Fungsi untuk membuat slide
+    function createSlides(colors) {
+      const container = document.getElementById('slidesContainer');
+      const dotsContainer = document.getElementById('slideDots');
+      container.innerHTML = '';
+      dotsContainer.innerHTML = '';
+      
+      // Hitung jumlah slide yang dibutuhkan
+      totalSlides = Math.ceil(colors.length / colorsPerSlide);
+      
+      // Buat setiap slide
+      for (let i = 0; i < totalSlides; i++) {
+        const startIdx = i * colorsPerSlide;
+        const endIdx = startIdx + colorsPerSlide;
+        const slideColors = colors.slice(startIdx, endIdx);
+        
+        // Buat elemen slide
+        const slide = document.createElement('div');
+        slide.className = `color-slide ${i === 0 ? 'active' : ''}`;
+        
+        // Tambahkan warna ke slide
+        slideColors.forEach((color, idx) => {
+          const globalIdx = startIdx + idx;
+          const delay = (idx * 0.2).toFixed(1);
           const row = document.createElement('div');
-          row.className = "grid grid-cols-8 gap-4 text-white text-sm items-center py-2 hover:bg-white/5 rounded transition-all duration-300";
+          row.className = "grid grid-cols-7 gap-4 text-white text-sm items-center py-2 hover:bg-white/5 rounded transition-all duration-300";
           row.innerHTML = `
-            <div>${index + 1}</div>
+            <div>${globalIdx + 1}</div>
             <div>${color.color_name || 'Tanpa Nama'}</div>
             <div>${color.red}</div>
             <div>${color.green}</div>
@@ -81,10 +144,52 @@
               <div class="w-40 h-8 rounded blink-wind" style="background-color: ${color.hex}; animation-delay: ${delay}s;"></div>
             </div>
           `;
-          container.appendChild(row);
+          slide.appendChild(row);
         });
+        
+        container.appendChild(slide);
+        
+        // Buat dot navigasi
+        const dot = document.createElement('button');
+        dot.className = `slide-dot w-3 h-3 rounded-full bg-white/30 ${i === 0 ? 'active bg-white/80' : ''}`;
+        dot.addEventListener('click', () => showSlide(i));
+        dotsContainer.appendChild(dot);
+      }
+      
+      // Update info slide
+      document.getElementById('slideInfo').textContent = `Slide 1 of ${totalSlides}`;
+    }
+
+    // Load data warna
+    fetch('colors.json')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
       })
-      .catch(error => console.error('Gagal memuat data warna:', error));
+      .then(data => {
+        colorData = data;
+        createSlides(data);
+      })
+      .catch(error => {
+        console.error('Gagal memuat data warna:', error);
+        const container = document.getElementById('slidesContainer');
+        container.innerHTML = `<div class="text-red-400 p-4">Failed to load color data. Please try again later.</div>`;
+      });
+
+    // Event listeners untuk tombol navigasi
+    document.getElementById('prevSlide').addEventListener('click', () => {
+      if (currentSlide > 0) {
+        showSlide(currentSlide - 1);
+      }
+    });
+
+    document.getElementById('nextSlide').addEventListener('click', () => {
+      if (currentSlide < totalSlides - 1) {
+        showSlide(currentSlide + 1);
+      }
+    });
   </script>
 
 </body>
