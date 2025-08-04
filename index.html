@@ -1,1677 +1,1992 @@
-# Color Palette Generator with Descriptive Color Names
-
-Here's the complete code with all modifications to include descriptive color names:
-
-```html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Color Palette Generator</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
-        
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #f8fafc;
-            transition: all 0.3s ease;
-            overflow-x: hidden;
-        }
-        
-        .page {
-            min-height: 100vh;
-            padding: 2rem;
-            display: none;
-        }
-        
-        .active-page {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        .nav-btn {
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .nav-btn:after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 2px;
-            bottom: 0;
-            left: 0;
-            background-color: #6366f1;
-            transform: scaleX(0);
-            transform-origin: bottom right;
-            transition: transform 0.3s ease;
-        }
-        
-        .nav-btn:hover:after {
-            transform: scaleX(1);
-            transform-origin: bottom left;
-        }
-        
-        .active-btn {
-            color: #6366f1;
-        }
-        
-        .active-btn:after {
-            transform: scaleX(1);
-        }
-        
-        .color-box {
-            height: 150px;
-            cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .color-box:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-        }
-        
-        .palette-bar {
-            height: 40px;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-        
-        .palette-bar:hover {
-            transform: scaleY(1.1);
-        }
-        
-        .upload-btn {
-            border: 2px dashed #cbd5e1;
-            transition: all 0.3s ease;
-        }
-        
-        .upload-btn:hover {
-            border-color: #6366f1;
-            background-color: #eef2ff;
-        }
-        
-        #imagePreview, #generatedImage, #finalImage {
-            max-height: 400px;
-            object-fit: contain;
-        }
-        
-        #generatedImage {
-            border-radius: 8px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        }
-        
-        .palette-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            gap: 1rem;
-        }
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Color Palette Generator</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>
+        <style>
+            @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
 
-        /* Style untuk color grid */
-#extractedColorsGrid div {
-  transition: transform 0.2s;
-}
+            body {
+                font-family: "Poppins", sans-serif;
+                background-color: #f8fafc;
+                transition: all 0.3s ease;
+                overflow-x: hidden;
+            }
 
-#extractedColorsGrid div:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        .generate-btn {
-            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-            transition: all 0.3s ease;
-        }
-        
-        .generate-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.3);
-        }
-        
-        .color-code {
-            background-color: rgba(0, 0, 0, 0.7);
-            color: white;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .color-box:hover .color-code {
-            opacity: 1;
-        }
-        
-        .copy-notification {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #10b981;
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: 100;
-        }
-        
-        .copy-notification.show {
-            opacity: 1;
-        }
-        
-        .loading-spinner {
-            border: 4px solid rgba(0, 0, 0, 0.1);
-            border-radius: 50%;
-            border-top: 4px solid #6366f1;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 20px auto;
-        }
-        
-        /* New styles for color names */
-        .shadow-inner {
-            box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.05);
-        }
-        
-        .bg-gray-50 {
-            background-color: #f9fafb;
-        }
-        
-        .color-name-tag {
-            position: absolute;
-            top: 5px;
-            left: 5px;
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 2px 5px;
-            border-radius: 3px;
-            font-size: 10px;
-            font-weight: bold;
-        }
+            .page {
+                min-height: 100vh;
+                padding: 2rem;
+                display: none;
+            }
 
-        /* Add to your existing CSS */
-.star {
-    position: fixed;
-    background-color: white;
-    border-radius: 50%;
-    z-index: -1;
-    pointer-events: none;
-    animation: twinkle 3s infinite;
-}
+            .active-page {
+                display: block;
+                animation: fadeIn 0.5s ease;
+            }
 
-.comet {
-    position: fixed;
-    background-color: rgba(255, 255, 255, 0.8);
-    z-index: -1;
-    pointer-events: none;
-    animation: shoot 15s linear infinite;
-}
+            .nav-btn {
+                transition: all 0.3s ease;
+                position: relative;
+                overflow: hidden;
+            }
 
-.comet-tail {
-    position: fixed;
-    width: 60px;
-    height: 1px;
-    background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.8) 100%);
-    z-index: -1;
-    pointer-events: none;
-    transform-origin: left center;
-    animation: shoot 15s linear infinite;
-}
+            .nav-btn:after {
+                content: "";
+                position: absolute;
+                width: 100%;
+                height: 2px;
+                bottom: 0;
+                left: 0;
+                background-color: #6366f1;
+                transform: scaleX(0);
+                transform-origin: bottom right;
+                transition: transform 0.3s ease;
+            }
 
-@keyframes twinkle {
-    0%, 100% { opacity: 0.2; }
-    50% { opacity: 1; }
-}
+            .nav-btn:hover:after {
+                transform: scaleX(1);
+                transform-origin: bottom left;
+            }
 
-@keyframes shoot {
-    0% {
-        transform: translateX(0) translateY(0);
-        opacity: 0;
-    }
-    10% {
-        opacity: 1;
-    }
-    90% {
-        opacity: 1;
-    }
-    100% {
-        transform: translateX(100px) translateY(100px);
-        opacity: 0;
-    }
-}
-        
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
-        }
-        
-        .blink {
-            animation: blink 1s infinite ease-in-out;
-        }
-    </style>
-</head>
-<body>
-<iframe 
-  src="https://space-background-phi.vercel.app/" 
-  style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; border: none;" 
-  allowfullscreen
-></iframe>
+            .active-btn {
+                color: #6366f1;
+            }
 
-    <!-- Navigation -->
-    <nav class="fixed top-0 left-0 right-0 bg-white shadow-sm z-50">
-        <div class="container mx-auto px-4 py-3">
-            <div class="flex justify-center space-x-6">
-                <button class="nav-btn active-btn px-3 py-2 text-sm font-medium" onclick="showPage('page1')">Intro</button>
-                <button class="nav-btn px-3 py-2 text-sm font-medium" onclick="showPage('page2')">Upload Image</button>
-                <button class="nav-btn px-3 py-2 text-sm font-medium" onclick="showPage('page3')">Generate Palette</button>
-                <button class="nav-btn px-3 py-2 text-sm font-medium" onclick="showPage('page4')">Color Codes</button>
-                <a href="fitur-warna.html">
-                    <button class="nav-btn px-3 py-2 text-sm font-medium">colors snap</button>
-                </a>
+            .active-btn:after {
+                transform: scaleX(1);
+            }
+
+            .color-box {
+                height: 150px;
+                cursor: pointer;
+                transition:
+                    transform 0.3s ease,
+                    box-shadow 0.3s ease;
+            }
+
+            .color-box:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            }
+
+            .palette-bar {
+                height: 40px;
+                cursor: pointer;
+                transition: transform 0.3s ease;
+            }
+
+            .palette-bar:hover {
+                transform: scaleY(1.1);
+            }
+
+            .upload-btn {
+                border: 2px dashed #cbd5e1;
+                transition: all 0.3s ease;
+            }
+
+            .upload-btn:hover {
+                border-color: #6366f1;
+                background-color: #eef2ff;
+            }
+
+            #imagePreview,
+            #generatedImage,
+            #finalImage {
+                max-height: 400px;
+                object-fit: contain;
+            }
+
+            #generatedImage {
+                border-radius: 8px;
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            }
+
+            .palette-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                gap: 1rem;
+            }
+
+            /* Style untuk color grid */
+            #extractedColorsGrid div {
+                transition: transform 0.2s;
+            }
+
+            #extractedColorsGrid div:hover {
+                transform: scale(1.05);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                }
+                to {
+                    opacity: 1;
+                }
+            }
+
+            .generate-btn {
+                background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+                transition: all 0.3s ease;
+            }
+
+            .generate-btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.3);
+            }
+
+            .color-code {
+                background-color: rgba(0, 0, 0, 0.7);
+                color: white;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+
+            .color-box:hover .color-code {
+                opacity: 1;
+            }
+
+            .copy-notification {
+                position: fixed;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                background-color: #10b981;
+                color: white;
+                padding: 0.5rem 1rem;
+                border-radius: 4px;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+                z-index: 100;
+            }
+
+            .copy-notification.show {
+                opacity: 1;
+            }
+
+            .loading-spinner {
+                border: 4px solid rgba(0, 0, 0, 0.1);
+                border-radius: 50%;
+                border-top: 4px solid #6366f1;
+                width: 40px;
+                height: 40px;
+                animation: spin 1s linear infinite;
+                margin: 20px auto;
+            }
+
+            /* New styles for color names */
+            .shadow-inner {
+                box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.05);
+            }
+
+            .bg-gray-50 {
+                background-color: #f9fafb;
+            }
+
+            .color-name-tag {
+                position: absolute;
+                top: 5px;
+                left: 5px;
+                background-color: rgba(255, 255, 255, 0.8);
+                padding: 2px 5px;
+                border-radius: 3px;
+                font-size: 10px;
+                font-weight: bold;
+            }
+
+            /* Add to your existing CSS */
+            .star {
+                position: fixed;
+                background-color: white;
+                border-radius: 50%;
+                z-index: -1;
+                pointer-events: none;
+                animation: twinkle 3s infinite;
+            }
+
+            .comet {
+                position: fixed;
+                background-color: rgba(255, 255, 255, 0.8);
+                z-index: -1;
+                pointer-events: none;
+                animation: shoot 15s linear infinite;
+            }
+
+            .comet-tail {
+                position: fixed;
+                width: 60px;
+                height: 1px;
+                background: linear-gradient(
+                    90deg,
+                    rgba(255, 255, 255, 0) 0%,
+                    rgba(255, 255, 255, 0.8) 100%
+                );
+                z-index: -1;
+                pointer-events: none;
+                transform-origin: left center;
+                animation: shoot 15s linear infinite;
+            }
+
+            @keyframes twinkle {
+                0%,
+                100% {
+                    opacity: 0.2;
+                }
+                50% {
+                    opacity: 1;
+                }
+            }
+
+            @keyframes shoot {
+                0% {
+                    transform: translateX(0) translateY(0);
+                    opacity: 0;
+                }
+                10% {
+                    opacity: 1;
+                }
+                90% {
+                    opacity: 1;
+                }
+                100% {
+                    transform: translateX(100px) translateY(100px);
+                    opacity: 0;
+                }
+            }
+
+            @keyframes blink {
+                0%,
+                100% {
+                    opacity: 1;
+                }
+                50% {
+                    opacity: 0.3;
+                }
+            }
+
+            .blink {
+                animation: blink 1s infinite ease-in-out;
+            }
+        </style>
+    </head>
+    <body>
+        <iframe
+            src="https://space-background-phi.vercel.app/"
+            style="
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: -1;
+                border: none;
+            "
+            allowfullscreen
+        ></iframe>
+
+        <!-- Navigation -->
+        <nav class="fixed top-0 left-0 right-0 bg-white shadow-sm z-50">
+            <div class="container mx-auto px-4 py-3">
+                <div class="flex justify-center space-x-6">
+                    <button
+                        class="nav-btn active-btn px-3 py-2 text-sm font-medium"
+                        onclick="showPage('page1')"
+                    >
+                        Intro
+                    </button>
+                    <button
+                        class="nav-btn px-3 py-2 text-sm font-medium"
+                        onclick="showPage('page2')"
+                    >
+                        Upload Image
+                    </button>
+                    <button
+                        class="nav-btn px-3 py-2 text-sm font-medium"
+                        onclick="showPage('page3')"
+                    >
+                        Generate Palette
+                    </button>
+                    <button
+                        class="nav-btn px-3 py-2 text-sm font-medium"
+                        onclick="showPage('page4')"
+                    >
+                        Color Codes
+                    </button>
+                    <a href="fitur-warna.html">
+                        <button class="nav-btn px-3 py-2 text-sm font-medium">
+                            colors snap
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Page 1: Intro -->
+        <div id="page1" class="page active-page pt-20">
+            <div class="container mx-auto px-4 py-10 flex items-center h-svh">
+                <div class="max-w-4xl mx-auto text-center">
+                    <h1 class="text-4xl font-bold text-white mb-10">
+                        Color Palette Generator
+                    </h1>
+                    <p class="text-xl text-gray-600 mb-8">
+                        Extract beautiful color palettes from your images with
+                        our intuitive tool. Discover harmonious color
+                        combinations perfect for your designs.
+                    </p>
+
+                    <button
+                        onclick="showPage('page2')"
+                        class="generate-btn text-white px-8 py-3 rounded-full font-medium text-lg shadow-lg"
+                    >
+                        Get Started
+                    </button>
+
+                    <!-- Interactive Color Palettes -->
+                    <div class="space-y-6 text-left max-w-lg mx-auto mt-12">
+                        <!-- Monochromatic -->
+                        <div>
+                            <p class="text-white font-semibold mb-2"></p>
+                            <div class="flex space-x-2"></div>
+                        </div>
+
+                        <!-- Complementary -->
+                        <div>
+                            <p class="text-white font-semibold mb-2"></p>
+                            <div class="flex space-x-2"></div>
+                        </div>
+
+                        <!-- Analogous -->
+                        <div>
+                            <p class="text-white font-semibold mb-2"></p>
+                            <div class="flex space-x-2"></div>
+                        </div>
+
+                        <!-- Triadic -->
+                        <div>
+                            <p class="text-white font-semibold mb-2"></p>
+                            <div class="flex space-x-2"></div>
+                        </div>
+
+                        <!-- Tetradic -->
+                        <div>
+                            <p class="text-white font-semibold mb-2"></p>
+                            <div class="flex space-x-2"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </nav>
 
-    <!-- Page 1: Intro -->
-    <div id="page1" class="page active-page pt-20">
-        <div class="container mx-auto px-4 py-10">
-            <div class="max-w-4xl mx-auto text-center">
-                <h1 class="text-4xl font-bold text-white mb-10">Color Palette Generator</h1>
-                <p class="text-xl text-gray-600 mb-8">Extract beautiful color palettes from your images with our intuitive tool. Discover harmonious color combinations perfect for your designs.</p>
-                
-                <button onclick="showPage('page2')" class="generate-btn text-white px-8 py-3 rounded-full font-medium text-lg shadow-lg">Get Started</button>
-                
-                <!-- Interactive Color Palettes -->
-                <div class="space-y-6 text-left max-w-lg mx-auto mt-12">
-                    <!-- Monochromatic -->
-                    <div>
-                        <p class="text-white font-semibold mb-2"></p>
-                        <div class="flex space-x-2">
+        <!-- Page 2: Image Upload Preview -->
+        <div id="page2" class="page pt-20">
+            <div class="container mx-auto px-4 py-10">
+                <h2 class="text-3xl font-bold text-center text-white mb-10">
+                    Upload Your Image
+                </h2>
 
-                        </div>
+                <div class="mb-12 grid grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-xl shadow-md">
+                        <div
+                            class="w-full h-32 mb-4 rounded-lg bg-gradient-to-r from-purple-400 via-pink-500 to-red-500"
+                        ></div>
+                        <h3 class="text-lg font-semibold mb-2">Upload Image</h3>
+                        <p class="text-gray-600">
+                            Simply upload any photo to extract its color
+                            palette.
+                        </p>
                     </div>
-
-                    <!-- Complementary -->
-                    <div>
-                        <p class="text-white font-semibold mb-2"></p>
-                        <div class="flex space-x-2">
-
-                        </div>
+                    <div class="bg-white p-6 rounded-xl shadow-md">
+                        <div
+                            class="w-full h-32 mb-4 rounded-lg bg-gradient-to-r from-green-400 to-blue-500"
+                        ></div>
+                        <h3 class="text-lg font-semibold mb-2">
+                            Generate Palette
+                        </h3>
+                        <p class="text-gray-600">
+                            Our algorithm analyzes colors in your image to
+                            create harmonious palettes.
+                        </p>
                     </div>
-                    
-                    <!-- Analogous -->
-                    <div>
-                        <p class="text-white font-semibold mb-2"></p>
-                        <div class="flex space-x-2">
-
-                        </div>
-                    </div>
-
-                    <!-- Triadic -->
-                    <div>
-                        <p class="text-white font-semibold mb-2"></p>
-                        <div class="flex space-x-2">
-
-                        </div>
-                    </div>
-
-                    <!-- Tetradic -->
-                    <div>
-                        <p class="text-white font-semibold mb-2"></p>
-                        <div class="flex space-x-2">
-
-                        </div>
+                    <div class="bg-white p-6 rounded-xl shadow-md">
+                        <div
+                            class="w-full h-32 mb-4 rounded-lg bg-gradient-to-r from-yellow-400 via-red-500 to-purple-500"
+                        ></div>
+                        <h3 class="text-lg font-semibold mb-2">
+                            Export Colors
+                        </h3>
+                        <p class="text-gray-600">
+                            Get color codes in HEX, RGB, and HSL formats for
+                            easy use in your projects.
+                        </p>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
 
-    <!-- Page 2: Image Upload Preview -->
-    <div id="page2" class="page pt-20">
-        <div class="container mx-auto px-4 py-10">
-            <h2 class="text-3xl font-bold text-center text-white mb-10">Upload Your Image</h2>
-
-
-            <div class="mb-12 grid grid-cols-3 gap-6">
-                <div class="bg-white p-6 rounded-xl shadow-md">
-                    <div class="w-full h-32 mb-4 rounded-lg bg-gradient-to-r from-purple-400 via-pink-500 to-red-500"></div>
-                    <h3 class="text-lg font-semibold mb-2">Upload Image</h3>
-                    <p class="text-gray-600">Simply upload any photo to extract its color palette.</p>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-md">
-                    <div class="w-full h-32 mb-4 rounded-lg bg-gradient-to-r from-green-400 to-blue-500"></div>
-                    <h3 class="text-lg font-semibold mb-2">Generate Palette</h3>
-                    <p class="text-gray-600">Our algorithm analyzes colors in your image to create harmonious palettes.</p>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-md">
-                    <div class="w-full h-32 mb-4 rounded-lg bg-gradient-to-r from-yellow-400 via-red-500 to-purple-500"></div>
-                    <h3 class="text-lg font-semibold mb-2">Export Colors</h3>
-                    <p class="text-gray-600">Get color codes in HEX, RGB, and HSL formats for easy use in your projects.</p>
-                </div>
-            </div>
-
-
-            <div class="max-w-2xl mx-auto">
-                <div class="bg-white rounded-xl shadow-md p-6 mb-8">
-                    <div id="dropArea" class="upload-btn rounded-lg p-12 text-center cursor-pointer mb-4">
-                        <input type="file" id="imageUpload" accept="image/*" class="hidden">
-                        <div class="flex flex-col items-center justify-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gray-400 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                            </svg>
-                            <h3 class="text-lg font-medium text-gray-700 mb-2">Drag & drop your image here</h3>
-                            <p class="text-gray-500 text-sm mb-4">or click to browse files</p>
-                            <button id="uploadBtn" class="bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-medium">Select Image</button>
+                <div class="max-w-2xl mx-auto">
+                    <div class="bg-white rounded-xl shadow-md p-6 mb-8">
+                        <div
+                            id="dropArea"
+                            class="upload-btn rounded-lg p-12 text-center cursor-pointer mb-4"
+                        >
+                            <input
+                                type="file"
+                                id="imageUpload"
+                                accept="image/*"
+                                class="hidden"
+                            />
+                            <div
+                                class="flex flex-col items-center justify-center"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-12 w-12 text-gray-400 mb-4"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                                    />
+                                </svg>
+                                <h3
+                                    class="text-lg font-medium text-gray-700 mb-2"
+                                >
+                                    Drag & drop your image here
+                                </h3>
+                                <p class="text-gray-500 text-sm mb-4">
+                                    or click to browse files
+                                </p>
+                                <button
+                                    id="uploadBtn"
+                                    class="bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-medium"
+                                >
+                                    Select Image
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div id="previewContainer" class="hidden">
-                        <h3 class="text-lg font-medium text-gray-700 mb-4">Image Preview</h3>
-                        <div class="flex justify-center mb-6">
-                            <img id="imagePreview" class="rounded-lg" src="" alt="Preview of your uploaded image"/>
-                        </div>
-                        <div class="flex justify-center">
-                            <button onclick="showPage('page3')" class="generate-btn text-white px-6 py-2 rounded-md text-sm font-medium">Continue to Generate Palette</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-   <!-- Page 3: Generate Color Palette -->
-    <div id="page3" class="page pt-20">
-        <div class="container mx-auto px-4 py-10">
-            <h2 class="text-3xl font-bold text-center text-white mb-10">Generate Color Palette</h2>
-            
-            <div class="max-w-4xl mx-auto">
-                <div class="bg-white rounded-xl shadow-md p-6 mb-8">
-                    <div class="flex flex-col md:flex-row gap-8">
-                        <div class="md:w-1/2">
+
+                        <div id="previewContainer" class="hidden">
+                            <h3 class="text-lg font-medium text-gray-700 mb-4">
+                                Image Preview
+                            </h3>
                             <div class="flex justify-center mb-6">
-                                <img id="generatedImage" class="w-full rounded-lg" src="" alt="Image being analyzed for color palette"/>
+                                <img
+                                    id="imagePreview"
+                                    class="rounded-lg"
+                                    src=""
+                                    alt="Preview of your uploaded image"
+                                />
                             </div>
-                            <div class="flex justify-center gap-4">
-                                <button id="generatePaletteBtn" class="generate-btn text-white px-6 py-2 rounded-md text-sm font-medium">Generate Palette</button>
-                                <button onclick="document.getElementById('imageUpload').click()" class="border border-gray-300 px-6 py-2 rounded-md text-sm font-medium">Change Image</button>
-                            </div>
-                        </div>
-                        
-                        <div class="md:w-1/2">
-                            <h3 class="text-lg font-medium text-gray-700 mb-4">Color Extraction Options</h3>
-                            
-                            <div class="space-y-4 mb-6">
-                                <div>
-                                    <label for="colorCount" class="block text-sm font-medium text-gray-700 mb-1">Number of Colors</label>
-                                    <select id="colorCount" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                                        <option value="5">5</option>
-                                        <option value="8" selected>8</option>
-                                        <option value="12">12</option>
-                                        <option value="16">16</option>
-                                        <option value="16">16 (Detailed)</option>
-                                    </select>
-                                </div>
-                                
-                                <div>
-                                    <label for="algorithmType" class="block text-sm font-medium text-gray-700 mb-1">Algorithm</label>
-                                    <select id="algorithmType" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                                        <option value="kmeans">K-Means Clustering (Fast)</option>
-                                        <option value="medianCut" selected>Median Cut (Balanced)</option>
-                                        <option value="vibrant">Vibrant Extraction (Artistic)</option>
-                                    </select>
-                                </div>
-                            </div>
-                            
-                            <div id="palettePreview" class="hidden">
-                                <h3 class="text-lg font-medium text-gray-700 mb-4">Generated Palette Preview</h3>
-                                <div class="flex flex-wrap gap-2 mb-4" id="paletteColorsContainer">
-                                    <!-- Palette preview will be generated here -->
-                                </div>
-                                <button onclick="showPage('page4')" class="generate-btn text-white px-6 py-2 rounded-md text-sm font-medium">View Detailed Palette</button>
-                            </div>
-                            
-                            <div id="loadingIndicator" class="hidden">
-                                <div class="loading-spinner"></div>
-                                <p class="text-center text-gray-600">Analyzing image colors...</p>
+                            <div class="flex justify-center">
+                                <button
+                                    onclick="showPage('page3')"
+                                    class="generate-btn text-white px-6 py-2 rounded-md text-sm font-medium"
+                                >
+                                    Continue to Generate Palette
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    
-    <!-- Page 4: Color Codes -->
-    <div id="page4" class="page pt-20">
-        <div class="container mx-auto px-4 py-10">
-            <h2 class="text-3xl font-bold text-center text-white mb-10">Color Palette Details</h2>
-            
-            <div class="max-w-4xl mx-auto">
-                <div class="bg-white rounded-xl shadow-md p-6 mb-8">
-                    <div class="flex gap-4 mb-6">
-                        <div class="w-1/3">
-                            <div class="flex justify-center mb-4">
-                                <img id="finalImage" class="rounded-lg max-h-48" src="" alt="Final image with extracted color palette"/>
+
+        <!-- Page 3: Generate Color Palette -->
+        <div id="page3" class="page pt-20">
+            <div class="container mx-auto px-4 py-10">
+                <h2 class="text-3xl font-bold text-center text-white mb-10">
+                    Generate Color Palette
+                </h2>
+
+                <div class="max-w-4xl mx-auto">
+                    <div class="bg-white rounded-xl shadow-md p-6 mb-8">
+                        <div class="flex flex-col md:flex-row gap-8">
+                            <div class="md:w-1/2">
+                                <div class="flex justify-center mb-6">
+                                    <img
+                                        id="generatedImage"
+                                        class="w-full rounded-lg"
+                                        src=""
+                                        alt="Image being analyzed for color palette"
+                                    />
+                                </div>
+                                <div class="flex justify-center gap-4">
+                                    <button
+                                        id="generatePaletteBtn"
+                                        class="generate-btn text-white px-6 py-2 rounded-md text-sm font-medium"
+                                    >
+                                        Generate Palette
+                                    </button>
+                                    <button
+                                        onclick="document.getElementById('imageUpload').click()"
+                                        class="border border-gray-300 px-6 py-2 rounded-md text-sm font-medium"
+                                    >
+                                        Change Image
+                                    </button>
+                                </div>
                             </div>
-                            <div class="text-center">
-                                      <button onclick="downloadAsPNG()" class="bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center gap-2">
-        <i class="fas fa-download"></i> Download PNG
-      </button>
-      <button onclick="downloadAsJPG()" class="bg-green-600 text-white px-4 py-2 rounded-lg flex items-center gap-2">
-        <i class="fas fa-download"></i> Download JPG
-      </button>
+
+                            <div class="md:w-1/2">
+                                <h3
+                                    class="text-lg font-medium text-gray-700 mb-4"
+                                >
+                                    Color Extraction Options
+                                </h3>
+
+                                <div class="space-y-4 mb-6">
+                                    <div>
+                                        <label
+                                            for="colorCount"
+                                            class="block text-sm font-medium text-gray-700 mb-1"
+                                            >Number of Colors</label
+                                        >
+                                        <select
+                                            id="colorCount"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                        >
+                                            <option value="5">5</option>
+                                            <option value="8" selected>
+                                                8
+                                            </option>
+                                            <option value="12">12</option>
+                                            <option value="16">16</option>
+                                            <option value="16">
+                                                16 (Detailed)
+                                            </option>
+                                        </select>
+                                    </div>
+
+                                    <div>
+                                        <label
+                                            for="algorithmType"
+                                            class="block text-sm font-medium text-gray-700 mb-1"
+                                            >Algorithm</label
+                                        >
+                                        <select
+                                            id="algorithmType"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                        >
+                                            <option value="kmeans">
+                                                K-Means Clustering (Fast)
+                                            </option>
+                                            <!-- <option value="medianCut" selected>
+                                                Median Cut (Balanced)
+                                            </option>
+                                            <option value="vibrant">
+                                                Vibrant Extraction (Artistic)
+                                            </option> -->
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div id="palettePreview" class="hidden">
+                                    <h3
+                                        class="text-lg font-medium text-gray-700 mb-4"
+                                    >
+                                        Generated Palette Preview
+                                    </h3>
+                                    <div
+                                        class="flex flex-wrap gap-2 mb-4"
+                                        id="paletteColorsContainer"
+                                    >
+                                        <!-- Palette preview will be generated here -->
+                                    </div>
+                                    <button
+                                        onclick="showPage('page4')"
+                                        class="generate-btn text-white px-6 py-2 rounded-md text-sm font-medium"
+                                    >
+                                        View Detailed Palette
+                                    </button>
+                                </div>
+
+                                <div id="loadingIndicator" class="hidden">
+                                    <div class="loading-spinner"></div>
+                                    <p class="text-center text-gray-600">
+                                        Analyzing image colors...
+                                    </p>
+                                </div>
                             </div>
-                        </div>
-                        
-                        <div class="w-2/3">
-                            <h3 class="text-lg font-medium text-gray-700 mb-4">Color Information</h3>
-                            <div id="colorBarsContainer" class="space-y-2 mb-4">
-                                <!-- Color bars will be generated here -->
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div id="colorCodesContainer">
-                        <h3 class="text-lg font-medium text-gray-700 mb-4">Color Codes</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6" id="colorCodesGrid">
-                            <!-- Color codes will be generated here -->
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    
-    <!-- Page 5: All Palettes -->
-    <div id="page5" class="page pt-20">
-        <div class="container mx-auto px-4 py-10">
-            <h2 class="text-3xl font-bold text-center text-white mb-10">All Generated Palettes</h2>
-            
-            <div class="max-w-6xl mx-auto">
-                <div id="savedPalettesContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- Saved palettes will be generated here -->
+
+        <!-- Page 4: Color Codes -->
+        <div id="page4" class="page pt-20">
+            <div class="container mx-auto px-4 py-10">
+                <h2 class="text-3xl font-bold text-center text-white mb-10">
+                    Color Palette Details
+                </h2>
+
+                <div class="max-w-4xl mx-auto">
+                    <div class="bg-white rounded-xl shadow-md p-6 mb-8">
+                        <div class="flex gap-4 mb-6">
+                            <div class="w-1/3">
+                                <div class="flex justify-center mb-4">
+                                    <img
+                                        id="finalImage"
+                                        class="rounded-lg max-h-48"
+                                        src=""
+                                        alt="Final image with extracted color palette"
+                                    />
+                                </div>
+                                <div class="text-center">
+                                    <button
+                                        onclick="downloadAsPNG()"
+                                        class="bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center gap-2"
+                                    >
+                                        <i class="fas fa-download"></i> Download
+                                        PNG
+                                    </button>
+                                    <button
+                                        onclick="downloadAsJPG()"
+                                        class="bg-green-600 text-white px-4 py-2 rounded-lg flex items-center gap-2"
+                                    >
+                                        <i class="fas fa-download"></i> Download
+                                        JPG
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="w-2/3">
+                                <h3
+                                    class="text-lg font-medium text-gray-700 mb-4"
+                                >
+                                    Color Information
+                                </h3>
+                                <div
+                                    id="colorBarsContainer"
+                                    class="space-y-2 mb-4"
+                                >
+                                    <!-- Color bars will be generated here -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="colorCodesContainer">
+                            <h3 class="text-lg font-medium text-gray-700 mb-4">
+                                Color Codes
+                            </h3>
+                            <div
+                                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6"
+                                id="colorCodesGrid"
+                            >
+                                <!-- Color codes will be generated here -->
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    
-    <!-- Copy Notification -->
-    <div id="copyNotification" class="copy-notification">
-        Color code copied!
-    </div>
-    
-    <script>
-        // Global variables
-        let currentPalette = [];
-        let savedPalettes = [];
-        
-        // Color names database
-        const colorNames = [
-  // Red variants (50)
-  { name: "Imperial Red", hex: "#ED2939" },
-  { name: "Carmine", hex: "#960018" },
-  { name: "Ruby", hex: "#E0115F" },
-  { name: "Crimson", hex: "#DC143C" },
-  { name: "Scarlet", hex: "#FF2400" },
-  { name: "Burgundy", hex: "#800020" },
-  { name: "Cardinal", hex: "#C41E3A" },
-  { name: "Maroon", hex: "#800000" },
-  { name: "Ferrari Red", hex: "#FF2800" },
-  { name: "Alizarin", hex: "#E32636" },
-  { name: "Amarnath", hex: "#E52B50" },
-  { name: "Amaranth", hex: "#9F2B68" },
-  { name: "Cerise", hex: "#DE3163" },
-  { name: "Claret", hex: "#7F1734" },
-  { name: "Cordovan", hex: "#893F45" },
-  { name: "Falu Red", hex: "#801818" },
-  { name: "Fire Brick", hex: "#B22222" },
-  { name: "Garnet", hex: "#733635" },
-  { name: "Hollywood Cerise", hex: "#F400A1" },
-  { name: "Lava", hex: "#CF1020" },
-  { name: "Madder", hex: "#A50021" },
-  { name: "Pink Raspberry", hex: "#980036" },
-  { name: "Redwood", hex: "#A45A52" },
-  { name: "Rosewood", hex: "#65000B" },
-  { name: "Sanguine", hex: "#BC3F4A" },
-  { name: "Tuscan Red", hex: "#7C3030" },
-  { name: "Venetian Red", hex: "#C80815" },
-  { name: "Wine", hex: "#722F37" },
-  { name: "Cinnabar", hex: "#E44D2E" },
-  { name: "Coquelicot", hex: "#FF3800" },
-  { name: "Coral Red", hex: "#FF4040" },
-  { name: "Deep Carmine", hex: "#A9203E" },
-  { name: "Electric Crimson", hex: "#FF003F" },
-  { name: "Fire Engine Red", hex: "#CE2029" },
-  { name: "Folly", hex: "#FF004F" },
-  { name: "Harvard Crimson", hex: "#C90016" },
-  { name: "Indian Red", hex: "#CD5C5C" },
-  { name: "Jasper", hex: "#D05340" },
-  { name: "Light Coral", hex: "#F08080" },
-  { name: "Misty Rose", hex: "#FFE4E1" },
-  { name: "Persian Red", hex: "#CC3333" },
-  { name: "Pink Sherbet", hex: "#F78FA7" },
-  { name: "Radical Red", hex: "#FF355E" },
-  { name: "Raspberry", hex: "#E30B5D" },
-  { name: "Red Orange", hex: "#FF5349" },
-  { name: "Rose Vale", hex: "#AB4E52" },
-  { name: "Salmon", hex: "#FA8072" },
-  { name: "Tomato", hex: "#FF6347" },
-  { name: "Watermelon", hex: "#FC6C85" },
-  { name: "Wild Watermelon", hex: "#FD5B78" },
 
-  // Orange variants (40)
-  { name: "International Orange", hex: "#FF4F00" },
-  { name: "Persimmon", hex: "#EC5800" },
-  { name: "Tangerine", hex: "#F28500" },
-  { name: "Gamboge", hex: "#E49B0F" },
-  { name: "Golden Poppy", hex: "#FCC200" },
-  { name: "Princeton Orange", hex: "#FF8F00" },
-  { name: "Pumpkin", hex: "#FF7518" },
-  { name: "Safety Orange", hex: "#FF6700" },
-  { name: "Sunset Orange", hex: "#FD5E53" },
-  { name: "Vermilion", hex: "#E34234" },
-  { name: "Amber", hex: "#FFBF00" },
-  { name: "Apricot", hex: "#FBCEB1" },
-  { name: "Atomic Tangerine", hex: "#FF9966" },
-  { name: "Bittersweet", hex: "#FE6F5E" },
-  { name: "Burnt Orange", hex: "#CC5500" },
-  { name: "Cadmium Orange", hex: "#ED872D" },
-  { name: "Carrot Orange", hex: "#ED9121" },
-  { name: "Coral", hex: "#FF7F50" },
-  { name: "Dark Orange", hex: "#FF8C00" },
-  { name: "Deep Carrot Orange", hex: "#E9692C" },
-  { name: "Deep Saffron", hex: "#FF9933" },
-  { name: "Gamboge Orange", hex: "#996600" },
-  { name: "Giants Orange", hex: "#FE5A1D" },
-  { name: "Heat Wave", hex: "#FF7A00" },
-  { name: "Mango Tango", hex: "#FF8243" },
-  { name: "Neon Carrot", hex: "#FFA343" },
-  { name: "Orange Peel", hex: "#FF9F00" },
-  { name: "Orange Red", hex: "#FF4500" },
-  { name: "Outrageous Orange", hex: "#FF6E4A" },
-  { name: "Papaya Whip", hex: "#FFEFD5" },
-  { name: "Peach", hex: "#FFE5B4" },
-  { name: "Peach Orange", hex: "#FFCC99" },
-  { name: "Persian Orange", hex: "#D99058" },
-  { name: "Portland Orange", hex: "#FF5A36" },
-  { name: "Princeton Orange", hex: "#F58025" },
-  { name: "Pumpkin", hex: "#FF7518" },
-  { name: "Sienna", hex: "#A0522D" },
-  { name: "Sunburnt Cyclops", hex: "#FF404C" },
-  { name: "Tango Pink", hex: "#E4717A" },
-  { name: "Terra Cotta", hex: "#E2725B" },
+        <!-- Page 5: All Palettes -->
+        <div id="page5" class="page pt-20">
+            <div class="container mx-auto px-4 py-10">
+                <h2 class="text-3xl font-bold text-center text-white mb-10">
+                    All Generated Palettes
+                </h2>
 
-  // Yellow variants (50)
-  { name: "Lemon", hex: "#FFF700" },
-  { name: "Canary", hex: "#FFFF99" },
-  { name: "Gold", hex: "#FFD700" },
-  { name: "Saffron", hex: "#F4C430" },
-  { name: "Stil de Grain", hex: "#FADA5E" },
-  { name: "Sunflower", hex: "#FFDA03" },
-  { name: "Trombone", hex: "#D2B55B" },
-  { name: "Aureolin", hex: "#FDEE00" },
-  { name: "Banana", hex: "#FFE135" },
-  { name: "Blond", hex: "#FAF0BE" },
-  { name: "Buff", hex: "#F0DC82" },
-  { name: "Cadmium Yellow", hex: "#FFF600" },
-  { name: "Citrine", hex: "#E4D00A" },
-  { name: "Cream", hex: "#FFFDD0" },
-  { name: "Dark Goldenrod", hex: "#B8860B" },
-  { name: "Flax", hex: "#EEDC82" },
-  { name: "Gamboge", hex: "#E49B0F" },
-  { name: "Goldenrod", hex: "#DAA520" },
-  { name: "Icterine", hex: "#FCF75E" },
-  { name: "Jonquil", hex: "#F4CA16" },
-  { name: "Laser Lemon", hex: "#FFFF66" },
-  { name: "Lemon Chiffon", hex: "#FFFACD" },
-  { name: "Lemon Curry", hex: "#CCA01D" },
-  { name: "Lemon Glacier", hex: "#FDFF00" },
-  { name: "Lemon Lime", hex: "#E3FF00" },
-  { name: "Lemon Meringue", hex: "#F6EABE" },
-  { name: "Lemon Yellow", hex: "#FFF44F" },
-  { name: "Maize", hex: "#FBEC5D" },
-  { name: "Mikado Yellow", hex: "#FFC40C" },
-  { name: "Minion Yellow", hex: "#F5E050" },
-  { name: "Mustard", hex: "#FFDB58" },
-  { name: "Naples Yellow", hex: "#FADA5E" },
-  { name: "Navajo White", hex: "#FFDEAD" },
-  { name: "Old Gold", hex: "#CFB53B" },
-  { name: "Papaya Whip", hex: "#FFEFD5" },
-  { name: "Saffron", hex: "#F4C430" },
-  { name: "School Bus Yellow", hex: "#FFD800" },
-  { name: "Selective Yellow", hex: "#FFBA00" },
-  { name: "Straw", hex: "#E4D96F" },
-  { name: "Sunset", hex: "#FAD6A5" },
-  { name: "Supernova", hex: "#FFC901" },
-  { name: "Titanium Yellow", hex: "#EEE600" },
-  { name: "Unmellow Yellow", hex: "#FFFF66" },
-  { name: "Vanilla", hex: "#F3E5AB" },
-  { name: "Yellow Rose", hex: "#FFF000" },
-  { name: "Zinnwaldite", hex: "#EBC2AF" },
-  { name: "Golden Yellow", hex: "#FFDF00" },
-  { name: "Cyber Yellow", hex: "#FFD300" },
-  { name: "Safety Yellow", hex: "#EED202" },
-  { name: "Golden Poppy", hex: "#FCC200" },
+                <div class="max-w-6xl mx-auto">
+                    <div
+                        id="savedPalettesContainer"
+                        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+                    >
+                        <!-- Saved palettes will be generated here -->
+                    </div>
+                </div>
+            </div>
+        </div>
 
-  // Green variants (60)
-  { name: "Emerald", hex: "#50C878" },
-  { name: "Jade", hex: "#00A86B" },
-  { name: "Malachite", hex: "#0BDA51" },
-  { name: "Smaragdine", hex: "#4FC978" },
-  { name: "Viridian", hex: "#40826D" },
-  { name: "Apple Green", hex: "#8DB600" },
-  { name: "Army Green", hex: "#4B5320" },
-  { name: "Artichoke", hex: "#8F9779" },
-  { name: "Asparagus", hex: "#87A96B" },
-  { name: "Avocado", hex: "#568203" },
-  { name: "Bright Green", hex: "#66FF00" },
-  { name: "British Racing Green", hex: "#004225" },
-  { name: "Brunswick Green", hex: "#1B4D3E" },
-  { name: "Cal Poly Green", hex: "#1E4D2B" },
-  { name: "Castleton Green", hex: "#00563F" },
-  { name: "Celadon", hex: "#ACE1AF" },
-  { name: "Chartreuse", hex: "#7FFF00" },
-  { name: "Dartmouth Green", hex: "#00703C" },
-  { name: "Dark Moss Green", hex: "#4A5D23" },
-  { name: "Dark Spring Green", hex: "#177245" },
-  { name: "Dollar Bill", hex: "#85BB65" },
-  { name: "Electric Green", hex: "#00FF00" },
-  { name: "Fern Green", hex: "#4F7942" },
-  { name: "Forest Green", hex: "#228B22" },
-  { name: "GO Green", hex: "#00AB66" },
-  { name: "Grass", hex: "#7AC488" },
-  { name: "Green Yellow", hex: "#ADFF2F" },
-  { name: "Harlequin", hex: "#3FFF00" },
-  { name: "Hunter Green", hex: "#355E3B" },
-  { name: "India Green", hex: "#138808" },
-  { name: "Islamic Green", hex: "#009000" },
-  { name: "Jungle Green", hex: "#29AB87" },
-  { name: "Kelly Green", hex: "#4CBB17" },
-  { name: "Lawn Green", hex: "#7CFC00" },
-  { name: "Light Green", hex: "#90EE90" },
-  { name: "Lime", hex: "#BFFF00" },
-  { name: "Lime Green", hex: "#32CD32" },
-  { name: "Mantis", hex: "#74C365" },
-  { name: "Mint", hex: "#3EB489" },
-  { name: "Moss Green", hex: "#8A9A5B" },
-  { name: "Myrtle", hex: "#21421E" },
-  { name: "Office Green", hex: "#008000" },
-  { name: "Olivine", hex: "#9AB973" },
-  { name: "Paris Green", hex: "#50C878" },
-  { name: "Pear", hex: "#D1E231" },
-  { name: "Pistachio", hex: "#93C572" },
-  { name: "Russian Green", hex: "#679267" },
-  { name: "Sap Green", hex: "#507D2A" },
-  { name: "Sea Green", hex: "#2E8B57" },
-  { name: "Spring Bud", hex: "#A7FC00" },
-  { name: "Spring Green", hex: "#00FF7F" },
-  { name: "Tea Green", hex: "#D0F0C0" },
-  { name: "Turtle Green", hex: "#8A9A5B" },
-  { name: "Verdigris", hex: "#43B3AE" },
-  { name: "Yellow Green", hex: "#9ACD32" },
-  { name: "Amazon", hex: "#3B7A57" },
-  { name: "Bottle Green", hex: "#006A4E" },
-  { name: "Bud Green", hex: "#7BB661" },
-  { name: "Camouflage Green", hex: "#78866B" },
-  { name: "Celtic Green", hex: "#1F6B49" },
+        <!-- Copy Notification -->
+        <div id="copyNotification" class="copy-notification">
+            Color code copied!
+        </div>
 
-  // Blue variants (70)
-  { name: "Azure", hex: "#007FFF" },
-  { name: "Cerulean", hex: "#007BA7" },
-  { name: "Cobalt", hex: "#0047AB" },
-  { name: "Egyptian Blue", hex: "#1034A6" },
-  { name: "Sapphire", hex: "#0F52BA" },
-  { name: "Ultramarine", hex: "#120A8F" },
-  { name: "Air Force Blue", hex: "#5D8AA8" },
-  { name: "Alice Blue", hex: "#F0F8FF" },
-  { name: "Aqua", hex: "#00FFFF" },
-  { name: "Baby Blue", hex: "#89CFF0" },
-  { name: "Blue Gray", hex: "#6699CC" },
-  { name: "Blue Green", hex: "#0D98BA" },
-  { name: "Bright Blue", hex: "#0096FF" },
-  { name: "Cadet Blue", hex: "#5F9EA0" },
-  { name: "Carolina Blue", hex: "#56A0D3" },
-  { name: "Celeste", hex: "#B2FFFF" },
-  { name: "Cornflower Blue", hex: "#6495ED" },
-  { name: "Cyan", hex: "#00FFFF" },
-  { name: "Dark Blue", hex: "#00008B" },
-  { name: "Deep Sky Blue", hex: "#00BFFF" },
-  { name: "Denim", hex: "#1560BD" },
-  { name: "Dodger Blue", hex: "#1E90FF" },
-  { name: "Duke Blue", hex: "#00009C" },
-  { name: "Electric Blue", hex: "#7DF9FF" },
-  { name: "Federal Blue", hex: "#002366" },
-  { name: "Glaucous", hex: "#6082B6" },
-  { name: "Iceberg", hex: "#71A6D2" },
-  { name: "Indigo", hex: "#4B0082" },
-  { name: "International Klein Blue", hex: "#002FA7" },
-  { name: "Iris", hex: "#5A4FCF" },
-  { name: "Light Blue", hex: "#ADD8E6" },
-  { name: "Majorelle Blue", hex: "#6050DC" },
-  { name: "Maya Blue", hex: "#73C2FB" },
-  { name: "Medium Blue", hex: "#0000CD" },
-  { name: "Midnight Blue", hex: "#191970" },
-  { name: "Navy Blue", hex: "#000080" },
-  { name: "Neon Blue", hex: "#4666FF" },
-  { name: "Oxford Blue", hex: "#002147" },
-  { name: "Pacific Blue", hex: "#1CA9C9" },
-  { name: "Palatinate Blue", hex: "#273BE2" },
-  { name: "Periwinkle", hex: "#CCCCFF" },
-  { name: "Persian Blue", hex: "#1C39BB" },
-  { name: "Phthalo Blue", hex: "#000F89" },
-  { name: "Powder Blue", hex: "#B0E0E6" },
-  { name: "Prussian Blue", hex: "#003153" },
-  { name: "Robin Egg Blue", hex: "#00CCCC" },
-  { name: "Royal Blue", hex: "#4169E1" },
-  { name: "Sapphire Blue", hex: "#0067A5" },
-  { name: "Sky Blue", hex: "#87CEEB" },
-  { name: "Steel Blue", hex: "#4682B4" },
-  { name: "Teal", hex: "#008080" },
-  { name: "True Blue", hex: "#0073CF" },
-  { name: "Tufts Blue", hex: "#3E8EDE" },
-  { name: "Turquoise", hex: "#40E0D0" },
-  { name: "UCLA Blue", hex: "#536895" },
-  { name: "Ultramarine", hex: "#3F00FF" },
-  { name: "Violet Blue", hex: "#324AB2" },
-  { name: "Yale Blue", hex: "#00356B" },
-  { name: "Zaffre", hex: "#0014A8" },
-  { name: "Aero", hex: "#7CB9E8" },
-  { name: "Aquamarine", hex: "#7FFFD4" },
-  { name: "Arctic Blue", hex: "#82CAFF" },
-  { name: "Bleu de France", hex: "#318CE7" },
-  { name: "Blue Bell", hex: "#A2A2D0" },
-  { name: "Blue Jeans", hex: "#5DADEC" },
-  { name: "Blue Sapphire", hex: "#126180" },
-  { name: "Blue Yonder", hex: "#5072A7" },
-  { name: "Brandeis Blue", hex: "#0070FF" },
-  { name: "Capri", hex: "#00BFFF" },
-  { name: "Celtic Blue", hex: "#246BCE" },
-  { name: "Chefchaouen Blue", hex: "#468FE7" },
-  { name: "Cyan Azure", hex: "#4E82B4" },
-  { name: "Dark Cyan", hex: "#008B8B" },
+        <script>
+            // Global variables
+            let currentPalette = [];
+            let savedPalettes = [];
 
-  // Purple variants (50)
-  { name: "Amethyst", hex: "#9966CC" },
-  { name: "Byzantium", hex: "#702963" },
-  { name: "Electric Purple", hex: "#BF00FF" },
-  { name: "Heliotrope", hex: "#DF73FF" },
-  { name: "Lavender", hex: "#E6E6FA" },
-  { name: "Lilac", hex: "#C8A2C8" },
-  { name: "Magenta", hex: "#FF00FF" },
-  { name: "Mauve", hex: "#E0B0FF" },
-  { name: "Orchid", hex: "#DA70D6" },
-  { name: "Purple Heart", hex: "#69359C" },
-  { name: "Tyrian Purple", hex: "#66023C" },
-  { name: "Veronica", hex: "#A020F0" },
-  { name: "Violet", hex: "#8F00FF" },
-  { name: "African Violet", hex: "#B284BE" },
-  { name: "Blue Violet", hex: "#8A2BE2" },
-  { name: "Chinese Violet", hex: "#856088" },
-  { name: "Dark Orchid", hex: "#9932CC" },
-  { name: "Dark Violet", hex: "#9400D3" },
-  { name: "Electric Violet", hex: "#8F00FF" },
-  { name: "English Violet", hex: "#563C5C" },
-  { name: "Fandango", hex: "#B53389" },
-  { name: "French Mauve", hex: "#D473D4" },
-  { name: "Fuchsia", hex: "#FF00FF" },
-  { name: "Grape", hex: "#6F2DA8" },
-  { name: "Han Purple", hex: "#5218FA" },
-  { name: "Indigo", hex: "#4B0082" },
-  { name: "Japanese Violet", hex: "#5B3256" },
-  { name: "Lavender Blush", hex: "#FFF0F5" },
-  { name: "Lavender Gray", hex: "#C4C3D0" },
-  { name: "Lavender Indigo", hex: "#9457EB" },
-  { name: "Lavender Purple", hex: "#967BB6" },
-  { name: "Lavender Rose", hex: "#FBA0E3" },
-  { name: "Lilac Luster", hex: "#AE98AA" },
-  { name: "Mardi Gras", hex: "#880085" },
-  { name: "Medium Orchid", hex: "#BA55D3" },
-  { name: "Medium Purple", hex: "#9370DB" },
-  { name: "Medium Violet Red", hex: "#C71585" },
-  { name: "Mountbatten Pink", hex: "#997A8D" },
-  { name: "Mulberry", hex: "#C54B8C" },
-  { name: "Old Lavender", hex: "#796878" },
-  { name: "Opera Mauve", hex: "#B784A7" },
-  { name: "Palatinate Purple", hex: "#682860" },
-  { name: "Pansy Purple", hex: "#78184A" },
-  { name: "Pearl", hex: "#FDEEF4" },
-  { name: "Persian Indigo", hex: "#32127A" },
-  { name: "Phlox", hex: "#DF00FF" },
-  { name: "Plum", hex: "#8E4585" },
-  { name: "Pomp and Power", hex: "#86608E" },
-  { name: "Purple Mountain Majesty", hex: "#9678B6" },
-  { name: "Purple Navy", hex: "#4E5180" },
-  { name: "Purple Pizzazz", hex: "#FE4EDA" },
-  { name: "Purple Taupe", hex: "#50404D" },
-  { name: "Razzmic Berry", hex: "#8D4E85" },
-  { name: "Red Violet", hex: "#C71585" },
-  { name: "Royal Purple", hex: "#7851A9" },
-  { name: "Russian Violet", hex: "#32174D" },
-  { name: "Slate Blue", hex: "#6A5ACD" },
-  { name: "Thistle", hex: "#D8BFD8" },
-  { name: "Twilight Lavender", hex: "#8A496B" },
-  { name: "Violet Eggplant", hex: "#991199" },
-  { name: "Wisteria", hex: "#C9A0DC" },
+            // Color names database
+            const colorNames = [
+                // Red variants (50)
+                { name: "Imperial Red", hex: "#ED2939" },
+                { name: "Carmine", hex: "#960018" },
+                { name: "Ruby", hex: "#E0115F" },
+                { name: "Crimson", hex: "#DC143C" },
+                { name: "Scarlet", hex: "#FF2400" },
+                { name: "Burgundy", hex: "#800020" },
+                { name: "Cardinal", hex: "#C41E3A" },
+                { name: "Maroon", hex: "#800000" },
+                { name: "Ferrari Red", hex: "#FF2800" },
+                { name: "Alizarin", hex: "#E32636" },
+                { name: "Amarnath", hex: "#E52B50" },
+                { name: "Amaranth", hex: "#9F2B68" },
+                { name: "Cerise", hex: "#DE3163" },
+                { name: "Claret", hex: "#7F1734" },
+                { name: "Cordovan", hex: "#893F45" },
+                { name: "Falu Red", hex: "#801818" },
+                { name: "Fire Brick", hex: "#B22222" },
+                { name: "Garnet", hex: "#733635" },
+                { name: "Hollywood Cerise", hex: "#F400A1" },
+                { name: "Lava", hex: "#CF1020" },
+                { name: "Madder", hex: "#A50021" },
+                { name: "Pink Raspberry", hex: "#980036" },
+                { name: "Redwood", hex: "#A45A52" },
+                { name: "Rosewood", hex: "#65000B" },
+                { name: "Sanguine", hex: "#BC3F4A" },
+                { name: "Tuscan Red", hex: "#7C3030" },
+                { name: "Venetian Red", hex: "#C80815" },
+                { name: "Wine", hex: "#722F37" },
+                { name: "Cinnabar", hex: "#E44D2E" },
+                { name: "Coquelicot", hex: "#FF3800" },
+                { name: "Coral Red", hex: "#FF4040" },
+                { name: "Deep Carmine", hex: "#A9203E" },
+                { name: "Electric Crimson", hex: "#FF003F" },
+                { name: "Fire Engine Red", hex: "#CE2029" },
+                { name: "Folly", hex: "#FF004F" },
+                { name: "Harvard Crimson", hex: "#C90016" },
+                { name: "Indian Red", hex: "#CD5C5C" },
+                { name: "Jasper", hex: "#D05340" },
+                { name: "Light Coral", hex: "#F08080" },
+                { name: "Misty Rose", hex: "#FFE4E1" },
+                { name: "Persian Red", hex: "#CC3333" },
+                { name: "Pink Sherbet", hex: "#F78FA7" },
+                { name: "Radical Red", hex: "#FF355E" },
+                { name: "Raspberry", hex: "#E30B5D" },
+                { name: "Red Orange", hex: "#FF5349" },
+                { name: "Rose Vale", hex: "#AB4E52" },
+                { name: "Salmon", hex: "#FA8072" },
+                { name: "Tomato", hex: "#FF6347" },
+                { name: "Watermelon", hex: "#FC6C85" },
+                { name: "Wild Watermelon", hex: "#FD5B78" },
 
-  // Brown variants (40)
-  { name: "Auburn", hex: "#A52A2A" },
-  { name: "Beaver", hex: "#9F8170" },
-  { name: "Bistre", hex: "#3D2B1F" },
-  { name: "Bole", hex: "#79443B" },
-  { name: "Bronze", hex: "#CD7F32" },
-  { name: "Buff", hex: "#F0DC82" },
-  { name: "Burgundy", hex: "#800020" },
-  { name: "Burnt Umber", hex: "#8A3324" },
-  { name: "Camel", hex: "#C19A6B" },
-  { name: "Chamoisee", hex: "#A0785A" },
-  { name: "Chestnut", hex: "#954535" },
-  { name: "Chocolate", hex: "#7B3F00" },
-  { name: "Cocoa Brown", hex: "#D2691E" },
-  { name: "Coffee", hex: "#6F4E37" },
-  { name: "Copper", hex: "#B87333" },
-  { name: "Cordovan", hex: "#893F45" },
-  { name: "Coyote Brown", hex: "#81613C" },
-  { name: "Dark Brown", hex: "#654321" },
-  { name: "Desert Sand", hex: "#EDC9AF" },
-  { name: "Earth Yellow", hex: "#E1A95F" },
-  { name: "Ecru", hex: "#C2B280" },
-  { name: "Fallow", hex: "#C19A6B" },
-  { name: "Fawn", hex: "#E5AA70" },
-  { name: "Feldgrau", hex: "#4D5D53" },
-  { name: "Gamboge", hex: "#E49B0F" },
-  { name: "Golden Brown", hex: "#996515" },
-  { name: "Khaki", hex: "#C3B091" },
-  { name: "Liver", hex: "#674C47" },
-  { name: "Mahogany", hex: "#C04000" },
-  { name: "Ochre", hex: "#CC7722" },
-  { name: "Raw Umber", hex: "#826644" },
-  { name: "Redwood", hex: "#A45A52" },
-  { name: "Russet", hex: "#80461B" },
-  { name: "Sand", hex: "#C2B280" },
-  { name: "Sandy Brown", hex: "#F4A460" },
-  { name: "Sepia", hex: "#704214" },
-  { name: "Sienna", hex: "#A0522D" },
-  { name: "Taupe", hex: "#483C32" },
-  { name: "Tuscan Red", hex: "#7C3030" },
-  { name: "Wheat", hex: "#F5DEB3" },
-  { name: "Windsor Tan", hex: "#A75502" },
+                // Orange variants (40)
+                { name: "International Orange", hex: "#FF4F00" },
+                { name: "Persimmon", hex: "#EC5800" },
+                { name: "Tangerine", hex: "#F28500" },
+                { name: "Gamboge", hex: "#E49B0F" },
+                { name: "Golden Poppy", hex: "#FCC200" },
+                { name: "Princeton Orange", hex: "#FF8F00" },
+                { name: "Pumpkin", hex: "#FF7518" },
+                { name: "Safety Orange", hex: "#FF6700" },
+                { name: "Sunset Orange", hex: "#FD5E53" },
+                { name: "Vermilion", hex: "#E34234" },
+                { name: "Amber", hex: "#FFBF00" },
+                { name: "Apricot", hex: "#FBCEB1" },
+                { name: "Atomic Tangerine", hex: "#FF9966" },
+                { name: "Bittersweet", hex: "#FE6F5E" },
+                { name: "Burnt Orange", hex: "#CC5500" },
+                { name: "Cadmium Orange", hex: "#ED872D" },
+                { name: "Carrot Orange", hex: "#ED9121" },
+                { name: "Coral", hex: "#FF7F50" },
+                { name: "Dark Orange", hex: "#FF8C00" },
+                { name: "Deep Carrot Orange", hex: "#E9692C" },
+                { name: "Deep Saffron", hex: "#FF9933" },
+                { name: "Gamboge Orange", hex: "#996600" },
+                { name: "Giants Orange", hex: "#FE5A1D" },
+                { name: "Heat Wave", hex: "#FF7A00" },
+                { name: "Mango Tango", hex: "#FF8243" },
+                { name: "Neon Carrot", hex: "#FFA343" },
+                { name: "Orange Peel", hex: "#FF9F00" },
+                { name: "Orange Red", hex: "#FF4500" },
+                { name: "Outrageous Orange", hex: "#FF6E4A" },
+                { name: "Papaya Whip", hex: "#FFEFD5" },
+                { name: "Peach", hex: "#FFE5B4" },
+                { name: "Peach Orange", hex: "#FFCC99" },
+                { name: "Persian Orange", hex: "#D99058" },
+                { name: "Portland Orange", hex: "#FF5A36" },
+                { name: "Princeton Orange", hex: "#F58025" },
+                { name: "Pumpkin", hex: "#FF7518" },
+                { name: "Sienna", hex: "#A0522D" },
+                { name: "Sunburnt Cyclops", hex: "#FF404C" },
+                { name: "Tango Pink", hex: "#E4717A" },
+                { name: "Terra Cotta", hex: "#E2725B" },
 
-  // Gray/Black/White variants (30)
-  { name: "Ash Gray", hex: "#B2BEB5" },
-  { name: "Battleship Gray", hex: "#848482" },
-  { name: "Black Coral", hex: "#54626F" },
-  { name: "Blue Gray", hex: "#6699CC" },
-  { name: "Cadet Gray", hex: "#91A3B0" },
-  { name: "Carbon Gray", hex: "#625D5D" },
-  { name: "Charcoal", hex: "#36454F" },
-  { name: "Cinereous", hex: "#98817B" },
-  { name: "Cool Gray", hex: "#8C92AC" },
-  { name: "Dark Liver", hex: "#534B4F" },
-  { name: "Davy's Gray", hex: "#555555" },
-  { name: "Eerie Black", hex: "#1B1B1B" },
-  { name: "Gainsboro", hex: "#DCDCDC" },
-  { name: "Gunmetal", hex: "#2A3439" },
-  { name: "Jet", hex: "#343434" },
-  { name: "Light Gray", hex: "#D3D3D3" },
-  { name: "Manatee", hex: "#979AAA" },
-  { name: "Medium Gray", hex: "#BEBEBE" },
-  { name: "Nickel", hex: "#727472" },
-  { name: "Onyx", hex: "#353839" },
-  { name: "Platinum", hex: "#E5E4E2" },
-  { name: "Quick Silver", hex: "#A6A6A6" },
-  { name: "Rhythm", hex: "#777696" },
-  { name: "Silver", hex: "#C0C0C0" },
-  { name: "Slate Gray", hex: "#708090" },
-  { name: "Smoke", hex: "#738276" },
-  { name: "Stormcloud", hex: "#4F666A" },
-  { name: "Taupe Gray", hex: "#8B8589" },
-  { name: "Timberwolf", hex: "#DBD7D2" },
-  { name: "White Smoke", hex: "#F5F5F5" },
-  { name: "Xanadu", hex: "#738678" }
-];
-        
-        // Function to find closest color name
-        function getClosestColorName(hexColor) {
-            if (!hexColor || !hexColor.startsWith('#') || hexColor.length !== 7) {
-                return "Custom";
-            }
-            
-            // Convert HEX to RGB
-            const r = parseInt(hexColor.substr(1, 2), 16);
-            const g = parseInt(hexColor.substr(3, 2), 16);
-            const b = parseInt(hexColor.substr(5, 2), 16);
-            
-            let closestColor = null;
-            let minDistance = Infinity;
-            
-            colorNames.forEach(color => {
-                // Convert reference color to RGB
-                const refR = parseInt(color.hex.substr(1, 2), 16);
-                const refG = parseInt(color.hex.substr(3, 2), 16);
-                const refB = parseInt(color.hex.substr(5, 2), 16);
-                
-                // Calculate color distance (Euclidean)
-                const distance = Math.sqrt(
-                    Math.pow(r - refR, 2) + 
-                    Math.pow(g - refG, 2) + 
-                    Math.pow(b - refB, 2)
-                );
-                
-                if (distance < minDistance) {
-                    minDistance = distance;
-                    closestColor = color.name;
+                // Yellow variants (50)
+                { name: "Lemon", hex: "#FFF700" },
+                { name: "Canary", hex: "#FFFF99" },
+                { name: "Gold", hex: "#FFD700" },
+                { name: "Saffron", hex: "#F4C430" },
+                { name: "Stil de Grain", hex: "#FADA5E" },
+                { name: "Sunflower", hex: "#FFDA03" },
+                { name: "Trombone", hex: "#D2B55B" },
+                { name: "Aureolin", hex: "#FDEE00" },
+                { name: "Banana", hex: "#FFE135" },
+                { name: "Blond", hex: "#FAF0BE" },
+                { name: "Buff", hex: "#F0DC82" },
+                { name: "Cadmium Yellow", hex: "#FFF600" },
+                { name: "Citrine", hex: "#E4D00A" },
+                { name: "Cream", hex: "#FFFDD0" },
+                { name: "Dark Goldenrod", hex: "#B8860B" },
+                { name: "Flax", hex: "#EEDC82" },
+                { name: "Gamboge", hex: "#E49B0F" },
+                { name: "Goldenrod", hex: "#DAA520" },
+                { name: "Icterine", hex: "#FCF75E" },
+                { name: "Jonquil", hex: "#F4CA16" },
+                { name: "Laser Lemon", hex: "#FFFF66" },
+                { name: "Lemon Chiffon", hex: "#FFFACD" },
+                { name: "Lemon Curry", hex: "#CCA01D" },
+                { name: "Lemon Glacier", hex: "#FDFF00" },
+                { name: "Lemon Lime", hex: "#E3FF00" },
+                { name: "Lemon Meringue", hex: "#F6EABE" },
+                { name: "Lemon Yellow", hex: "#FFF44F" },
+                { name: "Maize", hex: "#FBEC5D" },
+                { name: "Mikado Yellow", hex: "#FFC40C" },
+                { name: "Minion Yellow", hex: "#F5E050" },
+                { name: "Mustard", hex: "#FFDB58" },
+                { name: "Naples Yellow", hex: "#FADA5E" },
+                { name: "Navajo White", hex: "#FFDEAD" },
+                { name: "Old Gold", hex: "#CFB53B" },
+                { name: "Papaya Whip", hex: "#FFEFD5" },
+                { name: "Saffron", hex: "#F4C430" },
+                { name: "School Bus Yellow", hex: "#FFD800" },
+                { name: "Selective Yellow", hex: "#FFBA00" },
+                { name: "Straw", hex: "#E4D96F" },
+                { name: "Sunset", hex: "#FAD6A5" },
+                { name: "Supernova", hex: "#FFC901" },
+                { name: "Titanium Yellow", hex: "#EEE600" },
+                { name: "Unmellow Yellow", hex: "#FFFF66" },
+                { name: "Vanilla", hex: "#F3E5AB" },
+                { name: "Yellow Rose", hex: "#FFF000" },
+                { name: "Zinnwaldite", hex: "#EBC2AF" },
+                { name: "Golden Yellow", hex: "#FFDF00" },
+                { name: "Cyber Yellow", hex: "#FFD300" },
+                { name: "Safety Yellow", hex: "#EED202" },
+                { name: "Golden Poppy", hex: "#FCC200" },
+
+                // Green variants (60)
+                { name: "Emerald", hex: "#50C878" },
+                { name: "Jade", hex: "#00A86B" },
+                { name: "Malachite", hex: "#0BDA51" },
+                { name: "Smaragdine", hex: "#4FC978" },
+                { name: "Viridian", hex: "#40826D" },
+                { name: "Apple Green", hex: "#8DB600" },
+                { name: "Army Green", hex: "#4B5320" },
+                { name: "Artichoke", hex: "#8F9779" },
+                { name: "Asparagus", hex: "#87A96B" },
+                { name: "Avocado", hex: "#568203" },
+                { name: "Bright Green", hex: "#66FF00" },
+                { name: "British Racing Green", hex: "#004225" },
+                { name: "Brunswick Green", hex: "#1B4D3E" },
+                { name: "Cal Poly Green", hex: "#1E4D2B" },
+                { name: "Castleton Green", hex: "#00563F" },
+                { name: "Celadon", hex: "#ACE1AF" },
+                { name: "Chartreuse", hex: "#7FFF00" },
+                { name: "Dartmouth Green", hex: "#00703C" },
+                { name: "Dark Moss Green", hex: "#4A5D23" },
+                { name: "Dark Spring Green", hex: "#177245" },
+                { name: "Dollar Bill", hex: "#85BB65" },
+                { name: "Electric Green", hex: "#00FF00" },
+                { name: "Fern Green", hex: "#4F7942" },
+                { name: "Forest Green", hex: "#228B22" },
+                { name: "GO Green", hex: "#00AB66" },
+                { name: "Grass", hex: "#7AC488" },
+                { name: "Green Yellow", hex: "#ADFF2F" },
+                { name: "Harlequin", hex: "#3FFF00" },
+                { name: "Hunter Green", hex: "#355E3B" },
+                { name: "India Green", hex: "#138808" },
+                { name: "Islamic Green", hex: "#009000" },
+                { name: "Jungle Green", hex: "#29AB87" },
+                { name: "Kelly Green", hex: "#4CBB17" },
+                { name: "Lawn Green", hex: "#7CFC00" },
+                { name: "Light Green", hex: "#90EE90" },
+                { name: "Lime", hex: "#BFFF00" },
+                { name: "Lime Green", hex: "#32CD32" },
+                { name: "Mantis", hex: "#74C365" },
+                { name: "Mint", hex: "#3EB489" },
+                { name: "Moss Green", hex: "#8A9A5B" },
+                { name: "Myrtle", hex: "#21421E" },
+                { name: "Office Green", hex: "#008000" },
+                { name: "Olivine", hex: "#9AB973" },
+                { name: "Paris Green", hex: "#50C878" },
+                { name: "Pear", hex: "#D1E231" },
+                { name: "Pistachio", hex: "#93C572" },
+                { name: "Russian Green", hex: "#679267" },
+                { name: "Sap Green", hex: "#507D2A" },
+                { name: "Sea Green", hex: "#2E8B57" },
+                { name: "Spring Bud", hex: "#A7FC00" },
+                { name: "Spring Green", hex: "#00FF7F" },
+                { name: "Tea Green", hex: "#D0F0C0" },
+                { name: "Turtle Green", hex: "#8A9A5B" },
+                { name: "Verdigris", hex: "#43B3AE" },
+                { name: "Yellow Green", hex: "#9ACD32" },
+                { name: "Amazon", hex: "#3B7A57" },
+                { name: "Bottle Green", hex: "#006A4E" },
+                { name: "Bud Green", hex: "#7BB661" },
+                { name: "Camouflage Green", hex: "#78866B" },
+                { name: "Celtic Green", hex: "#1F6B49" },
+
+                // Blue variants (70)
+                { name: "Azure", hex: "#007FFF" },
+                { name: "Cerulean", hex: "#007BA7" },
+                { name: "Cobalt", hex: "#0047AB" },
+                { name: "Egyptian Blue", hex: "#1034A6" },
+                { name: "Sapphire", hex: "#0F52BA" },
+                { name: "Ultramarine", hex: "#120A8F" },
+                { name: "Air Force Blue", hex: "#5D8AA8" },
+                { name: "Alice Blue", hex: "#F0F8FF" },
+                { name: "Aqua", hex: "#00FFFF" },
+                { name: "Baby Blue", hex: "#89CFF0" },
+                { name: "Blue Gray", hex: "#6699CC" },
+                { name: "Blue Green", hex: "#0D98BA" },
+                { name: "Bright Blue", hex: "#0096FF" },
+                { name: "Cadet Blue", hex: "#5F9EA0" },
+                { name: "Carolina Blue", hex: "#56A0D3" },
+                { name: "Celeste", hex: "#B2FFFF" },
+                { name: "Cornflower Blue", hex: "#6495ED" },
+                { name: "Cyan", hex: "#00FFFF" },
+                { name: "Dark Blue", hex: "#00008B" },
+                { name: "Deep Sky Blue", hex: "#00BFFF" },
+                { name: "Denim", hex: "#1560BD" },
+                { name: "Dodger Blue", hex: "#1E90FF" },
+                { name: "Duke Blue", hex: "#00009C" },
+                { name: "Electric Blue", hex: "#7DF9FF" },
+                { name: "Federal Blue", hex: "#002366" },
+                { name: "Glaucous", hex: "#6082B6" },
+                { name: "Iceberg", hex: "#71A6D2" },
+                { name: "Indigo", hex: "#4B0082" },
+                { name: "International Klein Blue", hex: "#002FA7" },
+                { name: "Iris", hex: "#5A4FCF" },
+                { name: "Light Blue", hex: "#ADD8E6" },
+                { name: "Majorelle Blue", hex: "#6050DC" },
+                { name: "Maya Blue", hex: "#73C2FB" },
+                { name: "Medium Blue", hex: "#0000CD" },
+                { name: "Midnight Blue", hex: "#191970" },
+                { name: "Navy Blue", hex: "#000080" },
+                { name: "Neon Blue", hex: "#4666FF" },
+                { name: "Oxford Blue", hex: "#002147" },
+                { name: "Pacific Blue", hex: "#1CA9C9" },
+                { name: "Palatinate Blue", hex: "#273BE2" },
+                { name: "Periwinkle", hex: "#CCCCFF" },
+                { name: "Persian Blue", hex: "#1C39BB" },
+                { name: "Phthalo Blue", hex: "#000F89" },
+                { name: "Powder Blue", hex: "#B0E0E6" },
+                { name: "Prussian Blue", hex: "#003153" },
+                { name: "Robin Egg Blue", hex: "#00CCCC" },
+                { name: "Royal Blue", hex: "#4169E1" },
+                { name: "Sapphire Blue", hex: "#0067A5" },
+                { name: "Sky Blue", hex: "#87CEEB" },
+                { name: "Steel Blue", hex: "#4682B4" },
+                { name: "Teal", hex: "#008080" },
+                { name: "True Blue", hex: "#0073CF" },
+                { name: "Tufts Blue", hex: "#3E8EDE" },
+                { name: "Turquoise", hex: "#40E0D0" },
+                { name: "UCLA Blue", hex: "#536895" },
+                { name: "Ultramarine", hex: "#3F00FF" },
+                { name: "Violet Blue", hex: "#324AB2" },
+                { name: "Yale Blue", hex: "#00356B" },
+                { name: "Zaffre", hex: "#0014A8" },
+                { name: "Aero", hex: "#7CB9E8" },
+                { name: "Aquamarine", hex: "#7FFFD4" },
+                { name: "Arctic Blue", hex: "#82CAFF" },
+                { name: "Bleu de France", hex: "#318CE7" },
+                { name: "Blue Bell", hex: "#A2A2D0" },
+                { name: "Blue Jeans", hex: "#5DADEC" },
+                { name: "Blue Sapphire", hex: "#126180" },
+                { name: "Blue Yonder", hex: "#5072A7" },
+                { name: "Brandeis Blue", hex: "#0070FF" },
+                { name: "Capri", hex: "#00BFFF" },
+                { name: "Celtic Blue", hex: "#246BCE" },
+                { name: "Chefchaouen Blue", hex: "#468FE7" },
+                { name: "Cyan Azure", hex: "#4E82B4" },
+                { name: "Dark Cyan", hex: "#008B8B" },
+
+                // Purple variants (50)
+                { name: "Amethyst", hex: "#9966CC" },
+                { name: "Byzantium", hex: "#702963" },
+                { name: "Electric Purple", hex: "#BF00FF" },
+                { name: "Heliotrope", hex: "#DF73FF" },
+                { name: "Lavender", hex: "#E6E6FA" },
+                { name: "Lilac", hex: "#C8A2C8" },
+                { name: "Magenta", hex: "#FF00FF" },
+                { name: "Mauve", hex: "#E0B0FF" },
+                { name: "Orchid", hex: "#DA70D6" },
+                { name: "Purple Heart", hex: "#69359C" },
+                { name: "Tyrian Purple", hex: "#66023C" },
+                { name: "Veronica", hex: "#A020F0" },
+                { name: "Violet", hex: "#8F00FF" },
+                { name: "African Violet", hex: "#B284BE" },
+                { name: "Blue Violet", hex: "#8A2BE2" },
+                { name: "Chinese Violet", hex: "#856088" },
+                { name: "Dark Orchid", hex: "#9932CC" },
+                { name: "Dark Violet", hex: "#9400D3" },
+                { name: "Electric Violet", hex: "#8F00FF" },
+                { name: "English Violet", hex: "#563C5C" },
+                { name: "Fandango", hex: "#B53389" },
+                { name: "French Mauve", hex: "#D473D4" },
+                { name: "Fuchsia", hex: "#FF00FF" },
+                { name: "Grape", hex: "#6F2DA8" },
+                { name: "Han Purple", hex: "#5218FA" },
+                { name: "Indigo", hex: "#4B0082" },
+                { name: "Japanese Violet", hex: "#5B3256" },
+                { name: "Lavender Blush", hex: "#FFF0F5" },
+                { name: "Lavender Gray", hex: "#C4C3D0" },
+                { name: "Lavender Indigo", hex: "#9457EB" },
+                { name: "Lavender Purple", hex: "#967BB6" },
+                { name: "Lavender Rose", hex: "#FBA0E3" },
+                { name: "Lilac Luster", hex: "#AE98AA" },
+                { name: "Mardi Gras", hex: "#880085" },
+                { name: "Medium Orchid", hex: "#BA55D3" },
+                { name: "Medium Purple", hex: "#9370DB" },
+                { name: "Medium Violet Red", hex: "#C71585" },
+                { name: "Mountbatten Pink", hex: "#997A8D" },
+                { name: "Mulberry", hex: "#C54B8C" },
+                { name: "Old Lavender", hex: "#796878" },
+                { name: "Opera Mauve", hex: "#B784A7" },
+                { name: "Palatinate Purple", hex: "#682860" },
+                { name: "Pansy Purple", hex: "#78184A" },
+                { name: "Pearl", hex: "#FDEEF4" },
+                { name: "Persian Indigo", hex: "#32127A" },
+                { name: "Phlox", hex: "#DF00FF" },
+                { name: "Plum", hex: "#8E4585" },
+                { name: "Pomp and Power", hex: "#86608E" },
+                { name: "Purple Mountain Majesty", hex: "#9678B6" },
+                { name: "Purple Navy", hex: "#4E5180" },
+                { name: "Purple Pizzazz", hex: "#FE4EDA" },
+                { name: "Purple Taupe", hex: "#50404D" },
+                { name: "Razzmic Berry", hex: "#8D4E85" },
+                { name: "Red Violet", hex: "#C71585" },
+                { name: "Royal Purple", hex: "#7851A9" },
+                { name: "Russian Violet", hex: "#32174D" },
+                { name: "Slate Blue", hex: "#6A5ACD" },
+                { name: "Thistle", hex: "#D8BFD8" },
+                { name: "Twilight Lavender", hex: "#8A496B" },
+                { name: "Violet Eggplant", hex: "#991199" },
+                { name: "Wisteria", hex: "#C9A0DC" },
+
+                // Brown variants (40)
+                { name: "Auburn", hex: "#A52A2A" },
+                { name: "Beaver", hex: "#9F8170" },
+                { name: "Bistre", hex: "#3D2B1F" },
+                { name: "Bole", hex: "#79443B" },
+                { name: "Bronze", hex: "#CD7F32" },
+                { name: "Buff", hex: "#F0DC82" },
+                { name: "Burgundy", hex: "#800020" },
+                { name: "Burnt Umber", hex: "#8A3324" },
+                { name: "Camel", hex: "#C19A6B" },
+                { name: "Chamoisee", hex: "#A0785A" },
+                { name: "Chestnut", hex: "#954535" },
+                { name: "Chocolate", hex: "#7B3F00" },
+                { name: "Cocoa Brown", hex: "#D2691E" },
+                { name: "Coffee", hex: "#6F4E37" },
+                { name: "Copper", hex: "#B87333" },
+                { name: "Cordovan", hex: "#893F45" },
+                { name: "Coyote Brown", hex: "#81613C" },
+                { name: "Dark Brown", hex: "#654321" },
+                { name: "Desert Sand", hex: "#EDC9AF" },
+                { name: "Earth Yellow", hex: "#E1A95F" },
+                { name: "Ecru", hex: "#C2B280" },
+                { name: "Fallow", hex: "#C19A6B" },
+                { name: "Fawn", hex: "#E5AA70" },
+                { name: "Feldgrau", hex: "#4D5D53" },
+                { name: "Gamboge", hex: "#E49B0F" },
+                { name: "Golden Brown", hex: "#996515" },
+                { name: "Khaki", hex: "#C3B091" },
+                { name: "Liver", hex: "#674C47" },
+                { name: "Mahogany", hex: "#C04000" },
+                { name: "Ochre", hex: "#CC7722" },
+                { name: "Raw Umber", hex: "#826644" },
+                { name: "Redwood", hex: "#A45A52" },
+                { name: "Russet", hex: "#80461B" },
+                { name: "Sand", hex: "#C2B280" },
+                { name: "Sandy Brown", hex: "#F4A460" },
+                { name: "Sepia", hex: "#704214" },
+                { name: "Sienna", hex: "#A0522D" },
+                { name: "Taupe", hex: "#483C32" },
+                { name: "Tuscan Red", hex: "#7C3030" },
+                { name: "Wheat", hex: "#F5DEB3" },
+                { name: "Windsor Tan", hex: "#A75502" },
+
+                // Gray/Black/White variants (30)
+                { name: "Ash Gray", hex: "#B2BEB5" },
+                { name: "Battleship Gray", hex: "#848482" },
+                { name: "Black Coral", hex: "#54626F" },
+                { name: "Blue Gray", hex: "#6699CC" },
+                { name: "Cadet Gray", hex: "#91A3B0" },
+                { name: "Carbon Gray", hex: "#625D5D" },
+                { name: "Charcoal", hex: "#36454F" },
+                { name: "Cinereous", hex: "#98817B" },
+                { name: "Cool Gray", hex: "#8C92AC" },
+                { name: "Dark Liver", hex: "#534B4F" },
+                { name: "Davy's Gray", hex: "#555555" },
+                { name: "Eerie Black", hex: "#1B1B1B" },
+                { name: "Gainsboro", hex: "#DCDCDC" },
+                { name: "Gunmetal", hex: "#2A3439" },
+                { name: "Jet", hex: "#343434" },
+                { name: "Light Gray", hex: "#D3D3D3" },
+                { name: "Manatee", hex: "#979AAA" },
+                { name: "Medium Gray", hex: "#BEBEBE" },
+                { name: "Nickel", hex: "#727472" },
+                { name: "Onyx", hex: "#353839" },
+                { name: "Platinum", hex: "#E5E4E2" },
+                { name: "Quick Silver", hex: "#A6A6A6" },
+                { name: "Rhythm", hex: "#777696" },
+                { name: "Silver", hex: "#C0C0C0" },
+                { name: "Slate Gray", hex: "#708090" },
+                { name: "Smoke", hex: "#738276" },
+                { name: "Stormcloud", hex: "#4F666A" },
+                { name: "Taupe Gray", hex: "#8B8589" },
+                { name: "Timberwolf", hex: "#DBD7D2" },
+                { name: "White Smoke", hex: "#F5F5F5" },
+                { name: "Xanadu", hex: "#738678" },
+            ];
+
+            // Function to find closest color name
+            function getClosestColorName(hexColor) {
+                if (
+                    !hexColor ||
+                    !hexColor.startsWith("#") ||
+                    hexColor.length !== 7
+                ) {
+                    return "Custom";
                 }
-            });
-            
-            return closestColor || "Custom";
-        }
-        
-        // Page navigation
-        function showPage(pageId) {
-            document.querySelectorAll('.page').forEach(page => {
-                page.classList.remove('active-page');
-            });
-            document.getElementById(pageId).classList.add('active-page');
-            
-            document.querySelectorAll('.nav-btn').forEach(btn => {
-                btn.classList.remove('active-btn');
-            });
-            
-            const activeBtn = document.querySelector(`button[onclick="showPage('${pageId}')"]`);
-            if (activeBtn) {
-                activeBtn.classList.add('active-btn');
-            }
-            
-            // Scroll to top when changing pages
-            window.scrollTo(0, 0);
-        }
-        
-        // Image upload functionality
-        const imageUpload = document.getElementById('imageUpload');
-        const previewContainer = document.getElementById('previewContainer');
-        const imagePreview = document.getElementById('imagePreview');
-        const generatedImage = document.getElementById('generatedImage');
-        const finalImage = document.getElementById('finalImage');
-        const dropArea = document.getElementById('dropArea');
-        const uploadBtn = document.getElementById('uploadBtn');
-        
-        uploadBtn.addEventListener('click', () => imageUpload.click());
-        
-        imageUpload.addEventListener('change', function(e) {
-            if (e.target.files.length) {
-                const file = e.target.files[0];
-                
-                // Validate file type
-                if (!file.type.match('image.*')) {
-                    alert('Please select an image file (JPEG, PNG, etc.)');
-                    return;
-                }
-                
-                // Validate file size (max 5MB)
-                if (file.size > 40 * 1024 * 1024) {
-                    alert('Image size should be less than 5MB');
-                    return;
-                }
-                
-                const reader = new FileReader();
-                reader.onload = function(event) {
-                    imagePreview.src = event.target.result;
-                    generatedImage.src = event.target.result;
-                    finalImage.src = event.target.result;
-                    
-                    // Set crossOrigin for color extraction
-                    imagePreview.crossOrigin = 'Anonymous';
-                    generatedImage.crossOrigin = 'Anonymous';
-                    finalImage.crossOrigin = 'Anonymous';
-                    
-                    previewContainer.classList.remove('hidden');
-                    
-                    // Reset palette preview if changing image
-                    document.getElementById('palettePreview').classList.add('hidden');
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-        
-        // Drag and drop functionality
-        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-            dropArea.addEventListener(eventName, preventDefaults, false);
-            document.body.addEventListener(eventName, preventDefaults, false);
-        });
-        
-        function preventDefaults(e) {
-            e.preventDefault();
-            e.stopPropagation();
-        }
-        
-        ['dragenter', 'dragover'].forEach(eventName => {
-            dropArea.addEventListener(eventName, highlight, false);
-        });
-        
-        ['dragleave', 'drop'].forEach(eventName => {
-            dropArea.addEventListener(eventName, unhighlight, false);
-        });
-        
-        function highlight() {
-            dropArea.classList.add('border-indigo-600', 'bg-indigo-50');
-        }
-        
-        function unhighlight() {
-            dropArea.classList.remove('border-indigo-600', 'bg-indigo-50');
-        }
-        
-        dropArea.addEventListener('drop', handleDrop, false);
-        
-        function handleDrop(e) {
-            const dt = e.dataTransfer;
-            const files = dt.files;
-            
-            if (files.length) {
-                // Trigger the file input change event
-                imageUpload.files = files;
-                const event = new Event('change');
-                imageUpload.dispatchEvent(event);
-            }
-        }
-        
-        // Generate palette functionality
-        const generatePaletteBtn = document.getElementById('generatePaletteBtn');
-        generatePaletteBtn.addEventListener('click', generatePalette);
-        
-function generatePalette() {
-    const colorCount = parseInt(document.getElementById('colorCount').value);
-    const img = document.getElementById('generatedImage');
-    const palettePreview = document.getElementById('palettePreview');
-    const loadingIndicator = document.getElementById('loadingIndicator');
-    const algorithmType = document.getElementById('algorithmType').value;
 
-    loadingIndicator.classList.remove('hidden');
-    generatePaletteBtn.disabled = true;
-    palettePreview.classList.add('hidden');
+                // Convert HEX to RGB
+                const r = parseInt(hexColor.substr(1, 2), 16);
+                const g = parseInt(hexColor.substr(3, 2), 16);
+                const b = parseInt(hexColor.substr(5, 2), 16);
 
-    if (!img.complete || img.naturalWidth === 0) {
-        alert('Please wait for the image to load completely');
-        loadingIndicator.classList.add('hidden');
-        generatePaletteBtn.disabled = false;
-        return;
-    }
+                let closestColor = null;
+                let minDistance = Infinity;
 
-    try {
-        let palette;
+                colorNames.forEach((color) => {
+                    // Convert reference color to RGB
+                    const refR = parseInt(color.hex.substr(1, 2), 16);
+                    const refG = parseInt(color.hex.substr(3, 2), 16);
+                    const refB = parseInt(color.hex.substr(5, 2), 16);
 
-        if (algorithmType === 'kmeans') {
-            palette = extractColorsWithKMeans(img, colorCount);
-        } else {
-            // Gunakan kmeans untuk algoritma lain
-            const colorThief = new ColorThief();
-            palette = colorThief.getPalette(img, colorCount);
-            palette = palette.map(c => rgbToHex(c[0], c[1], c[2]));
-        }
+                    // Calculate color distance (Euclidean)
+                    const distance = Math.sqrt(
+                        Math.pow(r - refR, 2) +
+                            Math.pow(g - refG, 2) +
+                            Math.pow(b - refB, 2),
+                    );
 
-        if (!palette || palette.length === 0) {
-            throw new Error('Could not extract colors from this image');
-        }
-
-        currentPalette = palette;
-
-        displayPalettePreview(currentPalette);
-        generateColorBars(currentPalette);
-        generateColorCodes(currentPalette);
-
-        palettePreview.classList.remove('hidden');
-    } catch (error) {
-        console.error('Error extracting colors:', error);
-        alert('Error: ' + error.message);
-    } finally {
-        loadingIndicator.classList.add('hidden');
-        generatePaletteBtn.disabled = false;
-    }
-}
-
-        // Generate color codes for page 4
-        function generateColorCodes(colors) {
-            const container = document.getElementById('colorCodesGrid');
-            container.innerHTML = '';
-            
-            colors.forEach(color => {
-                const colorName = getClosestColorName(color);
-                const rgb = hexToRgb(color);
-                const hsl = rgbToHsl(color);
-                
-                const colorBox = document.createElement('div');
-                colorBox.className = 'bg-white p-4 rounded-lg shadow-sm border border-gray-100';
-                
-                // Color name header
-                const nameHeader = document.createElement('h4');
-                nameHeader.className = 'text-lg font-semibold text-center mb-2';
-                nameHeader.textContent = colorName;
-                
-                // Color display
-                const colorDisplay = document.createElement('div');
-                colorDisplay.className = 'h-24 rounded-lg mb-3 relative color-box';
-                colorDisplay.style.backgroundColor = color;
-                
-                // Color code overlay
-                const colorCode = document.createElement('div');
-                colorCode.className = 'color-code text-xs text-center p-2 rounded-b absolute bottom-0 left-0 right-0';
-                colorCode.innerHTML = `<div class="font-bold">${color}</div>`;
-                
-                colorDisplay.appendChild(colorCode);
-                
-                // Color details
-                const detailsContainer = document.createElement('div');
-                detailsContainer.className = 'space-y-1';
-                
-                // HEX
-                const hexDetail = createColorDetail('HEX', color, color);
-                
-                // RGB
-                const rgbDetail = createColorDetail('RGB', rgb, rgb);
-                
-                // HSL
-                const hslDetail = createColorDetail('HSL', hsl, hsl);
-                
-                // Combine all elements
-                detailsContainer.appendChild(hexDetail);
-                detailsContainer.appendChild(rgbDetail);
-                detailsContainer.appendChild(hslDetail);
-                
-                colorBox.appendChild(nameHeader);
-                colorBox.appendChild(colorDisplay);
-                colorBox.appendChild(detailsContainer);
-                
-                container.appendChild(colorBox);
-            });
-        }
-
-// === FUNGSI HELPER ===
-function rgbToHex(r, g, b) {
-    return "#" + [r, g, b]
-        .map(x => {
-            const hex = x.toString(16);
-            return hex.length === 1 ? "0" + hex : hex;
-        })
-        .join("");
-}
-
-function displayPalettePreview(colors) {
-    const container = document.getElementById('paletteColorsContainer');
-    if (!container) return;
-
-    container.innerHTML = '';
-
-    colors.forEach(color => {
-        const colorBox = document.createElement('div');
-        colorBox.className = 'w-10 h-10 rounded-full shadow-md cursor-pointer';
-        colorBox.style.backgroundColor = color;
-        colorBox.title = color;
-        colorBox.onclick = () => copyToClipboard(color);
-        container.appendChild(colorBox);
-    });
-}
-
-// === FUNGSI K-MEANS CLUSTERING ===
-function extractColorsWithKMeans(img, k) {
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-
-    canvas.width = img.naturalWidth;
-    canvas.height = img.naturalHeight;
-    ctx.drawImage(img, 0, 0);
-
-    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-    const data = imageData.data;
-
-    const pixels = [];
-    for (let i = 0; i < data.length; i += 4) {
-        pixels.push([data[i], data[i + 1], data[i + 2]]);
-    }
-
-    const centroids = Array.from({ length: k }, () => pixels[Math.floor(Math.random() * pixels.length)]);
-
-    for (let iter = 0; iter < 10; iter++) {
-        const clusters = Array.from({ length: k }, () => []);
-
-        for (const pixel of pixels) {
-            let minDist = Infinity;
-            let closest = 0;
-            for (let i = 0; i < centroids.length; i++) {
-                const dist = Math.hypot(
-                    pixel[0] - centroids[i][0],
-                    pixel[1] - centroids[i][1],
-                    pixel[2] - centroids[i][2]
-                );
-                if (dist < minDist) {
-                    minDist = dist;
-                    closest = i;
-                }
-            }
-            clusters[closest].push(pixel);
-        }
-
-        for (let i = 0; i < k; i++) {
-            if (clusters[i].length === 0) continue;
-            const sum = [0, 0, 0];
-            for (const [r, g, b] of clusters[i]) {
-                sum[0] += r;
-                sum[1] += g;
-                sum[2] += b;
-            }
-            centroids[i] = sum.map(v => Math.round(v / clusters[i].length));
-        }
-    }
-
-    return centroids.map(([r, g, b]) => rgbToHex(r, g, b));
-}
-
-// === FUNGSI GENERATE PALETTE (MODIFIED) ===
-function generatePalette() {
-    const colorCount = parseInt(document.getElementById('colorCount').value);
-    const img = document.getElementById('generatedImage');
-    const palettePreview = document.getElementById('palettePreview');
-    const loadingIndicator = document.getElementById('loadingIndicator');
-    const algorithmType = document.getElementById('algorithmType').value;
-
-    loadingIndicator.classList.remove('hidden');
-    generatePaletteBtn.disabled = true;
-    palettePreview.classList.add('hidden');
-
-    if (!img.complete || img.naturalWidth === 0) {
-        alert('Please wait for the image to load completely');
-        loadingIndicator.classList.add('hidden');
-        generatePaletteBtn.disabled = false;
-        return;
-    }
-
-    try {
-        let palette;
-
-        if (algorithmType === 'kmeans') {
-            palette = extractColorsWithKMeans(img, colorCount);
-        } else {
-            const colorThief = new ColorThief();
-            const rawPalette = colorThief.getPalette(img, colorCount);
-            palette = rawPalette.map(c => rgbToHex(c[0], c[1], c[2]));
-        }
-
-        if (!palette || palette.length === 0) {
-            throw new Error('Could not extract colors from this image');
-        }
-
-        currentPalette = palette;
-        displayPalettePreview(currentPalette);
-        generateColorBars(currentPalette);
-        generateColorCodes(currentPalette);
-        palettePreview.classList.remove('hidden');
-    } catch (error) {
-        console.error('Error extracting colors:', error);
-        alert('Error: ' + error.message);
-    } finally {
-        loadingIndicator.classList.add('hidden');
-        generatePaletteBtn.disabled = false;
-    }
-}
-
-        // Helper function to create color detail row
-        function createColorDetail(label, value, copyValue) {
-            const container = document.createElement('div');
-            container.className = 'flex justify-between items-center text-sm';
-            
-            const labelSpan = document.createElement('span');
-            labelSpan.className = 'font-medium text-gray-600';
-            labelSpan.textContent = label + ':';
-            
-            const valueSpan = document.createElement('span');
-            valueSpan.className = 'font-mono cursor-pointer hover:text-indigo-600';
-            valueSpan.textContent = value;
-            valueSpan.onclick = () => {
-                copyToClipboard(copyValue);
-                showCopyNotification();
-            };
-            
-            container.appendChild(labelSpan);
-            container.appendChild(valueSpan);
-            
-            return container;
-        }
-
-        // Helper function: HEX to RGB string
-        function hexToRgb(hex) {
-            // Remove # if present
-            hex = hex.replace('#', '');
-            
-            // Parse r, g, b values
-            const r = parseInt(hex.substring(0, 2), 16);
-            const g = parseInt(hex.substring(2, 4), 16);
-            const b = parseInt(hex.substring(4, 6), 16);
-            
-            return `rgb(${r}, ${g}, ${b})`;
-        }
-
-        // Helper function: HEX to HSL string
-        function rgbToHsl(hex) {
-            // Convert HEX to RGB first
-            hex = hex.replace('#', '');
-            let r = parseInt(hex.substring(0, 2), 16) / 255;
-            let g = parseInt(hex.substring(2, 4), 16) / 255;
-            let b = parseInt(hex.substring(4, 6), 16) / 255;
-
-            let max = Math.max(r, g, b);
-            let min = Math.min(r, g, b);
-            let h, s, l = (max + min) / 2;
-
-            if (max === min) {
-                h = s = 0; // achromatic
-            } else {
-                let d = max - min;
-                s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-                switch (max) {
-                    case r: h = (g - b) / d + (g < b ? 6 : 0); break;
-                    case g: h = (b - r) / d + 2; break;
-                    case b: h = (r - g) / d + 4; break;
-                }
-                h /= 6;
-            }
-            
-            h = Math.round(h * 360);
-            s = Math.round(s * 100);
-            l = Math.round(l * 100);
-            
-            return `hsl(${h}, ${s}%, ${l}%)`;
-        }
-
-        // Copy to clipboard functionality
-        function copyToClipboard(text) {
-            navigator.clipboard.writeText(text).then(function() {
-                showCopyNotification();
-            }, function(err) {
-                console.error('Could not copy text: ', err);
-                // Fallback for older browsers
-                const textarea = document.createElement('textarea');
-                textarea.value = text;
-                document.body.appendChild(textarea);
-                textarea.select();
-                try {
-                    document.execCommand('copy');
-                    showCopyNotification();
-                } catch (err) {
-                    console.error('Fallback copy failed:', err);
-                }
-                document.body.removeChild(textarea);
-            });
-        }
-
-        function showCopyNotification() {
-            const notification = document.getElementById('copyNotification');
-            notification.classList.add('show');
-            setTimeout(() => notification.classList.remove('show'), 2000);
-        }
-
-        // Save palette to history
-        function savePalette(colors, imageSrc) {
-            const palette = {
-                id: Date.now(),
-                colors: colors,
-                image: imageSrc,
-                date: new Date().toLocaleString(),
-                name: `Palette ${savedPalettes.length + 1}`
-            };
-            
-            savedPalettes.unshift(palette); // Add to beginning of array
-            updateSavedPalettesDisplay();
-            
-            // Store in localStorage
-            localStorage.setItem('colorPalettes', JSON.stringify(savedPalettes));
-        }
-                
-function generateColorBars(colors) {
-    const container = document.getElementById('colorBarsContainer');
-    if (!container) return;
-
-    container.innerHTML = '';
-
-    colors.forEach(color => {
-        const colorName = getClosestColorName(color);
-
-        const barContainer = document.createElement('div');
-        barContainer.className = 'flex items-center mb-4 p-3 bg-gray-50 rounded-lg';
-
-        // Info warna (nama & kode)
-        const info = document.createElement('div');
-        info.className = 'w-32 mr-4';
-
-        const name = document.createElement('div');
-        name.className = 'text-sm font-semibold text-gray-800';
-        name.textContent = colorName;
-
-        const hex = document.createElement('div');
-        hex.className = 'text-xs text-gray-500 mb-1';
-        hex.textContent = color;
-
-        const copyBtn = document.createElement('button');
-        copyBtn.className = 'text-xs text-indigo-600 hover:text-indigo-800';
-        copyBtn.textContent = 'Copy';
-        copyBtn.onclick = () => {
-            copyToClipboard(color);
-            showCopyNotification();
-        };
-
-        info.appendChild(name);
-        info.appendChild(hex);
-        info.appendChild(copyBtn);
-
-        // Bar warna
-        const bar = document.createElement('div');
-        bar.className = 'flex-1 h-10 rounded-lg shadow-inner relative overflow-hidden';
-        bar.style.backgroundColor = color;
-
-        barContainer.appendChild(info);
-        barContainer.appendChild(bar);
-        container.appendChild(barContainer);
-    });
-}
-
-        // View saved palette details
-        function viewSavedPalette(paletteId) {
-            const palette = savedPalettes.find(p => p.id === paletteId);
-            if (!palette) return;
-            
-            // Set the current palette
-            currentPalette = palette.colors;
-            finalImage.src = palette.image;
-            
-            // Generate displays
-            generateColorBars(currentPalette);
-            generateColorCodes(currentPalette);
-            
-            // Go to the color codes page
-            showPage('page4');
-        }
-
-        // Download palette as image (PNG or JPG)
-function downloadPalette(format = 'png') {
-    if (currentPalette.length === 0) {
-        alert('No palette to download');
-        return;
-    }
-
-    const img = document.getElementById('finalImage');
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-    
-    // Set canvas dimensions (image width, image height + palette section)
-    const paletteHeight = 200; // Space for color palette and info
-    canvas.width = img.naturalWidth;
-    canvas.height = img.naturalHeight + paletteHeight;
-    
-    // Draw original image
-    ctx.drawImage(img, 0, 0, canvas.width, img.naturalHeight);
-    
-    // Add title
-    ctx.fillStyle = '#333';
-    ctx.font = 'bold 24px Arial';
-    ctx.textAlign = 'center';
-    ctx.fillText('Extracted Color Palette', canvas.width / 2, img.naturalHeight + 40);
-    
-    // Draw color swatches with info
-    const swatchSize = 80;
-    const swatchMargin = 20;
-    const startX = (canvas.width - (currentPalette.length * (swatchSize + swatchMargin))) / 2;
-    
-    currentPalette.forEach((color, index) => {
-        const x = startX + index * (swatchSize + swatchMargin);
-        const y = img.naturalHeight + 60;
-        
-        // Draw color swatch
-        ctx.fillStyle = color;
-        ctx.fillRect(x, y, swatchSize, swatchSize);
-        
-        // Draw border
-        ctx.strokeStyle = '#ddd';
-        ctx.lineWidth = 2;
-        ctx.strokeRect(x, y, swatchSize, swatchSize);
-        
-        // Add color name and code
-        ctx.fillStyle = '#000';
-        ctx.font = '12px Arial';
-        ctx.textAlign = 'center';
-        
-        const colorName = getClosestColorName(color);
-        const rgb = hexToRgb(color);
-        const hsl = rgbToHsl(color);
-        
-        // Wrap long color names
-        const maxChars = 10;
-        const wrappedName = colorName.length > maxChars 
-            ? colorName.substring(0, maxChars) + '...' 
-            : colorName;
-        
-        // Draw text info below swatch
-        ctx.fillText(wrappedName, x + swatchSize/2, y + swatchSize + 15);
-        ctx.fillText(color, x + swatchSize/2, y + swatchSize + 30);
-        ctx.fillText(rgb, x + swatchSize/2, y + swatchSize + 45);
-        ctx.fillText(hsl, x + swatchSize/2, y + swatchSize + 60);
-    });
-    
-    // Convert to blob and download
-    canvas.toBlob(blob => {
-        const link = document.createElement('a');
-        link.href = URL.createObjectURL(blob);
-        link.download = `color-palette.${format}`;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    }, `image/${format}`, 0.9);
-}
-
-// Separate functions for PNG and JPG downloads
-function downloadAsPNG() {
-    downloadPalette('png');
-}
-
-function downloadAsJPG() {
-    downloadPalette('jpeg');
-}
-// Load sample palette data (in a real app, this would come from a database)
-        window.addEventListener('load', function() {
-            // Simulate loading saved palettes
-            setTimeout(() => {
-                const container = document.getElementById('savedPalettesContainer');
-                
-                // Clear the example palette
-                container.innerHTML = '';
-                
-                // Add sample palettes
-                for (let i = 0; i < 6; i++) {
-                    const paletteCard = document.createElement('div');
-                    paletteCard.className = 'bg-white rounded-xl shadow-md overflow-hidden';
-                    
-                    const colors = [];
-                    for (let j = 0; j < 5; j++) {
-                        colors.push(getRandomColor());
+                    if (distance < minDistance) {
+                        minDistance = distance;
+                        closestColor = color.name;
                     }
-                    
-                    const imageContainer = document.createElement('div');
-                    imageContainer.className = 'h-48 relative';
-                    
-                    const img = document.createElement('img');
-                    img.src = `https://placehold.co/600x400?text=Palette+${i+1}`;
-                    img.alt = `Sample color palette ${i+1}`;
-                    img.className = 'w-full h-full object-cover';
-                    
-                    const colorBar = document.createElement('div');
-                    colorBar.className = 'absolute bottom-0 left-0 right-0 h-12 flex';
-                    
-                    colors.forEach(color => {
-                        const colorDiv = document.createElement('div');
-                        colorDiv.className = 'w-1/5';
-                        colorDiv.style.backgroundColor = color;
-                        colorBar.appendChild(colorDiv);
-                    });
-                    
-                    imageContainer.appendChild(img);
-                    imageContainer.appendChild(colorBar);
-                    
-                    const cardBody = document.createElement('div');
-                    cardBody.className = 'p-4';
-                    
-                    const title = document.createElement('h3');
-                    title.className = 'text-lg font-medium text-gray-800 mb-2';
-                    title.textContent = `Generated Palette ${i+1}`;
-                    
-                    const footer = document.createElement('div');
-                    footer.className = 'flex justify-between items-center';
-                    
-                    const colorCount = document.createElement('span');
-                    colorCount.className = 'text-gray-500 text-sm';
-                    colorCount.textContent = '5 colors';
-                    
-                    const viewBtn = document.createElement('button');
-                    viewBtn.className = 'text-indigo-600 text-sm font-medium';
-                    viewBtn.textContent = 'View Details';
-                    
-                    footer.appendChild(colorCount);
-                    footer.appendChild(viewBtn);
-                    
-                    cardBody.appendChild(title);
-                    cardBody.appendChild(footer);
-                    
-                    paletteCard.appendChild(imageContainer);
-                    paletteCard.appendChild(cardBody);
-                    
-                    container.appendChild(paletteCard);
+                });
+
+                return closestColor || "Custom";
+            }
+
+            // Page navigation
+            function showPage(pageId) {
+                document.querySelectorAll(".page").forEach((page) => {
+                    page.classList.remove("active-page");
+                });
+                document.getElementById(pageId).classList.add("active-page");
+
+                document.querySelectorAll(".nav-btn").forEach((btn) => {
+                    btn.classList.remove("active-btn");
+                });
+
+                const activeBtn = document.querySelector(
+                    `button[onclick="showPage('${pageId}')"]`,
+                );
+                if (activeBtn) {
+                    activeBtn.classList.add("active-btn");
                 }
-            }, 1000);
-        });
 
-        window.addEventListener('load', () => {
-    const page1 = document.getElementById('page1');
-    const description = document.getElementById('paletteDescription');
+                // Scroll to top when changing pages
+                window.scrollTo(0, 0);
+            }
 
-    if (page1.classList.contains('active-page')) {
-      setTimeout(() => {
-        description.classList.remove('opacity-0');
-        description.scrollIntoView({ behavior: 'smooth' });
+            // Image upload functionality
+            const imageUpload = document.getElementById("imageUpload");
+            const previewContainer =
+                document.getElementById("previewContainer");
+            const imagePreview = document.getElementById("imagePreview");
+            const generatedImage = document.getElementById("generatedImage");
+            const finalImage = document.getElementById("finalImage");
+            const dropArea = document.getElementById("dropArea");
+            const uploadBtn = document.getElementById("uploadBtn");
 
-        const text = "A color palette is a collection of colors used in design to maintain consistency and evoke emotions. By analyzing images, you can extract dominant tones and use them in UI, branding, and digital art. Our tool helps you quickly identify harmonious combinations that are naturally pleasing to the eye.";
-        const typeTarget = document.getElementById('typewriter');
-        let i = 0;
+            uploadBtn.addEventListener("click", () => imageUpload.click());
 
-        const typeInterval = setInterval(() => {
-          typeTarget.textContent += text.charAt(i);
-          i++;
-          if (i >= text.length) clearInterval(typeInterval);
-        }, 25); // kecepatan ketik
-      }, 3000); // delay 5 detik
-    }
-  });
-</script>
-</body>
+            imageUpload.addEventListener("change", function (e) {
+                if (e.target.files.length) {
+                    const file = e.target.files[0];
+
+                    // Validate file type
+                    if (!file.type.match("image.*")) {
+                        alert("Please select an image file (JPEG, PNG, etc.)");
+                        return;
+                    }
+
+                    // Validate file size (max 5MB)
+                    if (file.size > 40 * 1024 * 1024) {
+                        alert("Image size should be less than 5MB");
+                        return;
+                    }
+
+                    const reader = new FileReader();
+                    reader.onload = function (event) {
+                        imagePreview.src = event.target.result;
+                        generatedImage.src = event.target.result;
+                        finalImage.src = event.target.result;
+
+                        // Set crossOrigin for color extraction
+                        imagePreview.crossOrigin = "Anonymous";
+                        generatedImage.crossOrigin = "Anonymous";
+                        finalImage.crossOrigin = "Anonymous";
+
+                        previewContainer.classList.remove("hidden");
+
+                        // Reset palette preview if changing image
+                        document
+                            .getElementById("palettePreview")
+                            .classList.add("hidden");
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            // Drag and drop functionality
+            ["dragenter", "dragover", "dragleave", "drop"].forEach(
+                (eventName) => {
+                    dropArea.addEventListener(
+                        eventName,
+                        preventDefaults,
+                        false,
+                    );
+                    document.body.addEventListener(
+                        eventName,
+                        preventDefaults,
+                        false,
+                    );
+                },
+            );
+
+            function preventDefaults(e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+
+            ["dragenter", "dragover"].forEach((eventName) => {
+                dropArea.addEventListener(eventName, highlight, false);
+            });
+
+            ["dragleave", "drop"].forEach((eventName) => {
+                dropArea.addEventListener(eventName, unhighlight, false);
+            });
+
+            function highlight() {
+                dropArea.classList.add("border-indigo-600", "bg-indigo-50");
+            }
+
+            function unhighlight() {
+                dropArea.classList.remove("border-indigo-600", "bg-indigo-50");
+            }
+
+            dropArea.addEventListener("drop", handleDrop, false);
+
+            function handleDrop(e) {
+                const dt = e.dataTransfer;
+                const files = dt.files;
+
+                if (files.length) {
+                    // Trigger the file input change event
+                    imageUpload.files = files;
+                    const event = new Event("change");
+                    imageUpload.dispatchEvent(event);
+                }
+            }
+
+            // Generate palette functionality
+            const generatePaletteBtn =
+                document.getElementById("generatePaletteBtn");
+            generatePaletteBtn.addEventListener("click", generatePalette);
+
+            function generatePalette() {
+                const colorCount = parseInt(
+                    document.getElementById("colorCount").value,
+                );
+                const img = document.getElementById("generatedImage");
+                const palettePreview =
+                    document.getElementById("palettePreview");
+                const loadingIndicator =
+                    document.getElementById("loadingIndicator");
+                const algorithmType =
+                    document.getElementById("algorithmType").value;
+
+                loadingIndicator.classList.remove("hidden");
+                generatePaletteBtn.disabled = true;
+                palettePreview.classList.add("hidden");
+
+                if (!img.complete || img.naturalWidth === 0) {
+                    alert("Please wait for the image to load completely");
+                    loadingIndicator.classList.add("hidden");
+                    generatePaletteBtn.disabled = false;
+                    return;
+                }
+
+                try {
+                    let palette;
+
+                    if (algorithmType === "kmeans") {
+                        palette = extractColorsWithKMeans(img, colorCount);
+                    } else {
+                        // Gunakan kmeans untuk algoritma lain
+                        const colorThief = new ColorThief();
+                        palette = colorThief.getPalette(img, colorCount);
+                        palette = palette.map((c) =>
+                            rgbToHex(c[0], c[1], c[2]),
+                        );
+                    }
+
+                    if (!palette || palette.length === 0) {
+                        throw new Error(
+                            "Could not extract colors from this image",
+                        );
+                    }
+
+                    currentPalette = palette;
+
+                    displayPalettePreview(currentPalette);
+                    generateColorBars(currentPalette);
+                    generateColorCodes(currentPalette);
+
+                    palettePreview.classList.remove("hidden");
+                } catch (error) {
+                    console.error("Error extracting colors:", error);
+                    alert("Error: " + error.message);
+                } finally {
+                    loadingIndicator.classList.add("hidden");
+                    generatePaletteBtn.disabled = false;
+                }
+            }
+
+            // Generate color codes for page 4
+            function generateColorCodes(colors) {
+                const container = document.getElementById("colorCodesGrid");
+                container.innerHTML = "";
+
+                colors.forEach((color) => {
+                    const colorName = getClosestColorName(color);
+                    const rgb = hexToRgb(color);
+                    const hsl = rgbToHsl(color);
+
+                    const colorBox = document.createElement("div");
+                    colorBox.className =
+                        "bg-white p-4 rounded-lg shadow-sm border border-gray-100";
+
+                    // Color name header
+                    const nameHeader = document.createElement("h4");
+                    nameHeader.className =
+                        "text-lg font-semibold text-center mb-2";
+                    nameHeader.textContent = colorName;
+
+                    // Color display
+                    const colorDisplay = document.createElement("div");
+                    colorDisplay.className =
+                        "h-24 rounded-lg mb-3 relative color-box";
+                    colorDisplay.style.backgroundColor = color;
+
+                    // Color code overlay
+                    const colorCode = document.createElement("div");
+                    colorCode.className =
+                        "color-code text-xs text-center p-2 rounded-b absolute bottom-0 left-0 right-0";
+                    colorCode.innerHTML = `<div class="font-bold">${color}</div>`;
+
+                    colorDisplay.appendChild(colorCode);
+
+                    // Color details
+                    const detailsContainer = document.createElement("div");
+                    detailsContainer.className = "space-y-1";
+
+                    // HEX
+                    const hexDetail = createColorDetail("HEX", color, color);
+
+                    // RGB
+                    const rgbDetail = createColorDetail("RGB", rgb, rgb);
+
+                    // HSL
+                    const hslDetail = createColorDetail("HSL", hsl, hsl);
+
+                    // Combine all elements
+                    detailsContainer.appendChild(hexDetail);
+                    detailsContainer.appendChild(rgbDetail);
+                    detailsContainer.appendChild(hslDetail);
+
+                    colorBox.appendChild(nameHeader);
+                    colorBox.appendChild(colorDisplay);
+                    colorBox.appendChild(detailsContainer);
+
+                    container.appendChild(colorBox);
+                });
+            }
+
+            // === FUNGSI HELPER ===
+            function rgbToHex(r, g, b) {
+                return (
+                    "#" +
+                    [r, g, b]
+                        .map((x) => {
+                            const hex = x.toString(16);
+                            return hex.length === 1 ? "0" + hex : hex;
+                        })
+                        .join("")
+                );
+            }
+
+            function displayPalettePreview(colors) {
+                const container = document.getElementById(
+                    "paletteColorsContainer",
+                );
+                if (!container) return;
+
+                container.innerHTML = "";
+
+                colors.forEach((color) => {
+                    const colorBox = document.createElement("div");
+                    colorBox.className =
+                        "w-10 h-10 rounded-full shadow-md cursor-pointer";
+                    colorBox.style.backgroundColor = color;
+                    colorBox.title = color;
+                    colorBox.onclick = () => copyToClipboard(color);
+                    container.appendChild(colorBox);
+                });
+            }
+
+            // === FUNGSI K-MEANS CLUSTERING ===
+            function extractColorsWithKMeans(img, k) {
+                // INPUT
+                const canvas = document.createElement("canvas");
+                const ctx = canvas.getContext("2d");
+
+                canvas.width = img.naturalWidth;
+                canvas.height = img.naturalHeight;
+                ctx.drawImage(img, 0, 0);
+
+                const imageData = ctx.getImageData(
+                    0,
+                    0,
+                    canvas.width,
+                    canvas.height,
+                );
+                const data = imageData.data;
+
+                // PROCESS
+                const pixels = [];
+                for (let i = 0; i < data.length; i += 4) {
+                    pixels.push([data[i], data[i + 1], data[i + 2]]);
+                }
+
+                const centroids = Array.from(
+                    { length: k },
+                    () => pixels[Math.floor(Math.random() * pixels.length)],
+                );
+
+                for (let iter = 0; iter < 10; iter++) {
+                    const clusters = Array.from({ length: k }, () => []);
+
+                    for (const pixel of pixels) {
+                        let minDist = Infinity;
+                        let closest = 0;
+                        for (let i = 0; i < centroids.length; i++) {
+                            const dist = Math.hypot(
+                                pixel[0] - centroids[i][0],
+                                pixel[1] - centroids[i][1],
+                                pixel[2] - centroids[i][2],
+                            );
+                            if (dist < minDist) {
+                                minDist = dist;
+                                closest = i;
+                            }
+                        }
+                        clusters[closest].push(pixel);
+                    }
+
+                    for (let i = 0; i < k; i++) {
+                        if (clusters[i].length === 0) continue;
+                        const sum = [0, 0, 0];
+                        for (const [r, g, b] of clusters[i]) {
+                            sum[0] += r;
+                            sum[1] += g;
+                            sum[2] += b;
+                        }
+                        centroids[i] = sum.map((v) =>
+                            Math.round(v / clusters[i].length),
+                        );
+                    }
+                }
+
+                // OUTPUT
+                return centroids.map(([r, g, b]) => rgbToHex(r, g, b));
+            }
+
+            // === FUNGSI GENERATE PALETTE (MODIFIED) ===
+            function generatePalette() {
+                const colorCount = parseInt(
+                    document.getElementById("colorCount").value,
+                );
+                const img = document.getElementById("generatedImage");
+                const palettePreview =
+                    document.getElementById("palettePreview");
+                const loadingIndicator =
+                    document.getElementById("loadingIndicator");
+                const algorithmType =
+                    document.getElementById("algorithmType").value;
+
+                loadingIndicator.classList.remove("hidden");
+                generatePaletteBtn.disabled = true;
+                palettePreview.classList.add("hidden");
+
+                if (!img.complete || img.naturalWidth === 0) {
+                    alert("Please wait for the image to load completely");
+                    loadingIndicator.classList.add("hidden");
+                    generatePaletteBtn.disabled = false;
+                    return;
+                }
+
+                try {
+                    let palette;
+
+                    if (algorithmType === "kmeans") {
+                        palette = extractColorsWithKMeans(img, colorCount);
+                    } else {
+                        const colorThief = new ColorThief();
+                        const rawPalette = colorThief.getPalette(
+                            img,
+                            colorCount,
+                        );
+                        palette = rawPalette.map((c) =>
+                            rgbToHex(c[0], c[1], c[2]),
+                        );
+                    }
+
+                    if (!palette || palette.length === 0) {
+                        throw new Error(
+                            "Could not extract colors from this image",
+                        );
+                    }
+
+                    currentPalette = palette;
+                    displayPalettePreview(currentPalette);
+                    generateColorBars(currentPalette);
+                    generateColorCodes(currentPalette);
+                    palettePreview.classList.remove("hidden");
+                } catch (error) {
+                    console.error("Error extracting colors:", error);
+                    alert("Error: " + error.message);
+                } finally {
+                    loadingIndicator.classList.add("hidden");
+                    generatePaletteBtn.disabled = false;
+                }
+            }
+
+            // Helper function to create color detail row
+            function createColorDetail(label, value, copyValue) {
+                const container = document.createElement("div");
+                container.className =
+                    "flex justify-between items-center text-sm";
+
+                const labelSpan = document.createElement("span");
+                labelSpan.className = "font-medium text-gray-600";
+                labelSpan.textContent = label + ":";
+
+                const valueSpan = document.createElement("span");
+                valueSpan.className =
+                    "font-mono cursor-pointer hover:text-indigo-600";
+                valueSpan.textContent = value;
+                valueSpan.onclick = () => {
+                    copyToClipboard(copyValue);
+                    showCopyNotification();
+                };
+
+                container.appendChild(labelSpan);
+                container.appendChild(valueSpan);
+
+                return container;
+            }
+
+            // Helper function: HEX to RGB string
+            function hexToRgb(hex) {
+                // Remove # if present
+                hex = hex.replace("#", "");
+
+                // Parse r, g, b values
+                const r = parseInt(hex.substring(0, 2), 16);
+                const g = parseInt(hex.substring(2, 4), 16);
+                const b = parseInt(hex.substring(4, 6), 16);
+
+                return `rgb(${r}, ${g}, ${b})`;
+            }
+
+            // Helper function: HEX to HSL string
+            function rgbToHsl(hex) {
+                // Convert HEX to RGB first
+                hex = hex.replace("#", "");
+                let r = parseInt(hex.substring(0, 2), 16) / 255;
+                let g = parseInt(hex.substring(2, 4), 16) / 255;
+                let b = parseInt(hex.substring(4, 6), 16) / 255;
+
+                let max = Math.max(r, g, b);
+                let min = Math.min(r, g, b);
+                let h,
+                    s,
+                    l = (max + min) / 2;
+
+                if (max === min) {
+                    h = s = 0; // achromatic
+                } else {
+                    let d = max - min;
+                    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+                    switch (max) {
+                        case r:
+                            h = (g - b) / d + (g < b ? 6 : 0);
+                            break;
+                        case g:
+                            h = (b - r) / d + 2;
+                            break;
+                        case b:
+                            h = (r - g) / d + 4;
+                            break;
+                    }
+                    h /= 6;
+                }
+
+                h = Math.round(h * 360);
+                s = Math.round(s * 100);
+                l = Math.round(l * 100);
+
+                return `hsl(${h}, ${s}%, ${l}%)`;
+            }
+
+            // Copy to clipboard functionality
+            function copyToClipboard(text) {
+                navigator.clipboard.writeText(text).then(
+                    function () {
+                        showCopyNotification();
+                    },
+                    function (err) {
+                        console.error("Could not copy text: ", err);
+                        // Fallback for older browsers
+                        const textarea = document.createElement("textarea");
+                        textarea.value = text;
+                        document.body.appendChild(textarea);
+                        textarea.select();
+                        try {
+                            document.execCommand("copy");
+                            showCopyNotification();
+                        } catch (err) {
+                            console.error("Fallback copy failed:", err);
+                        }
+                        document.body.removeChild(textarea);
+                    },
+                );
+            }
+
+            function showCopyNotification() {
+                const notification =
+                    document.getElementById("copyNotification");
+                notification.classList.add("show");
+                setTimeout(() => notification.classList.remove("show"), 2000);
+            }
+
+            // Save palette to history
+            function savePalette(colors, imageSrc) {
+                const palette = {
+                    id: Date.now(),
+                    colors: colors,
+                    image: imageSrc,
+                    date: new Date().toLocaleString(),
+                    name: `Palette ${savedPalettes.length + 1}`,
+                };
+
+                savedPalettes.unshift(palette); // Add to beginning of array
+                updateSavedPalettesDisplay();
+
+                // Store in localStorage
+                localStorage.setItem(
+                    "colorPalettes",
+                    JSON.stringify(savedPalettes),
+                );
+            }
+
+            function generateColorBars(colors) {
+                const container = document.getElementById("colorBarsContainer");
+                if (!container) return;
+
+                container.innerHTML = "";
+
+                colors.forEach((color) => {
+                    const colorName = getClosestColorName(color);
+
+                    const barContainer = document.createElement("div");
+                    barContainer.className =
+                        "flex items-center mb-4 p-3 bg-gray-50 rounded-lg";
+
+                    // Info warna (nama & kode)
+                    const info = document.createElement("div");
+                    info.className = "w-32 mr-4";
+
+                    const name = document.createElement("div");
+                    name.className = "text-sm font-semibold text-gray-800";
+                    name.textContent = colorName;
+
+                    const hex = document.createElement("div");
+                    hex.className = "text-xs text-gray-500 mb-1";
+                    hex.textContent = color;
+
+                    const copyBtn = document.createElement("button");
+                    copyBtn.className =
+                        "text-xs text-indigo-600 hover:text-indigo-800";
+                    copyBtn.textContent = "Copy";
+                    copyBtn.onclick = () => {
+                        copyToClipboard(color);
+                        showCopyNotification();
+                    };
+
+                    info.appendChild(name);
+                    info.appendChild(hex);
+                    info.appendChild(copyBtn);
+
+                    // Bar warna
+                    const bar = document.createElement("div");
+                    bar.className =
+                        "flex-1 h-10 rounded-lg shadow-inner relative overflow-hidden";
+                    bar.style.backgroundColor = color;
+
+                    barContainer.appendChild(info);
+                    barContainer.appendChild(bar);
+                    container.appendChild(barContainer);
+                });
+            }
+
+            // View saved palette details
+            function viewSavedPalette(paletteId) {
+                const palette = savedPalettes.find((p) => p.id === paletteId);
+                if (!palette) return;
+
+                // Set the current palette
+                currentPalette = palette.colors;
+                finalImage.src = palette.image;
+
+                // Generate displays
+                generateColorBars(currentPalette);
+                generateColorCodes(currentPalette);
+
+                // Go to the color codes page
+                showPage("page4");
+            }
+
+            // Download palette as image (PNG or JPG)
+            function downloadPalette(format = "png") {
+                if (currentPalette.length === 0) {
+                    alert("No palette to download");
+                    return;
+                }
+
+                const img = document.getElementById("finalImage");
+                const canvas = document.createElement("canvas");
+                const ctx = canvas.getContext("2d");
+
+                // Set canvas dimensions (image width, image height + palette section)
+                const paletteHeight = 200; // Space for color palette and info
+                canvas.width = img.naturalWidth;
+                canvas.height = img.naturalHeight + paletteHeight;
+
+                // Draw original image
+                ctx.drawImage(img, 0, 0, canvas.width, img.naturalHeight);
+
+                // Add title
+                ctx.fillStyle = "#333";
+                ctx.font = "bold 24px Arial";
+                ctx.textAlign = "center";
+                ctx.fillText(
+                    "Extracted Color Palette",
+                    canvas.width / 2,
+                    img.naturalHeight + 40,
+                );
+
+                // Draw color swatches with info
+                const swatchSize = 80;
+                const swatchMargin = 20;
+                const startX =
+                    (canvas.width -
+                        currentPalette.length * (swatchSize + swatchMargin)) /
+                    2;
+
+                currentPalette.forEach((color, index) => {
+                    const x = startX + index * (swatchSize + swatchMargin);
+                    const y = img.naturalHeight + 60;
+
+                    // Draw color swatch
+                    ctx.fillStyle = color;
+                    ctx.fillRect(x, y, swatchSize, swatchSize);
+
+                    // Draw border
+                    ctx.strokeStyle = "#ddd";
+                    ctx.lineWidth = 2;
+                    ctx.strokeRect(x, y, swatchSize, swatchSize);
+
+                    // Add color name and code
+                    ctx.fillStyle = "#000";
+                    ctx.font = "12px Arial";
+                    ctx.textAlign = "center";
+
+                    const colorName = getClosestColorName(color);
+                    const rgb = hexToRgb(color);
+                    const hsl = rgbToHsl(color);
+
+                    // Wrap long color names
+                    const maxChars = 10;
+                    const wrappedName =
+                        colorName.length > maxChars
+                            ? colorName.substring(0, maxChars) + "..."
+                            : colorName;
+
+                    // Draw text info below swatch
+                    ctx.fillText(
+                        wrappedName,
+                        x + swatchSize / 2,
+                        y + swatchSize + 15,
+                    );
+                    ctx.fillText(
+                        color,
+                        x + swatchSize / 2,
+                        y + swatchSize + 30,
+                    );
+                    ctx.fillText(rgb, x + swatchSize / 2, y + swatchSize + 45);
+                    ctx.fillText(hsl, x + swatchSize / 2, y + swatchSize + 60);
+                });
+
+                // Convert to blob and download
+                canvas.toBlob(
+                    (blob) => {
+                        const link = document.createElement("a");
+                        link.href = URL.createObjectURL(blob);
+                        link.download = `color-palette.${format}`;
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                    },
+                    `image/${format}`,
+                    0.9,
+                );
+            }
+
+            // Separate functions for PNG and JPG downloads
+            function downloadAsPNG() {
+                downloadPalette("png");
+            }
+
+            function downloadAsJPG() {
+                downloadPalette("jpeg");
+            }
+            // Load sample palette data (in a real app, this would come from a database)
+            window.addEventListener("load", function () {
+                // Simulate loading saved palettes
+                setTimeout(() => {
+                    const container = document.getElementById(
+                        "savedPalettesContainer",
+                    );
+
+                    // Clear the example palette
+                    container.innerHTML = "";
+
+                    // Add sample palettes
+                    for (let i = 0; i < 6; i++) {
+                        const paletteCard = document.createElement("div");
+                        paletteCard.className =
+                            "bg-white rounded-xl shadow-md overflow-hidden";
+
+                        const colors = [];
+                        for (let j = 0; j < 5; j++) {
+                            colors.push(getRandomColor());
+                        }
+
+                        const imageContainer = document.createElement("div");
+                        imageContainer.className = "h-48 relative";
+
+                        const img = document.createElement("img");
+                        img.src = `https://placehold.co/600x400?text=Palette+${i + 1}`;
+                        img.alt = `Sample color palette ${i + 1}`;
+                        img.className = "w-full h-full object-cover";
+
+                        const colorBar = document.createElement("div");
+                        colorBar.className =
+                            "absolute bottom-0 left-0 right-0 h-12 flex";
+
+                        colors.forEach((color) => {
+                            const colorDiv = document.createElement("div");
+                            colorDiv.className = "w-1/5";
+                            colorDiv.style.backgroundColor = color;
+                            colorBar.appendChild(colorDiv);
+                        });
+
+                        imageContainer.appendChild(img);
+                        imageContainer.appendChild(colorBar);
+
+                        const cardBody = document.createElement("div");
+                        cardBody.className = "p-4";
+
+                        const title = document.createElement("h3");
+                        title.className =
+                            "text-lg font-medium text-gray-800 mb-2";
+                        title.textContent = `Generated Palette ${i + 1}`;
+
+                        const footer = document.createElement("div");
+                        footer.className = "flex justify-between items-center";
+
+                        const colorCount = document.createElement("span");
+                        colorCount.className = "text-gray-500 text-sm";
+                        colorCount.textContent = "5 colors";
+
+                        const viewBtn = document.createElement("button");
+                        viewBtn.className =
+                            "text-indigo-600 text-sm font-medium";
+                        viewBtn.textContent = "View Details";
+
+                        footer.appendChild(colorCount);
+                        footer.appendChild(viewBtn);
+
+                        cardBody.appendChild(title);
+                        cardBody.appendChild(footer);
+
+                        paletteCard.appendChild(imageContainer);
+                        paletteCard.appendChild(cardBody);
+
+                        container.appendChild(paletteCard);
+                    }
+                }, 1000);
+            });
+
+            window.addEventListener("load", () => {
+                const page1 = document.getElementById("page1");
+                const description =
+                    document.getElementById("paletteDescription");
+
+                if (page1.classList.contains("active-page")) {
+                    setTimeout(() => {
+                        description.classList.remove("opacity-0");
+                        description.scrollIntoView({ behavior: "smooth" });
+
+                        const text =
+                            "A color palette is a collection of colors used in design to maintain consistency and evoke emotions. By analyzing images, you can extract dominant tones and use them in UI, branding, and digital art. Our tool helps you quickly identify harmonious combinations that are naturally pleasing to the eye.";
+                        const typeTarget =
+                            document.getElementById("typewriter");
+                        let i = 0;
+
+                        const typeInterval = setInterval(() => {
+                            typeTarget.textContent += text.charAt(i);
+                            i++;
+                            if (i >= text.length) clearInterval(typeInterval);
+                        }, 25); // kecepatan ketik
+                    }, 3000); // delay 5 detik
+                }
+            });
+        </script>
+    </body>
 </html>
